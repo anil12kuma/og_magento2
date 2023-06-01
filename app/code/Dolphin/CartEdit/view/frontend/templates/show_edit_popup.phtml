@@ -1,0 +1,214 @@
+<?php
+$edit_cart_helper = $block->getCartEditDataHelper();
+$quotedata = $block->getData('quotedata');
+$quote_opdata = $block->getCartProductOption($quotedata['quoteid']);
+$prd_coll = $block->getAllProductData($quotedata['prdid']);
+$prd_custom_op = $block->getCustomOptions($prd_coll);
+$prod_coll = $block->getProductByQuote($quotedata['quoteid']);
+$image = $block->getImage($prod_coll);
+$edit_url = $edit_cart_helper->getEditCartUrl();
+$form_key = $block->getFormKey();
+
+?>
+<style>
+    .modal-footer {
+    display: block !important;
+}
+</style>
+<div class="edit-cart-popup-main">
+    <form   class="form-edit-cart"
+            action="<?= $block->escapeUrl($edit_url) ?>"
+            method="post"
+            id="form-edit-cart-popup"
+            enctype="multipart/form-data"
+            autocomplete="off"
+            data-hasrequired="* Required Fields">
+            <input type="hidden"
+                   name="form_key"
+                   value="<?= $block->escapeHtmlAttr($form_key) ?>">
+            <input type="hidden"
+                   name="prdid"
+                   value="<?= $block->escapeHtmlAttr($quotedata['prdid']) ?>">
+            <input type="hidden"
+                   name="quoteid"
+                   value="<?= $block->escapeHtmlAttr($quotedata['quoteid']) ?>">
+        <div class="product-edit-show">
+            <div class="product-image-part">
+                <?= $image->toHtml() ?>
+            </div>
+            <div class="product-option-part">
+                <?php
+                if ($prd_coll->getTypeId() == "downloadable") {
+                    $links_option = $quote_opdata->getLinks();
+                    if (!empty($links_option)) {
+                        $links_option = $quote_opdata->getLinks();
+                    } else {
+                        $links_option = [];
+                    }
+                    ?>
+                    <div class="product-options-wrapper"
+                         id="product-options-wrapper"
+                         data-hasrequired="* Required Fields">
+                         <div class="fieldset" tabindex="0">
+                        <?=
+                        $block->getLayout()
+                        ->createBlock(\Magento\Downloadable\Block\Catalog\Product\Links::class)
+                        ->setProduct($prd_coll)
+                        ->setTemplate("Dolphin_CartEdit::product/options/links.phtml")
+                        ->setData('links', $links_option)
+                        ->toHtml();
+                        ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+
+                if ($prd_coll->getTypeId() == "configurable") {
+                    $config_option = $quote_opdata->getSuperAttribute();
+                    if (!empty($config_option)) {
+                        $config_option = json_encode($config_option);
+                    } else {
+                        $config_option = [];
+                        $config_option = json_encode($config_option);
+                    }
+                    ?>
+                    <div class="product-options-wrapper <?= /* @noEscape */ $prd_coll->getId() ?> "
+                        id="product-options-wrapper"
+                        data-hasrequired="* Required Fields">
+                        <div class="fieldset" tabindex="0">
+                    <?=
+                    $block->getLayout()
+                    ->createBlock(\Magento\Swatches\Block\Product\Renderer\Listing\Configurable::class)
+                    ->setProduct($prd_coll)
+                    ->setData('superdata', $config_option)
+                    ->setTemplate("Dolphin_CartEdit::product/options/renderer.phtml")
+                    ->setCacheKey(uniqid())
+                    ->toHtml();
+                    ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                if ($prd_coll->getTypeId() == "bundle") {
+                    $row_data = [];
+                    $option_id = $quote_opdata->getBundleOption();
+                    $option_qty = $quote_opdata->getBundleOptionQty();
+                    $bundel_option = [];
+                    if ((!empty($option_id)) && (!empty($option_qty))) {
+                        $bundel_option = $block->setBundelOption($option_id, $option_qty);
+                    } else {
+                        $bundel_option = [];
+                    }
+                    $bundel_html =  $block->getBundelProductHtml(
+                        $prd_coll->getId(),
+                        $bundel_option
+                    );
+                    ?>
+                        <?= /* @noEscape */ $bundel_html ?>
+                    <?php
+                }
+
+                $prd_options = $quote_opdata->getOptions();
+                if ($prd_options) {
+                    $prd_options = json_encode($prd_options);
+                } else {
+                    $prd_options = [];
+                    $prd_options = json_encode($prd_options);
+                }
+                ?>
+                <div class="custom-option">
+                    <div class="cart-edit-product-options"
+                         id="cart-edit-custom-options"
+                         data-optiondata='<?= /* @noEscape */ $prd_options ?>'
+                         >
+                        <ol class="fieldset">
+                            <?php foreach ($prd_custom_op as $_option): ?>
+                                    <?= $block->getOptionHtml($prd_coll, $_option); ?>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                </div>
+                <div class="product-qty">
+                    <span>Qty :</span>
+                    <input type="number"
+                           name="prdqty"
+                           class="input-text qty"
+                           id="qty-<?= /* @noEscape */ $prd_coll->getId() ?>"
+                           data-validate="{'required-number':true,
+                           'validate-item-quantity':{'minAllowed':1,'maxAllowed':10000}}"
+                           value="<?= $block->escapeHtmlAttr($quote_opdata->getQty()) ?>"
+                           >
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<script>
+require([
+        'jquery',
+        'mage/mage',
+        'mage/validation/validation',
+        'jquery/ui'
+    ],
+    function($){
+        $("#form-edit-cart-popup").mage('validation', {});
+        $(document).ready( function() {
+            if ($("#cart-edit-custom-options").length) {
+                var option_data = JSON.parse($("#cart-edit-custom-options").attr('data-optiondata'));
+                $.each(option_data,function(key,value){
+                    var option_type = $("[data-selector='options["+key+"]']").prop('type');
+                    if (typeof option_type === "undefined") {
+                        for (var i = value.length - 1; i >= 0; i--) {
+                            var type_multi = $("[data-selector='options["+key+"]["+value[i]+"]']").prop('type');
+                            if (type_multi == 'checkbox') {
+                                var check_box_data = $("[data-selector='options["+key+"]["+value[i]+"]']");
+                                if (check_box_data.length) {
+                                    check_box_data.prop('checked', true);
+                                }
+                            }
+                            if ($("[data-selector='options["+key+"][]']").length) {
+                                var select_multi = $("[data-selector='options["+key+"][]']").prop('type');
+                                if (select_multi == 'select-multiple') {
+                                    var multi_select_data = $("[data-selector='options["+key+"][]']");
+                                    if (multi_select_data.length) {
+                                        multi_select_data.val(value).attr('selected', true);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if(option_type == 'select-one'){
+                            var select_one_data = $("[data-selector='options["+key+"]']");
+                            if (select_one_data.length) {
+                                select_one_data.val(value).change();
+                            }
+
+                        }
+                        if((option_type == 'text') || (option_type == 'textarea')){
+                            var text_data = $("[data-selector='options["+key+"]']");
+                            if (text_data.length) {
+                                text_data.val(value);
+                            }
+                        }
+                        if (option_type == 'radio') {
+                            var radio_data = $("[data-selector='options["+key+"]']");
+                            if (radio_data.length) {
+                                for (var i = radio_data.length - 1; i >= 0; i--) {
+                                    if (radio_data[i].value == value) {
+                                        var radio_id = $("#"+radio_data[i].id);
+                                        if (radio_id.length) {
+                                            $("#"+radio_data[i].id).prop("checked", true).trigger("click");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+);
+</script>
+

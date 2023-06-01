@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @Author      Magetop Team
+ * @package     Review Management
+ * @copyright   Copyright (c) 2019 MAGETOP (http://www.magetop.com)
+ * @terms       http://www.magetop.com/terms
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ **/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magetop" translate="label" sortOrder="1">
+            <label>Magetop.com</label>
+        </tab>
+        <section id="reviewmanagement" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Advanced Review Setting</label>
+            <tab>magetop</tab>
+            <resource>Magetop_ReviewManagement::configurations</resource>
+            <group id="info" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Magetop\ReviewManagement\Block\System\Config\Form\Field\Info</frontend_model>
+            </group>   
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Advanced Review</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="purchase" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Make a Review on only Order Purchase</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

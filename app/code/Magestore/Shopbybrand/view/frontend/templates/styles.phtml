@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\Shopbybrand\Block\Style $block */
+?>
+<style>
+    .bestsllerbrand .shopbybrand-title h1,
+    .brand-search .shopbybrand-title h1,
+    .shopbybrand-title h1 {
+        background-color: #<?php echo $block->getSystemConfig()->getStyleBackgroundTitle() ?> !important;
+        color:#<?php echo $block->getSystemConfig()->getStyleBrandTitleColor() ?> !important;
+    }
+    .shopbybrand-list .brands .brandslist .brand-begin-label strong{
+        background-color: #<?php echo $block->getSystemConfig()->getStyleBackgroundFilterLabel()?> !important;
+        color:#<?php echo $block->getSystemConfig()->getStyleColorFilterLabel()?> !important;
+    }
+    .shopbybrand-list .charlist a{
+        background-color: #<?php echo $block->getSystemConfig()->getStyleBackgroundFilterLink() ?> !important;
+        color:#<?php echo $block->getSystemConfig()->getStyleColorLinkFilter()?> !important;
+    }
+    .shopbybrand-list .brands .brandslist .brand-begin-label{
+        border-bottom: 1px solid #<?php echo $block->getSystemConfig()->getStyleBackgroundFilterLabel() ?>  !important;
+    }
+    .shopbybrand-list .filterbar #charaters-list ul li.charlist a:hover,
+    .shopbybrand-list .filterbar #charaters-list ul li.isActiveCate a,
+    .shopbybrand-list .filterbar #charaters-list ul li.charlist a.isActiveCate{
+        background-color: #<?php echo $block->getSystemConfig()->getStyleBackgroundFilterLinkHover()?> !important;
+        color:#<?php echo $block->getSystemConfig()->getStyleColorFilterLinkHover() ?> !important;
+    }
+  
+    .shopbybrand-list a{
+        color:#<?php echo $block->getSystemConfig()->getStyleColorLink() ?> !important;
+    }
+    .shopbybrand-list a:hover {
+        color:#<?php echo $block->getSystemConfig()->getStyleColorLinkHover() ?> !important;
+    }
+    @media screen and (min-width:768px) and (max-width: 979px) {
+            .shopbybrand_sidebar .shopbybrand-title h1,
+            .brand-search .shopbybrand-title h1,
+            .bestsllerbrand .shopbybrand-title h1{
+            background-color: #<?php echo $block->getSystemConfig()->getStyleBackgroundTitle() ?> !important;
+        }   
+    }
+</style>

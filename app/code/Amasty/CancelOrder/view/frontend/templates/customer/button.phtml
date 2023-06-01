@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+?>
+<?php
+/** @var \Amasty\CancelOrder\Block\Button $block */
+?>
+
+<?php if ($block->isPopupEnabled()): ?>
+    <button class="amcorder-button -clear -link"
+            type="button"
+            title="<?= $block->escapeHtml($block->getButtonTitle()) ?>"
+            data-amcorder-js="cancel-<?= (int)$block->getOrder()->getId() ?>">
+        <?= $block->escapeHtml($block->getButtonTitle()) ?>
+    </button>
+    <?= $block->getChildBlock('amasty.custom.order.popup')->setOrder($block->getOrder())->toHtml() ?>
+<?php else: ?>
+    <button class="amcorder-button -clear -link"
+            type="button"
+            title="<?= $block->escapeHtml($block->getButtonTitle()) ?>"
+            data-mage-init='{"amcorderPrompt": {
+                "action": "window.location = \"<?= $block->escapeUrl($block->getCancelOrderUrl()) ?>\""
+            }}'>
+        <?= $block->escapeHtml($block->getButtonTitle()) ?>
+    </button>
+<?php endif; ?>

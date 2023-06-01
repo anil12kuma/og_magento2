@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<div class="row">
+    <div class="customer-login-title"><h3><?= $block->escapeHtml(__('Your OutdoorGoats Account')) ?></h3></div>
+  <div class="block block-customer-login col-md-12 mx-auto mb-4 w-100">
+      
+
+
+      <div class="block-content" aria-labelledby="block-customer-login-heading">
+          <form class="form form-login"
+                action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+                method="post"
+                id="login-form"
+                data-mage-init='{"validation":{}}'>
+              <?= $block->getBlockHtml('formkey') ?>
+              <fieldset class="fieldset login" data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>">
+                  <!--<div class="field note"><?php //$block->escapeHtml(__('If you have an account, sign in with your email address.')); ?></div>-->
+                  <div class="field email required">
+                      <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                      <div class="control">
+                          <input name="login[username]" value="<?= $block->escapeHtmlAttr($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text line-height-xl" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true}">
+                      </div>
+                  </div>
+                  <div class="field password required">
+                      <label for="pass" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+                      <div class="control">
+                          
+                          <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> class="input-text line-height-xl" id="pass" title="<?= $block->escapeHtmlAttr(__('Password')) ?>" data-validate="{required:true}">
+                      <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                      </div>
+                  </div>
+                  <?= $block->getChildHtml('form_additional_info') ?>
+                  <div class="field">
+                    <a class="action remind" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"><span><?= $block->escapeHtml(__('Forgot Your Password?')) ?></span></a>
+                  </div>
+                  <div class="actions-toolbar">
+                      <div class="primary"><button type="submit" class="action login primary btn-v-dark py-3 text-md w-100" name="send" id="send2"><span><?= $block->escapeHtml(__('Sign In')) ?></span></button></div>
+                      <div class="policycontent">
+                          <p class=="pcontent">By signing into your account, you agree to the OutdoorGoats <a class="termsuse" href="https://www.outdoorgoats.com/terms-of-use-privacy-policy" target="_blank">Terms of Use</a> and acknowledge you have read its <a class="termpolicy" href="#">Privacy Policy.</a>
+</p>
+                      </div>
+                      <!--<div class="secondary">
+                        <a href="<?php //echo $this->getUrl('customer/account/create');?>" class="action primary btn-v-dark py-3 text-md w-100"><span><?php //$block->escapeHtml(__('Create an Account')) ?></span></a>
+                      </div>-->
+                      <style>
+          							.customer-account-login .action.create {
+          								display: none;
+          							}
+                      </style>
+                  </div>
+              </fieldset>
+          </form>
+          <div class="spaor"><span>or</span></div>
+      </div>
+  </div>
+</div>
+
+<script>
+require(['jquery', 'jquery/ui'], function($){
+  $(document).ready( function() {
+      $("body").on('click', '.toggle-password', function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $("#pass");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+});
+});
+});
+</script>

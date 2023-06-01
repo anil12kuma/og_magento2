@@ -1,0 +1,189 @@
+<?php
+
+namespace Dolphin\CartEdit\Block;
+
+use Magento\Framework\View\Element\Template;
+
+class CartEdit extends Template
+{
+    protected $carteditHelper;
+    protected $_imageBuilder;
+    protected $_productloader;
+    protected $formKey;
+    protected $cart;
+    protected $registry;
+    protected $_customOptions;
+    protected $layoutFactory;
+    protected $productRepository;
+
+    public function __construct(
+        Template\Context $context,
+        \Dolphin\CartEdit\Helper\Data $carteditHelper,
+        \Magento\Catalog\Block\Product\ImageBuilder $_imageBuilder,
+        \Magento\Catalog\Model\ProductFactory $_productloader,
+        \Magento\Framework\Data\Form\FormKey $formKey,
+        \Magento\Checkout\Model\Cart $cart,
+        \Magento\Framework\Registry $registry,
+        \Magento\Catalog\Model\Product\Option $customOptions,
+        \Magento\Framework\View\LayoutFactory $layoutFactory,
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+        array $data = []
+    ) {
+        $this->carteditHelper = $carteditHelper;
+        $this->_imageBuilder = $_imageBuilder;
+        $this->_productloader = $_productloader;
+        $this->formKey = $formKey;
+        $this->cart = $cart;
+        $this->registry = $registry;
+        $this->_customOptions = $customOptions;
+        $this->layoutFactory = $layoutFactory;
+        $this->productRepository = $productRepository;
+        parent::__construct($context, $data);
+    }
+
+    public function getCartEditDataHelper()
+    {
+        return $this->carteditHelper;
+    }
+
+    public function getImage($product, $attributes = [])
+    {
+        $imageId = 'product_base_image';
+        return $this->_imageBuilder->setProduct($product)
+            ->setImageId($imageId)
+            ->setAttributes($attributes)
+            ->create();
+    }
+
+    public function getAllProductData($id)
+    {
+        return $this->_productloader->create()->load($id);
+    }
+
+    /* Custom Code - RRai */
+    public function getProductByQuote($quoteItemId)
+    {
+        $cart_data = $this->cart->getQuote()->getAllVisibleItems();
+        foreach ($cart_data as $item) {
+            if ($quoteItemId == $item->getId()) {
+                $productSku = $item->getSku();
+            }
+        }
+        return $this->productRepository->get($productSku);
+    }
+    /* Custom Code - RRai */
+
+    public function getFormKey()
+    {
+        return $this->formKey->getFormKey();
+    }
+
+    public function getCartItems($cart_id)
+    {
+        $cart_data = $this->cart->getQuote()->getAllVisibleItems();
+        foreach ($cart_data as $item) {
+            if ($cart_id == $item->getId()) {
+                return $item;
+            }
+        }
+    }
+
+    public function getCartProductOption($cart_id)
+    {
+        $cart_data = $this->getCartItems($cart_id);
+        return $cart_data->getBuyRequest();
+    }
+
+    public function getBundelProductHtml($product_id, $prd_data)
+    {
+        $_product = $this->getAllProductData($product_id);
+        $this->registry->register('current_product', $_product);
+        $layout = $this->layoutFactory->create();
+        $blockOption = $layout->createBlock(
+            \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle::class,
+            'type_bundle_options'
+        )
+            ->setProduct($_product)
+            ->setTemplate('Magento_Bundle::catalog/product/view/type/bundle/options.phtml')
+            ->setData('boption', $prd_data);
+        $price_renderer_block = $layout
+            ->createBlock(
+                \Magento\Framework\Pricing\Render::class,
+                "product.price.render.default",
+                [
+                    'data' => [
+                        'price_render_handle' => 'catalog_product_prices',
+                        'use_link_for_as_low_as' => 'true',
+                    ],
+                ]
+            )
+            ->setData('area', 'frontend');
+        $blockOption->setChild('product.price.render.default', $price_renderer_block);
+
+        $block_links2 = $layout->createBlock(
+            \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Multi::class,
+            'multi'
+        )
+            ->setProduct($_product)
+            ->setData('boption', $prd_data);
+        $blockOption->setChild('multi', $block_links2);
+
+        $block_links3 = $layout->createBlock(
+            \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Radio::class,
+            'radio'
+        )
+            ->setProduct($_product)
+            ->setTemplate("Dolphin_CartEdit::product/options/bundel/radio.phtml")
+            ->setData('boption', $prd_data);
+        $blockOption->setChild('radio', $block_links3);
+
+        $block_links4 = $layout->createBlock(
+            \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Select::class,
+            'select'
+        )
+            ->setProduct($_product)
+            ->setData('boption', $prd_data);
+        $blockOption->setChild('select', $block_links4);
+
+        $block_links5 = $layout->createBlock(
+            \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Checkbox::class,
+            'checkbox'
+        )
+            ->setProduct($_product)
+            ->setData('boption', $prd_data);
+        $blockOption->setChild('checkbox', $block_links5);
+
+        return $blockOption->toHtml();
+    }
+
+    public function setBundelOption($option_id, $option_qty)
+    {
+        $bundle_option = [];
+        $bundle_option[0] = '';
+        foreach ($option_id as $key => $value) {
+            $bundle_option[$value] = $option_qty[$key];
+        }
+        unset($bundle_option[0]);
+        return $bundle_option;
+    }
+
+    public function getOptionHtml($prd_data, \Magento\Catalog\Model\Product\Option $option)
+    {
+        $type = $this->getGroupOfOption($option->getType());
+        $renderer = $this->getChildBlock($type);
+        $option->setProduct($prd_data)->getPrice(true);
+        $renderer->setProduct($prd_data)->setOption($option);
+        return $this->getChildHtml($type, false);
+    }
+
+    public function getGroupOfOption($type)
+    {
+        $group = $this->_customOptions->getGroupByType($type);
+        return $group == '' ? 'default' : $group;
+    }
+
+    public function getCustomOptions($prd_data)
+    {
+        return $this->_customOptions->getProductOptionCollection($prd_data);
+    }
+}

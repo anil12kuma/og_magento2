@@ -1,0 +1,202 @@
+{
+    "quote": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "base_igst_amount": true,
+            "buyer_gst_number": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "gst_exclusive": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "base_igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "cgst_percent": true,
+            "sgst_percent": true,
+            "igst_percent": true,
+            "shipping_cgst_percent": true,
+            "shipping_sgst_percent": true,
+            "shipping_igst_percent": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "utgst_percent": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "shipping_utgst_percent": true,
+            "buyer_gst_number": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "shipping_cgst_percent": true,
+            "shipping_sgst_percent": true,
+            "shipping_igst_percent": true,
+            "buyer_gst_number": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "shipping_utgst_percent": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "cgst_percent": true,
+            "sgst_percent": true,
+            "igst_percent": true,
+            "gst_exclusive": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "utgst_percent": true
+        }
+    },
+    "sales_invoice": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "shipping_cgst_percent": true,
+            "shipping_sgst_percent": true,
+            "shipping_igst_percent": true,
+            "buyer_gst_number": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "shipping_utgst_percent": true
+        }
+    },
+    "sales_invoice_item": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "cgst_percent": true,
+            "sgst_percent": true,
+            "igst_percent": true,
+            "gst_exclusive": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "utgst_percent": true
+        }
+    },
+    "sales_creditmemo": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "shipping_cgst_percent": true,
+            "shipping_sgst_percent": true,
+            "shipping_igst_percent": true,
+            "buyer_gst_number": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "shipping_utgst_percent": true
+        }
+    },
+    "sales_creditmemo_item": {
+        "column": {
+            "cgst_amount": true,
+            "base_cgst_amount": true,
+            "sgst_amount": true,
+            "base_sgst_amount": true,
+            "igst_amount": true,
+            "shipping_cgst_amount": true,
+            "base_shipping_cgst_amount": true,
+            "shipping_sgst_amount": true,
+            "base_shipping_sgst_amount": true,
+            "shipping_igst_amount": true,
+            "base_shipping_igst_amount": true,
+            "cgst_percent": true,
+            "sgst_percent": true,
+            "igst_percent": true,
+            "gst_exclusive": true,
+            "utgst_amount": true,
+            "base_utgst_amount": true,
+            "shipping_utgst_amount": true,
+            "base_shipping_utgst_amount": true,
+            "utgst_percent": true
+        }
+    },
+    "sales_order_address": {
+        "column": {
+            "buyer_gst_number": true
+        }
+    }
+}

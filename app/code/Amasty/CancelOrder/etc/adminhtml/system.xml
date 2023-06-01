@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="am_cancel_order" translate="label" type="text" sortOrder="040115" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_CancelOrder::config</resource>
+            <class>separator-top</class>
+            <label>Cancel Orders</label>
+            <tab>amasty</tab>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\CancelOrder\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="customer_group" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Allow for Selected Group(s)</label>
+                    <source_model>Amasty\CancelOrder\Model\Source\CustomerGroup</source_model>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\System\Config\Field\Multiselect</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="order_status" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Order Status(es)</label>
+                    <validate>required-entry</validate>
+                    <source_model>Amasty\CancelOrder\Model\Source\OrderStatus</source_model>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\System\Config\Field\Multiselect</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="refund" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refund Paid Processing Orders Automatically</label>
+                    <source_model>Amasty\CancelOrder\Model\Source\Refund</source_model>
+                    <comment>
+                        <![CDATA[
+                            <ul class="amcorder-list-block">
+                                <li>When disabled, customers will be able to to cancel Processing Order only if it wasn’t yet invoiced.</li>
+                                <li>In ‘Offline’ mode all orders will be refunded offline regardless used payment method.</li>
+                                <li>In ‘Online (if possible)’ mode Processing Order with online invoice will be refunded online (exception: if order has several invoices, it will be refunded offline).</li>
+                            </ul>
+                        ]]>
+                    </comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="frontend" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Frontend</label>
+
+                <depends>
+                    <field id="*/general/enabled">1</field>
+                </depends>
+
+                <field id="button_title" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button Label</label>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="popup_enabled" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cancellation Popup</label>
+                    <comment>Choose Yes to configure comment and reasons fields and find out why customers Cancel Orders.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="notice" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Notice</label>
+                    <depends>
+                        <field id="popup_enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="reason" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Cancellation Reasons</label>
+                    <source_model>Amasty\CancelOrder\Model\Source\OrderStatus</source_model>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\Reason</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="popup_enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="required" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Required</label>
+                    <source_model>Amasty\CancelOrder\Model\Source\Elements</source_model>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\System\Config\Field\Multiselect</frontend_model>
+                    <depends>
+                        <field id="popup_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="admin_email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Admin Email Notifications</label>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Notify Admin about Orders Canceled by Customers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="to" translate="label comment" type="text" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Send Email to</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="sender" translate="label" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="template" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                    <source_model>Amasty\CancelOrder\Model\Source\AdminEmailTemplate</source_model>
+                </field>
+
+                <field id="auto_canceled_enabled" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Notify Admin about Auto-Canceled Orders</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/auto_cancel_mode/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="auto_canceled_to" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Send Email to</label>
+                    <depends>
+                        <field id="auto_canceled_enabled">1</field>
+                        <field id="*/auto_cancel_mode/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="auto_canceled_sender" translate="label" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="auto_canceled_enabled">1</field>
+                        <field id="*/auto_cancel_mode/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="auto_canceled_template" translate="label comment" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <depends>
+                        <field id="auto_canceled_enabled">1</field>
+                        <field id="*/auto_cancel_mode/enabled">1</field>
+                    </depends>
+                    <source_model>Amasty\CancelOrder\Model\Source\AutoEmailTemplate</source_model>
+                </field>
+            </group>
+
+            <group id="auto_cancel_mode" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="0">
+                <label>Auto Cancel Mode</label>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0">
+                    <label>Enabled</label>
+                    <comment>Enable to automatically cancel pending orders after a set period of time.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="created_from" translate="label comment" type="date" sortOrder="20" showInDefault="1"
+                       showInWebsite="0">
+                    <label>Consider Orders Created from</label>
+                    <comment>Orders with older Creation Date will not be automatically canceled. If left empty, all orders are considered.</comment>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\System\Config\Field\Date</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="order_status" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="0">
+                    <label>Consider Order Status(es)</label>
+                    <validate>required-entry</validate>
+                    <source_model>Amasty\CancelOrder\Model\Source\AutoCancelMode\OrderStatus</source_model>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\System\Config\Field\Multiselect</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="conditions" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="0">
+                    <label>Conditions based on Payment Method</label>
+                    <source_model>Amasty\CancelOrder\Model\Source\OrderStatus</source_model>
+                    <frontend_model>Amasty\CancelOrder\Block\Adminhtml\Conditions</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

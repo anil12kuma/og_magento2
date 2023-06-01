@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.totals">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-totals" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="cgst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/cgst</item>
+                                    <item name="sortOrder" xsi:type="string">20</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">CGST</item>
+                                    </item>
+                                </item>
+                                <item name="utgst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/utgst</item>
+                                    <item name="sortOrder" xsi:type="string">20</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">UTGST</item>
+                                    </item>
+                                </item>
+                                <item name="sgst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/sgst</item>
+                                    <item name="sortOrder" xsi:type="string">20</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">SGST</item>
+                                    </item>
+                                </item>
+                                <item name="igst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/igst</item>
+                                    <item name="sortOrder" xsi:type="string">20</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">IGST</item>
+                                    </item>
+                                </item>
+                                <item name="shipping_cgst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/shipcgst</item>
+                                    <item name="sortOrder" xsi:type="string">60</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Shipping CGST</item>
+                                    </item>
+                                </item>
+                                <item name="shipping_utgst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/shiputgst</item>
+                                    <item name="sortOrder" xsi:type="string">60</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Shipping UTGST</item>
+                                    </item>
+                                </item>
+                                <item name="shipping_sgst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/shipsgst</item>
+                                    <item name="sortOrder" xsi:type="string">60</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Shipping SGST</item>
+                                    </item>
+                                </item>
+                                <item name="shipping_igst_amount" xsi:type="array">
+                                    <item name="component" xsi:type="string">Meetanshi_IndianGst/js/view/checkout/cart/totals/shipigst</item>
+                                    <item name="sortOrder" xsi:type="string">60</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Shipping IGST</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="after.body.start">
+            <block class="Meetanshi\IndianGst\Block\Config" name="gst.config"
+                   template="Meetanshi_IndianGst::config_json.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

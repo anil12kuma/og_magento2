@@ -1,0 +1,21 @@
+{
+    "name": "shiprocket/module-orderdeliverystatus",
+    "description": "Shiprocket Order Delivery Status",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Ritak Bhardwaj",
+            "email": "ritakbhardwaj100@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Shiprocket\\OrderDeliveryStatus\\": ""
+        }
+    }
+}

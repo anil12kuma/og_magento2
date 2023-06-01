@@ -1,0 +1,115 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+?>
+<?php
+
+use \Amasty\CancelOrder\Block\Adminhtml\Conditions;
+
+/**
+ *  Amasty reason list template
+ *
+ * @var Conditions $block
+ */
+
+$element = $block->getElement();
+$isCheckboxRequired = $block->isInheritCheckboxRequired($element);
+$isDisabled = (bool)($element->getInherit() == 1 && $isCheckboxRequired);
+$defaultConditionsData = $block->getDefaultConditions();
+$selectedConditionsData = $block->getSelectedConditions();
+$counter = 0;
+?>
+
+<td class="amcorder-label label">
+    <label>
+        <span <?= /* @noEscape */ $block->renderScopeLabel($element) ?>>
+            <?= $block->escapeHtml(__('Conditions based on Payment Method')); ?>
+        </span>
+    </label>
+</td>
+<td class="amcorder-conditions-block amcorder-dragndrop-block">
+    <div class="amcorder-wrapper"
+         data-mage-init='{"amOrderConditions":<?= /* @noEscape */ $block->getInitData() ?>}'>
+        <p class="amcorder-legend">
+            <span class="title"><?= $block->escapeHtml(__('Payment Method(s) ')) ?></span>
+            <span class="title"><?= $block->escapeHtml(__('Duration')) ?></span>
+            <span class="title"><?= $block->escapeHtml(__('Duration unit')) ?></span>
+            <span><?= $block->escapeHtml(__('Actions')) ?></span>
+        </p>
+        <!-- should be empty element to clear all items and save it-->
+        <input name="<?= $block->escapeHtmlAttr($block->getElement()->getName()); ?>"
+               type="text"
+            <?= $isDisabled ? 'disabled' : '' ?>
+               class="amcorder-hidden  <?= $isDisabled ? 'disabled' : '' ?>"
+               value=""/>
+        <ul class="amcorder-order" data-amcorder-js="items">
+            <?php foreach ($selectedConditionsData as $condition): ?>
+                <li class="amcorder-item" data-amcorder-js="item">
+                    <label class="amcorder-label amcorder-field payment-methods">
+                        <select
+                            name="<?= $block->escapeHtmlAttr($block->getNamePrefix(Conditions::PAYMENT_METHODS, $counter)); ?>"
+                            <?= $isDisabled ? 'disabled' : '' ?>
+                            class="<?= $isDisabled ? 'disabled' : '' ?>"
+                        >
+                            <?php foreach ($defaultConditionsData[Conditions::PAYMENT_METHODS] as $method => $methodName): ?>
+                                <option value="<?= $block->escapeHtml($method) ?>" <?= ($method ==  $condition[Conditions::PAYMENT_METHODS]) ? 'selected' : ''; ?>><?= $block->escapeHtml(__($methodName)) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                    <label class="amcorder-label amcorder-field duration">
+                        <input name="<?= $block->escapeHtmlAttr($block->getNamePrefix(Conditions::DURATION, $counter)); ?>"
+                               type="text"
+                               <?= $isDisabled ? 'disabled' : '' ?>
+                               class="required-entry <?= $isDisabled ? 'disabled' : '' ?>"
+                               value="<?= $block->escapeHtml($condition[Conditions::DURATION]); ?>"
+                               data-amcorder-js="input"
+                        />
+                    </label>
+                    <label class="amcorder-label amcorder-field duration-unit">
+                        <select
+                            name="<?= $block->escapeHtmlAttr($block->getNamePrefix(Conditions::DURATION_UNIT, $counter)); ?>"
+                            <?= $isDisabled ? 'disabled' : '' ?>
+                            class="<?= $isDisabled ? 'disabled' : '' ?>"
+                        >
+                            <?php foreach ($defaultConditionsData['duration_unit'] as $key => $unit): ?>
+                                <option value="<?= $block->escapeHtml($key) ?>" <?= ($key ==  $condition[Conditions::DURATION_UNIT]) ? 'selected' : '';?>><?= $block->escapeHtml(__($unit)) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                    <button class="amcorder-button -clear -delete <?= $isDisabled ? 'disabled' : '' ?>"
+                        <?= $isDisabled ? 'disabled' : '' ?>
+                            title="<?= $block->escapeHtml(__('Remove Item')); ?>"
+                            type="button"
+                            data-amcorder-js="remove">
+                    </button>
+                </li>
+            <?php $counter++ ?>
+            <?php endforeach ?>
+        </ul>
+        <button class="amcorder-button <?= $isDisabled ? 'disabled' : '' ?>"
+                title="<?= $block->escapeHtml(__('Add Item')); ?>"
+            <?= $isDisabled ? 'disabled' : '' ?>
+                type="button"
+                data-amcondition-js="add">
+            <?= $block->escapeHtml(__('Add')); ?>
+        </button>
+    </div>
+
+    <button class="amcorder-button"
+            title="<?= $block->escapeHtml(__('Run')); ?>"
+            type="button"
+            data-amcorder-js="run"
+            data-mage-init='{"Amasty_CancelOrder/js/components/run":<?= /* @noEscape */ $block->getUrlData();?>}'>
+        <?= $block->escapeHtml(__('Run')); ?>
+    </button>
+
+    <p class="amcorder-note">
+        <?= $block->escapeHtml(__('Cron is running each hour by default. If you need to apply Auto Cancel immediately, click the ‘Run’ button (before performing the action please make sure that conditions are saved).')); ?>
+    </p>
+</td>
+<?php if ($isCheckboxRequired): ?>
+    <?= $block->renderInheritCheckboxHtml($element); ?>
+<?php endif; ?>

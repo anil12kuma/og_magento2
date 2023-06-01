@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontAmastyCancelOrderProcessingAndOnlineInvoiceWithBraintreeTest"
+          extends="StorefrontAmastyCancelOrderPendingWithBraintreeTest">
+        <annotations>
+            <title value="Cancel a braintree order in processing status with online invoice"/>
+            <description value="Config. module, create a braintree order, than cancel it from storefront, and check the status"/>
+            <testCaseId value="Cancel-5"/>
+            <severity value="CRITICAL"/>
+            <group value="Cancel"/>
+        </annotations>
+
+        <amOnPage url="{{AdminOrdersPage.url}}" stepKey="goToOrdersPage" before="cancelOrder"/>
+        <waitForPageLoad stepKey="waitForOrdersPageLoad" before="cancelOrder"/>
+        <actionGroup ref="filterOrderGridById" stepKey="filterOrdersGridById" before="cancelOrder">
+            <argument name="orderId" value="$grabOrderNumber"/>
+        </actionGroup>
+        <click selector="{{AdminDataGridTableSection.firstRow}}" stepKey="clickCreatedOrderInGrid" before="cancelOrder"/>
+        <!-- Go to the invoice-->
+        <click selector="{{AdminOrderDetailsMainActionsSection.invoice}}" stepKey="clickInvoiceAction" before="cancelOrder"/>
+        <click selector="{{AdminInvoiceMainActionsSection.submitInvoice}}" stepKey="clickSubmitInvoice" before="cancelOrder"/>
+    </test>
+</tests>

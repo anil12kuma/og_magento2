@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="\Magento\Sales\Block\Order\Totals" type="Meetanshi\IndianGst\Block\Order\Totals"/>
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="checkout-summary-product-attribute" type="Meetanshi\IndianGst\Plugin\Checkout\Model\DefaultConfigProvider" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="save_gst_in_quote" type="Meetanshi\IndianGst\Plugin\Checkout\Model\ShippingInformationManagement" sortOrder="1"/>
+    </type>
+    <type name="Meetanshi\IndianGst\Model\ResourceModel\Item\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_item</argument>
+            <argument name="eventPrefix" xsi:type="string">indiangst_listing_data_source</argument>
+            <argument name="eventObject" xsi:type="string">indiangst_listing_data_source</argument>
+            <argument name="resourceModel" xsi:type="string">Meetanshi\IndianGst\Model\ResourceModel\Item</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="indiangst_listing_data_source" xsi:type="string">Meetanshi\IndianGst\Model\ResourceModel\Item\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Ui\Model\Export\ConvertToCsv" type="Meetanshi\IndianGst\Model\Rewrite\Export\ConvertToCsv" />
+    <type name="Magento\Multishipping\Controller\Checkout\Address\SetBilling">
+            <plugin name="Meetanshi_IndianGst::display_buyer_gst_in_multishipping_billing" type="Meetanshi\IndianGst\Observer\DisplayBuyerGstMultiShipping" />
+    </type>
+    <type name="Magento\Multishipping\Controller\Checkout\AddressesPost">
+        <plugin name="Meetanshi_IndianGst::display_buyer_gst_in_multishipping_shipping" type="Meetanshi\IndianGst\Observer\DisplayBuyerGstMultiShipping" />
+    </type>
+    <type name="Magento\Multishipping\Controller\Checkout\Address\EditShippingPost">
+        <plugin name="Meetanshi_IndianGst::display_buyer_gst_in_multishipping_shipping_save" type="Meetanshi\IndianGst\Observer\DisplayBuyerGstMultiShipping" />
+    </type>
+    <type name="Magento\Customer\Controller\Address\FormPost">
+        <plugin name="Meetanshi_IndianGst::display_buyer_gst_in_multishipping_shipping_save" type="Meetanshi\IndianGst\Plugin\SaveBuyerGstNumber" />
+    </type>
+</config>

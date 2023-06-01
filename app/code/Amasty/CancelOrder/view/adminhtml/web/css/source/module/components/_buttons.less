@@ -1,0 +1,47 @@
+//
+//  Buttons Styles
+// _______________________________________________
+
+//
+//  Imports
+//  ----------------------------------------------
+
+@import '../_mixins';
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amcorder-button {
+        & {
+            .am-flex(center, center);
+
+            margin-top: 10px;
+        }
+
+        &.-clear {
+            & {
+                padding: 0;
+                margin: 0;
+                border: none;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            &:active,
+            &:hover,
+            &:focus {
+                border: none;
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+
+        &.-delete:before {
+            .am-mage-icon(@icon-delete__content);
+
+            font-size: 1.8rem;
+        }
+    }
+}

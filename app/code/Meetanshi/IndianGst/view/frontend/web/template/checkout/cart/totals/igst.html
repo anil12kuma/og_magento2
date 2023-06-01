@@ -1,0 +1,14 @@
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko if: isDisplayed() -->
+<tr class="totals igst_amount excl" >
+    <th class="mark" colspan="1" scope="row" data-bind="text: getIgstLabel()"></th>
+    <td class="amount">
+        <span class="price" data-bind="text: getValue(), attr: {'data-th': getIgstLabel()}"></span>
+    </td>
+</tr>
+<!-- /ko -->

@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Review\Block\Product\ReviewRenderer $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+
+$url = $block->getReviewsUrl() . '#reviews';
+$urlForm = $block->getReviewsUrl() . '#review-form';
+?>
+<?php if ($block->isReviewEnabled() && $block->getReviewsCount()): ?>
+    <?php $rating = $block->getRatingSummary(); ?>
+    <div class="product-reviews-summary<?= !$rating ? ' no-rating' : '' ?>" itemprop="aggregateRating" itemscope
+         itemtype="http://schema.org/AggregateRating">
+        <?php if ($rating):?>
+        <div class="rating-summary">
+             <div class="rating" title="<?= $block->escapeHtmlAttr($rating); ?>%">
+                <span class="review-img"><img src="<?= $block->getViewFileUrl('Magento_Review::images/star.svg'); ?>"/></span>
+                <span class="review-value">
+                    <?= $block->escapeHtmlAttr($rating)/20 ?>/5
+                </span>
+                <span class="review-count" itemprop="reviewCount">(<?= $block->escapeHtml($block->getReviewsCount()) ?>)</span>
+             </div>
+             
+         </div>
+            <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                "width:" . $block->escapeHtmlAttr($rating) . "%",
+                'div.rating-summary div.rating-result>span:first-child'
+            ) ?>
+        <?php endif;?>
+    </div>
+<?php elseif ($block->isReviewEnabled() && $block->getDisplayIfEmpty()): ?>
+
+<?php endif; ?>

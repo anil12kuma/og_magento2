@@ -1,0 +1,26 @@
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminAmastyCancelOrderGridCheckOrderStatusActionGroup">
+        <!-- Check the order entry on the Cancel Order Grid -->
+        <amOnPage url="{{AdminAmastyCancelOrderGridPage.url}}" stepKey="goToCancelOrderGrid"/>
+        <wait time="3" stepKey="waitTenSeconds1"/>
+        <waitForPageLoad stepKey="waitForOrdersPageLoadAgain1"/>
+        <!-- BundleProductFilterActionGroup.xml -->
+        <click selector="{{AdminProductFiltersSection.filter}}" stepKey="ClickOnFilter"/>
+        <grabCookie userInput="cookieWithOrdNum" stepKey="grabCookieOrdNum"/>
+        <fillField  userInput="{$grabCookieOrdNum}" selector="{{AdminAmastyCancelOrderGridSection.orderIDfrom}}" stepKey="fillOrderIDfrom"/>
+        <fillField  userInput="{$grabCookieOrdNum}" selector="{{AdminAmastyCancelOrderGridSection.orderIDto}}" stepKey="fillOrderIDto"/>
+        <click selector="{{AdminProductFiltersSection.applyFilters}}" stepKey="ClickOnApplyFilters"/>
+        <click selector="a.action-menu-item" stepKey="openOrder" />
+        <!-- Check the order status on the back-end -->
+        <waitForPageLoad stepKey="waitForOrdersPageLoad4"/>
+        <see selector="option[value=canceled]:first-of-type" userInput="Canceled" stepKey="checkOrderStatus"/>
+        <!-- Clear the filter -->
+<!--        <amOnPage url="{{AdminAmastyCancelOrderGridPage.url}}" stepKey="goToCancelOrderGridAgain"/>-->
+    <!--  <click selector="{{AdminAmastyCancelOrderGridSection.clearFilter}}" stepKey="clearFilter"/>-->
+    </actionGroup>
+    <actionGroup name="AdminAmastyCancelOrderGridCheckOrderStatusWithTransactonsActionGroup" extends="AdminAmastyCancelOrderGridCheckOrderStatusActionGroup">
+        <see selector="//td[contains (text(),'Void')]" userInput="Void" stepKey="checkIfThereIsVoidTransaction" after="checkOrderStatus"/>
+        <click selector="{{ViewOrderSection.transactions}}" stepKey="goToTransactions" after="checkOrderStatus"/>
+    </actionGroup>
+</actionGroups>

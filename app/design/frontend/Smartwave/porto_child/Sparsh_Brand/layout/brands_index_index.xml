@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="brand.image" destination="athelete.top.section" before="athelete.title.desc" />
+        <move element="page.main.title" destination="athelete.title.desc" before="-" />
+        <move element="brand.description" destination="athelete.title.desc" after="-" />
+        
+        <referenceContainer name="columns.top">
+            <container name="athelete.top.section" htmlTag="div" htmlClass="athelete-top-section">
+                <container name="athelete.title.desc" htmlTag="div" htmlClass="athelete-title-desc" before="messages"/>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mega_phonelogin_sendverificationcode_after">
+        <observer name="phonelogin_send_verification_code" instance="Mega\Phonelogin\Observer\SendOtpAfter" />
+    </event>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mega_Phonelogin::css/intlTelInput.css"/>
+    </head>
+
+    <body>
+        <referenceContainer name="page.bottom.container">
+            <block class="Mega\Phonelogin\Block\PhoneNumber"
+                   ifconfig="mega_phonelogin/checkout_config/enabled_checkout"
+                   template="Mega_Phonelogin::js-checkout.phtml"
+                   name="mega.international.telephone.input"/>
+        </referenceContainer>
+    </body>
+</page>

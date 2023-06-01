@@ -1,0 +1,94 @@
+//
+//  Amasty Drag-n-Drop Component Styles
+//  ______________________________________________
+
+//
+//  Import
+//  ----------------------------------------------
+
+@import '../_mixins';
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amcorder-dragndrop-block {
+        .amcorder-wrapper {
+            margin: 0 @amcorder__indent__l 0 0;
+            padding: @amcorder__indent__l @amcorder__indent__m;
+            background: #f1f1f1;
+        }
+
+        .amcorder-hidden {
+            display: none !important; // prevent magento how()
+            width: 0;
+        }
+
+        .amcorder-legend {
+            & {
+                .am-flex(space-between);
+
+                font-weight: 600;
+            }
+
+            .title {
+                padding-right: 10px;
+            }
+
+        }
+
+        .amcorder-order {
+            position: relative;
+        }
+
+        .amcorder-item {
+            & {
+                .am-flex();
+
+                position: relative;
+                padding: @amcorder__indent 0;
+                border-bottom: 1px solid #fff;
+            }
+
+            &.-draggable:hover {
+                cursor: move;
+            }
+
+            &.-draggable:before {
+                .am-mage-icon(@icon-grid__content);
+
+                padding: 0 @amcorder__indent 0 0;
+                background: transparent;
+            }
+
+            .amcorder-field {
+                & {
+                    margin-right: 10px;
+                }
+
+                &.duration {
+                    max-width: 50px;
+                }
+
+                &.duration [generated] {
+                    //override js style
+                    display: none !important;
+                }
+            }
+        }
+
+        .amcorder-label {
+            width: 100%;
+        }
+
+        .amcorder-button.-delete {
+            padding: 0 @amcorder__indent;
+        }
+
+        .amcorder-note {
+            padding: @amcorder__indent__m 0;
+            font-size: 12px;
+        }
+    }
+}

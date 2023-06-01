@@ -1,0 +1,15 @@
+<?php //phpcs:ignore Magento2.Legacy.PhtmlTemplate.TextJavascriptTypeFound ?>
+<script type="text/javascript">
+    require(
+        [
+            'Magento_Ui/js/lib/validation/validator',
+            'jquery',
+            'mage/translate'
+        ], function(validator, $){
+
+            validator.addRule('validate-stop-word', function (value) {
+                return value.match(/^[^\s]+$/g);
+            }, $.mage.__('Stop words should not contain whitespaces.')
+        );
+    });
+</script>

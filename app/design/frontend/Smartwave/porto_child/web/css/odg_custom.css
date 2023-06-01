@@ -1,0 +1,15 @@
+/*Custom CSS */
+
+
+/* Header */
+.page-header.type2 .header-contact .link.wishlist {
+    margin-left: 10px !important;
+}
+
+
+
+@media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+	.page-header.type2 .panel.header.show-icon-tablet {
+		display:none;
+	}
+}

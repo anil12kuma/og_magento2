@@ -1,0 +1,7 @@
+<?php $_item = $block->getItem();
+?>
+<?= /* @noEscape */ $block->getOrder()->formatPrice($_item->getData('utgst_amount')) ?>
+<?php
+echo '<br>Rate:' . round($_item->getUtgstPercent() ?? 0, 2) . '%';
+?>
+

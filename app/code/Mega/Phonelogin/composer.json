@@ -1,0 +1,27 @@
+{
+  "name": "mega/module-phonelogin",
+  "description": "Extension that allows store customers to login using verified mobile number",
+  "require": {
+    "php": "~5.5.0|~5.6.0|~7.0.0"
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "EULA"
+  ],
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "Mega\\Phonelogin\\": ""
+    }
+  },
+  "authors": [
+    {
+      "name": "Codeinnovers",
+      "email": "samparker801@gmail.com",
+      "homepage": "http://www.codeinnovers.com",
+      "role": "Developer"
+    }
+  ]
+}
+

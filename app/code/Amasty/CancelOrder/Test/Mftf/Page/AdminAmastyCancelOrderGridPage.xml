@@ -1,0 +1,6 @@
+<pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/PageObject.xsd">
+    <page name="AdminAmastyCancelOrderGridPage" url="am_cancel_order/grid/" area="admin" module="Amasty_CancelOrder">
+        <section name="AdminAmastyCancelOrderGridSection"/>
+    </page>
+</pages>

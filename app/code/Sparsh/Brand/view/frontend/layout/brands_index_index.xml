@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magento_Swatches::css/swatches.css"/>
+    </head>
+    <body>
+        <attribute name="class" value="page-products"/>
+        <referenceContainer name="columns.top">
+            <container name="brand.view.container" htmlTag="div" htmlClass="brand-view" after="-">
+                <block class="Sparsh\Brand\Block\Category\View" name="brand.image" template="Sparsh_Brand::image.phtml"/>
+                <block class="Sparsh\Brand\Block\Category\View" name="brand.description" template="Sparsh_Brand::description.phtml"/>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Sparsh\Brand\Block\Product" name="brand_products" template="Sparsh_Brand::brand_products.phtml">
+                <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+            </block>    
+        </referenceContainer>
+    </body>
+</page>

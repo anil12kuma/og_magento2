@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="invoice_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Meetanshi_IndianGst::order/print/invoice.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="invoice_totals">
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\Gst" name="gst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingCgst" name="shipping_cgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingSgst" name="shipping_sgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingIgst" name="shipping_igst"/>
+            <arguments>
+                <argument name="label_properties" xsi:type="string">colspan="6" class="mark"</argument>
+                <argument name="value_properties" xsi:type="string">class="amount"</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

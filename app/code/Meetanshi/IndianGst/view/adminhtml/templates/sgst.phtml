@@ -1,0 +1,16 @@
+<?php $_item = $block->getItem();
+$sgstUtgstPercent=0;
+$sgstUtgstAmount=0;
+if($_item->getSgstPercent()>0){
+    $sgstUtgstPercent=$_item->getSgstPercent();
+    $sgstUtgstAmount=$_item->getSgstAmount();
+}
+else{
+    $sgstUtgstPercent=$_item->getUtgstPercent();
+    $sgstUtgstAmount=$_item->getUtgstAmount();
+}
+?>
+<?= /* @noEscape */ $block->getOrder()->formatPrice($sgstUtgstAmount) ?>
+<?php
+echo '<br>Rate:' . round($sgstUtgstPercent ?? 0, 2) . '%';
+?>

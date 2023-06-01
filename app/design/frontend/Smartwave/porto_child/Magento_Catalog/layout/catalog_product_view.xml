@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        
+
+        <referenceContainer name="product.info.main">
+            <container name="brand.sku" htmlTag="div" htmlClass="brand-sku" before="title.review.section">
+                <block class="Magento\Catalog\Block\Product\View" name="brand.name" template="Magento_Catalog::product/brand.phtml" before="-"/>
+                <block class="Magento\Catalog\Block\Product\View" name="product.sku" template="Magento_Catalog::product/view/sku.phtml" after="-"/>
+            </container>
+        	<container name="title.review.section" htmlTag="div" htmlClass="title-review-section" before="product.info.price"></container>
+        	<block class="Magento\Catalog\Block\Product\View" name="brand.text" template="Magento_Catalog::product/brand-info.phtml" after="title.review.section"/>
+        	<block class="Magento\Catalog\Block\Product\View" name="extr.text" template="Magento_Catalog::product/view/extratext.phtml" after="product.info.price"/>
+        </referenceContainer>
+        
+
+        <!--<block class="Magento\Catalog\Block\Product\View\AddTo\Compare" name="view.addto.compares" after="view.addto.wishlist"
+               template="Magento_Catalog::product/view/addto/compare.phtml" >
+            <arguments>
+                <argument name="addToCompareViewModel" xsi:type="object">Magento\Catalog\ViewModel\Product\Checker\AddToCompareAvailability</argument>
+            </arguments>
+        </block>-->
+
+       
+        <referenceContainer name="product.info.stock.sku" remove="true" />
+        <referenceBlock name="product_view_addthis_links" remove="true" />
+        <referenceContainer name="product.info.main">
+            <block class="Magepow\Sizechart\Block\Product\Sizechart" ifconfig="magepow_sizechart/general/enabled" name="sizechart" after="product.info.addtocart" template="sizechart.phtml" />
+        </referenceContainer>
+
+        <move element="brand.text" destination="product.info.main" before="title.review.section"/>
+        <move element="page.main.title" destination="title.review.section" before="-"/>
+        <move element="product.info.review" destination="title.review.section"/>
+        <move element="view.addto.compare" destination="product.info.options.wrapper.bottom" before="product.info.addtocart.additional" />
+        <move element="view.addto.compares" destination="product.info.form.content" before="product.info.addtocart" />
+        <move element="sizechart" destination="product.info.form.options" before="product.info.options.wrapper" />
+        <move element="product.info.overview" destination="product.info.main" after="extr.text"/>
+        
+
+        <move element="product.info.details" destination="product.info.media" after="-"/>
+
+        <referenceContainer name="title.review.section">
+            <block class="Magento\Catalog\Block\Product\View" name="product.share" after="-" template="Magento_Catalog::product/view/share.phtml" />
+            <block class="Magento\Catalog\Block\Product\View" name="product.sku.mobile" template="Magento_Catalog::product/view/sku.phtml" after="product.share"/>
+        </referenceContainer>
+        
+        <!-- <move element="reviews.tab" destination="product.reviews.wrapper"/> -->
+        <referenceBlock name="product.attributes" remove="true" />
+         <referenceBlock name="product.buynow" remove="true"/>
+         <referenceBlock name="product.buynow.config" remove="true"/>
+
+        <referenceContainer name="product.info.media">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.media.review" template="Magento_Catalog::product/view/review.phtml" after="-" />
+        </referenceContainer>
+        
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View\Details" name="product.info.details.bottom" template="Magento_Catalog::product/view/details.phtml" after="product.info.media">
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description.bottom" as="descriptionbottom" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info">
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getDescription</argument>
+                        <argument name="at_code" xsi:type="string">description</argument>
+                        <argument name="css_class" xsi:type="string">description</argument>
+                        <argument name="at_label" xsi:type="string">none</argument>
+                        <argument name="title" translate="true" xsi:type="string">Product description</argument>
+                        <argument name="sort_order" xsi:type="string">10</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Catalog\Block\Product\View" name="features.tab.bottom" template="Magento_Catalog::product/view/features.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Best Use</argument>
+                        <argument name="sort_order" xsi:type="string">11</argument>
+                    </arguments>
+                </block>
+
+                <block class="Magento\Catalog\Block\Product\View" name="technical.tab.bottom" template="Magento_Catalog::product/view/technical.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Technical Specs</argument>
+                        <argument name="sort_order" xsi:type="string">12</argument>
+                    </arguments>
+                </block>
+
+                <block class="Magento\Catalog\Block\Product\View" name="product_care.tab.bottom" template="Magento_Catalog::product/view/product_care.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Product Care</argument>
+                        <argument name="sort_order" xsi:type="string">13</argument>
+                    </arguments>
+                </block>
+                
+
+                <block class="Magento\Catalog\Block\Product\View" name="return.tab.bottom" template="Magento_Catalog::product/view/return.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Return &amp; Exchange</argument>
+                        <argument name="sort_order" xsi:type="string">18</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="product.info.details">                
+            <referenceBlock name="product.info.description">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Product description</argument>
+                </arguments>
+            </referenceBlock>
+
+            <block class="Magento\Catalog\Block\Product\View" name="features.tab" template="Magento_Catalog::product/view/features.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Best Use</argument>
+                    <argument name="sort_order" xsi:type="string">11</argument>
+                </arguments>
+            </block>
+
+             <block class="Magento\Catalog\Block\Product\View" name="technical.tab" template="Magento_Catalog::product/view/technical.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Technical Specs</argument>
+                    <argument name="sort_order" xsi:type="string">12</argument>
+                </arguments>
+            </block>
+
+            <block class="Magento\Catalog\Block\Product\View" name="product_care.tab" template="Magento_Catalog::product/view/product_care.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Product Care</argument>
+                    <argument name="sort_order" xsi:type="string">13</argument>
+                </arguments>
+            </block>
+            
+
+            <block class="Magento\Catalog\Block\Product\View" name="return.tab" template="Magento_Catalog::product/view/return.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Return &amp; Exchange</argument>
+                    <argument name="sort_order" xsi:type="string">18</argument>
+                </arguments>
+            </block>
+
+        </referenceBlock>
+        <container name="custom.product.info.details" htmlTag="div" htmlClass="product info" after="-">
+                <!--<block class="Magento\Review\Block\Form" name="custom.product.review.form" as="review_form" ifconfig="catalog/review/active">
+             <container name="custom.product.review.form.fields.before" as="form_fields_before" label="Review Form Fields Before" htmlTag="div" htmlClass="rewards"/>
+                </block>-->
+                <block class="Magento\Review\Block\Product\View\ListView" name="product.info.product_additional_data" as="product_additional_data" template="Magetop_ReviewManagement::review/list.phtml" after="product.description"/>
+      <!--<block class="Magento\Review\Block\Product\View\ListView" name="custom.product.info.product_additional_data" as="product_additional_data" template="Magento_Review::product/view/list.phtml" ifconfig="catalog/review/active"/>-->
+   <block class="Magento\Catalog\Block\Widget\RecentlyViewed" name="recently_viewed" template="Magento_Catalog::product/widget/viewed/grid.phtml" after="-">
+    <arguments>
+        <argument name="uiComponent" xsi:type="string">widget_recently_viewed</argument>
+        <argument name="page_size" xsi:type="number">4</argument>
+        <!-- 'Product attributes to show' configuration -->
+        <argument name="show_attributes" xsi:type="string">brand,name,image,price,learn_more</argument>
+        <!-- 'Buttons to show' configuration -->
+        <argument name="show_buttons" xsi:type="string">add_to_compare,add_to_wishlist</argument>
+    </arguments>
+</block>
+   </container>
+   
+<move element="custom.product.info.details" destination="content" after="-" />
+
+<referenceBlock name="reviews.tab" remove="true"/>
+
+
+        
+         
+    </body>
+</page>

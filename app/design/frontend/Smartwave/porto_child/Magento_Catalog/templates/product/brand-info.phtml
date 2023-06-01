@@ -1,0 +1,58 @@
+<?php $_product = $block->getProduct();
+$brandName = $_product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($_product);
+$url ="";
+switch ($brandName) {
+	case 'Marmot':
+		$url = $this->getUrl('marmot-store');
+		break;
+	case 'Mobi Garden':
+		$url = $this->getUrl('mobi-garden-store');
+		break;
+	case 'Columbia':
+		$url = $this->getUrl('columbia-store');
+		break;
+	case 'Sherpa':
+		$url = $this->getUrl('sherpa-store');
+		break;
+	case 'The North Face':
+		$url = $this->getUrl('the-north-face-store');
+		break;
+	case 'Gokyo':
+		$url = $this->getUrl('gokyo-store');
+		break;
+	case 'Tripole Gears':
+		$url = $this->getUrl('tripole-gears');
+		break;
+	/*case 'Blue Bolt':
+		$url = $this->getUrl('blue-bolt');
+		break;
+	case 'River':
+		$url = $this->getUrl('river-remedy');
+		break;*/
+	case 'Athlos':
+		$url = $this->getUrl('athlos');
+		break;
+	default:
+		# code...
+		break;
+}
+
+ ?>
+ <?php
+ if($brandName =='Blue Bolt'){
+     
+     echo "";
+     ?>
+     
+<?php  }
+else if($brandName =='River'){
+    echo "";
+}else{
+	if($url != ""){
+    ?>
+    <div class="brand-text">
+	<span><a href="<?php echo $url;?>" target="_blank">Visit <?php echo $_product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($_product); ?> Store ></a></span>
+</div>
+<?php } }
+ 
+ ?>

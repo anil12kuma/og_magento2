@@ -1,0 +1,24 @@
+<!--@subject {{trans "Order #%increment_id was cancelled by the customer" increment_id=$request.increment_id}} @-->
+<!--@vars
+{
+"var request":"Request Model",
+"var request.increment_id":"Order Id",
+"var order_view_url":"Order View Url",
+"var customer_name":"Customer Name",
+"var customer_email":"Customer Email"
+}
+@-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Hello,"}}</p>
+<p>{{trans "This is an automatic notification about the order cancellation. "}}</p>
+
+<p><b>{{trans "Details"}}</b></p>
+
+<p>{{trans "Customer: %name " name=$request.name}}{{var request.customer_email}}</p>
+<p>{{trans "Order: "}}<a href="{{var order_view_url}}">#{{var request.increment_id}}</a></p>
+<p>{{trans "Reason: %reason" reason=$request.reason}}</p>
+<p>{{trans "Comment: %comment" comment=$request.comment}}</p>
+<p>{{trans "Thank you!"}}</p>
+
+{{template config_path="design/email/footer_template"}}

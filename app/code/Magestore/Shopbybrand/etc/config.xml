@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ms_shopbybrand>
+            <general>
+                <enable_frontend>1</enable_frontend>
+                <display_toplink>1</display_toplink>
+                <frontend_url_path>brand</frontend_url_path>
+                <attribute_code>manufacturer</attribute_code>
+                <brand_extended_search>name</brand_extended_search>
+                <number_brand_top>20</number_brand_top>
+                <number_product_on_row>3</number_product_on_row>
+                <display_brandnavigation>1</display_brandnavigation>
+                <maximum_item_brandnavigation>15</maximum_item_brandnavigation>
+                <brand_link_menu>1</brand_link_menu>
+            </general>
+            <optional>
+                <display_featured_brand>1</display_featured_brand>
+                <display_brand_image>1</display_brand_image>
+                <display_brand_have_product>0</display_brand_have_product>
+                <display_brand_categories>1</display_brand_categories>
+                <display_brand_signup>1</display_brand_signup>
+                <display_shopby>1</display_shopby>
+                <display_brand_maxreview>10</display_brand_maxreview>
+                <display_brand_view_search>1</display_brand_view_search>
+                <display_brand_list_search>1</display_brand_list_search>
+                <display_brand_by_category>1</display_brand_by_category>
+                <display_sidebar>1</display_sidebar>
+                <maximum_item_sidebar>10</maximum_item_sidebar>
+            </optional>
+            <!--add by cuong-->
+            <brand_list>
+                <display_brand_image>1</display_brand_image>
+                <display_brand_group_by_name>0</display_brand_group_by_name>
+                <display_brand_have_product>0</display_brand_have_product>
+                <display_product_number>0</display_product_number>
+                <display_featured_brand>1</display_featured_brand>
+                <show_featured_brand_as_slider>0</show_featured_brand_as_slider>
+                <show_number_of_slide>4</show_number_of_slide>
+                <display_brand_category>1</display_brand_category>
+                <display_brand_character_list>1</display_brand_character_list>
+                <display_brand_search_box>1</display_brand_search_box>
+                <brand_logo_width>125</brand_logo_width>
+                <brand_logo_height>125</brand_logo_height>
+            </brand_list>
+
+
+            <brand_details>
+                <details_layout>2columns-left</details_layout>
+                <details_display_banner>1</details_display_banner>
+                <details_display_logo>1</details_display_logo>
+                <details_display_featured_products>1</details_display_featured_products>
+                <details_display_brand_by_category>0</details_display_brand_by_category>
+                <details_search_box>1</details_search_box>
+                <details_best_seller>1</details_best_seller>
+                <number_of_products_show>5</number_of_products_show>
+            </brand_details>
+
+            <!--end add by cuong-->
+            <template>
+                <brand_listing>default</brand_listing>
+            </template>
+            <!-- add by Peter-->
+            <sidebar>
+                <brand_sidebar>1</brand_sidebar>
+                <maximum_item_sidebar>5</maximum_item_sidebar>
+                <option_display>0</option_display>
+            </sidebar>
+            <!-- end add by Peter-->
+
+            <feature_brand_flexibebox>
+                <display_featured_brand>1</display_featured_brand>
+                <show_featured_brand_as_slider>1</show_featured_brand_as_slider>
+            </feature_brand_flexibebox>
+            <style_config>
+                <background_title>FFA500</background_title>
+                <brand_title_color>FFFFFF</brand_title_color>
+                <background_filter_label>3399CC</background_filter_label>
+                <color_filter_label>FFFFFF</color_filter_label>
+                <background_filter_link>eeeeee</background_filter_link>
+                <color_link_fitler>707070</color_link_fitler>
+                <background_filter_link_hover>6f6f6f</background_filter_link_hover>
+                <color_filter_link_hover>ffffff</color_filter_link_hover>
+                <color_link>3399CC</color_link>
+                <color_link_hover>6f6f6f</color_link_hover>
+            </style_config>
+        </ms_shopbybrand>
+    </default>
+</config>

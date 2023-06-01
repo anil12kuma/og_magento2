@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-grouped-options",
+    "description": "Grouped Options by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.4"
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\GroupedOptions\\": ""
+        }
+    }
+}

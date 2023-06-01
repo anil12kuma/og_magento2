@@ -1,0 +1,13 @@
+{
+  "name": "wishtech/zoom-product-photo",
+  "description": "Zoom Product Photo",
+  "type": "magento2-module",
+  "version": "2.2.1",
+  "license": "GPL-3.0-or-later",
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "Wishtech\\ProductZoom\\": ""
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+
+<?php
+    $_helper    = $this->helper('Magento\Catalog\Helper\Output');
+    $_category  = $block->getCurrentBrand();
+    $_imgHtml   = '';
+    if (!empty($_category->getBannerImage()) && $_imgUrl = $block->getBrandImageUrl($_category->getBannerImage())) {
+        $_imgHtml = '<div class="category-image"><img src="' . $_imgUrl . '" alt="' . $block->escapeHtml($_category->getTitle()) . '" title="' . $block->escapeHtml($_category->getTitle()) . '" class="image" /></div>';
+        /* @escapeNotVerified */ echo $_imgHtml;
+    }
+?>
+
+

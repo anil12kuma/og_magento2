@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="gst-category">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">GST India - Meetanshi</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">25</item>
+            </item>
+        </argument>
+        
+		<field name="cat_gst_rate">
+            <argument name="data" xsi:type="array">
+			<item name="options" xsi:type="object">Meetanshi\IndianGst\Model\Config\Source\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">GST Rate (in Percentage)</item>
+                </item>
+            </argument>
+        </field>
+		<field name="cat_min_gst_amount">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Minimum Product Price to Apply Above GST Rate</item>
+                </item>
+            </argument>
+        </field>
+		<field name="cat_min_gst_rate">
+            <argument name="data" xsi:type="array">
+			<item name="options" xsi:type="object">Meetanshi\IndianGst\Model\Config\Source\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">GST Rate to Apply on Products Below Minimum Set Price</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

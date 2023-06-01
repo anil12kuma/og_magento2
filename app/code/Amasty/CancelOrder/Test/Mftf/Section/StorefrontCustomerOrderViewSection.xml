@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+   <section name="StorefrontCustomerOrderViewSection">
+        <element name="orderStatus" type="text" selector="//span[@class='order-status']"/>
+        <element name="commentContent" type="text" selector="//dd[@class='comment-content']"/>
+   </section>
+</sections>

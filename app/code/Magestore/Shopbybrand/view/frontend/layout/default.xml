@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/default.css"/>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/templates/default/shopbybrand-bootstrap.css"/>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/bootstrap.css"/>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/bootstrap.css.map"/>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/templates/default/sliderstyle.css"/>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/templates/default/default.css"/>
+        <css src="Magestore_Shopbybrand::css/shopbybrand/templates/default/freaturedproductsiliderstyle.css"/>
+    </head>
+    <body>
+        <referenceBlock name="content">
+            <block class="Magestore\Shopbybrand\Block\Style" name="shopbybrand.block.style" as="shopbybrand.block.style"/>
+        </referenceBlock>
+        <referenceBlock name="top.links">
+            <block class="Magestore\Shopbybrand\Block\Link" name="shopbybrand-top-link" before="my-account-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Brands</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="header.links">
+            <block class="Magestore\Shopbybrand\Block\Link" name="shopbybrand-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Brands</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,42 @@
+<?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+//$blockObj = $block->getLayout()->createBlock('Tigren\Ajaxwishlist\Block\Main');
+//echo $blockObj->getMyCustomMethod();
+$_product = $block->getProduct();
+$buttonTitle = __('Add to Cart');
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$reviewFactory = $objectManager->create('Magento\Review\Model\Review');
+
+$storeId = 1;
+$reviewFactory->getEntitySummary($_product, $storeId);
+
+$ratingSummary = $_product->getRatingSummary()->getRatingSummary();
+?>
+<style>
+div#mb-ajaxsuite-popup-wrapper.mb-ajaxsuite-popup-wrapper.popmsg {
+    
+    display: none !important;
+}
+#mb-ajaxsuite-blank {
+   
+    display: none !important;
+}
+</style>
+
+<script>
+require(['jquery'],function($){
+    $('#product-buynow-button').on('click',function(){
+        $('.buynow-button button.action.buy-now').trigger('click');
+    });
+
+    $('#wishlist-addtocart-button').on('click',function(){
+        $('.box-tocart button#product-addtocart-button').trigger('click');
+    });
+});
+</script>

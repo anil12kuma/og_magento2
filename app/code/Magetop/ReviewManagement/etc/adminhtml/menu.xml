@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @Author      Magetop Team
+ * @package     Review Management
+ * @copyright   Copyright (c) 2019 MAGETOP (http://www.magetop.com)
+ * @terms       http://www.magetop.com/terms
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ **/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magetop_ReviewManagement::main_menu" title="Advanced Review" module="Magetop_ReviewManagement" sortOrder="20" resource="Magetop_ReviewManagement::main_menu" />
+        <add id="Magetop_ReviewManagement::reviewmanagement" title="Manage Review Options" module="Magetop_ReviewManagement" parent="Magetop_ReviewManagement::main_menu" sortOrder="10" action="magetop/reviewmanagement/index" resource="Magetop_ReviewManagement::reviewmanagement"/>
+        <add id="Magetop_ReviewManagement::configurations" title="Configurations" module="Magetop_ReviewManagement" parent="Magetop_ReviewManagement::main_menu" sortOrder="20" action="adminhtml/system_config/edit/section/reviewmanagement" resource="Magetop_ReviewManagement::configurations"/>
+    </menu>
+</config>

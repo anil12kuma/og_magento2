@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Meetanshi_IndianGst::order/invoice/create/items.phtml</argument>
+            </action>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" as="simple"
+                   template="Meetanshi_IndianGst::order/invoice/create/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" as="configurable"
+                   template="Meetanshi_IndianGst::order/invoice/create/items/renderer/default.phtml"/>
+            <block class="Magento\Bundle\Block\Adminhtml\Sales\Order\Items\Renderer" name="order_items.bundle" as="bundle"
+                   template="Meetanshi_IndianGst::order/invoice/create/bundle/items/renderer.phtml"/>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" as="downloadable"
+                   template="Meetanshi_IndianGst::order/invoice/create/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" as="grouped"
+                   template="Meetanshi_IndianGst::order/invoice/create/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer" as="virtual"
+                   template="Meetanshi_IndianGst::order/invoice/create/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Column\Name" name="column_name"
+                   template="Meetanshi_IndianGst::items/column/name.phtml" group="column"/>
+        </referenceBlock>
+
+        <referenceBlock name="invoice_totals">
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\Gst" name="gst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingCgst" name="shipping_cgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingUtgst" name="shipping_utgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingSgst" name="shipping_sgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingIgst" name="shipping_igst"/>
+        </referenceBlock>
+    </body>
+</page>

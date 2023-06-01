@@ -1,0 +1,177 @@
+<?php
+/**
+ * @var $block  Mega\Phonelogin\Block\PhoneNumber
+ */
+?>
+<div id="otp-popup-modal" style="display:none">
+    <dl>
+        <dd>
+            <?php
+            echo __('A Verification Code Has been sent on entered mobile number. Please enter the verification code and click submit');
+            ?>
+        </dd>
+    </dl>
+    <div id="vcodeContainer">
+        <label for="name"><?php echo __('Verification Code')?></label>
+        <input type="text" id="verificationCode" name="verificationCode">
+        <div id="vcodeErr" class="errMsg"></div>
+        <input type="hidden" value="0" name = 'mphone_verified'>
+    </div>
+</div>
+ 
+<script type="application/javascript">
+    require([
+        'jquery',
+        'intlTelInput',
+        'Magento_Ui/js/modal/modal'
+    ], function ($,intlTelInput,modal) {
+        var popupModal = null;
+       
+       /* $(document).on("click",".otp-checkout-modal .action-close",function() {
+            $("input[name='telephone']").val('');
+            $("input[name='telephone']").attr('required', true);
+            $("input[name='telephone']").trigger("focus");
+        });*/     
+
+
+        setTimeout(function(){
+            var phone = $("input[name='telephone']").val();
+            var param = {phone: phone};
+            var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Checkout/Check");?>';
+            $.ajax({
+                showLoader: true,
+                url: requestUrl,
+                data: param,
+                type: "POST",
+                dataType: 'json'
+            }).done(function (data) {
+                if(data.status){
+                    var telephoneLabel = 'div[name="shippingAddress.telephone"] > label > span';
+                    //if (!$('mobileverified').length) {
+                        $('<span id="mobileverified" title="verified"><i class="porto-icon-check-circle"></i></span>').insertAfter(telephoneLabel);
+                    //}
+                }
+
+            });
+            
+        }, 8000);
+
+        maxMageTelephoneRenderComplete = function() {
+            $("input[name='telephone']").intlTelInput(<?php echo $block->phoneConfig(); ?>)
+        },
+            telephoneChanged = function (){
+                // $("input[name='telephone'").change(function(){
+                    if(popupModal === null){
+                        let options = {
+                            type: 'popup',
+                            responsive: true,
+                            innerScroll: true,
+                            title: 'Verify Phone Number',
+                            modalClass: 'otp-checkout-modal',
+                            buttons: [{
+                                text: $.mage.__('Verify'),
+                                class: 'button btn-success',
+                                click: function () {
+                                    var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Phone/verifyUpdatePhone");?>';
+                                    var verificationCode = $('#verificationCode').val();
+                                    if (verificationCode == '') {
+                                        $('#verificationCode').addClass('mage-error');
+                                    }
+                                    $('#verificationCode').removeClass('mage-error');
+                                    var phone = $("input[name='telephone']").val();
+                                    var param = {phone: phone, code: verificationCode};
+                                    $.ajax({
+                                        showLoader: true,
+                                        url: requestUrl,
+                                        data: param,
+                                        type: "POST",
+                                        dataType: 'json'
+                                    }).done(function (data) {
+                                        if (data.status) {
+                                            $('#vcodeErr').css('color','green');
+                                            $('#vcodeErr').html(data.message);
+                                            $('.otp-checkout-modal .action-close').trigger('click');
+                                            var telephoneLabel = 'div[name="shippingAddress.telephone"] > label > span';
+                                //if (!$('mobileverified').length) {
+                                    $('<span id="mobileverified" title="verified"><i class="porto-icon-check-circle"></i></span>').insertAfter(telephoneLabel);
+                                //}
+                                            //$('#form-validate').submit();
+                                        } else {
+                                            console.log('verified3');
+                                            //alert(data.message);
+                                            $('#vcodeErr').css('color','red');
+                                            $('#vcodeErr').html(data.message);
+                                        }
+
+                                    });
+
+
+                                }
+                            },{
+                                text: $.mage.__('Re-Send Code'),
+                                class: 'button btn-warning',
+                                click: function () {
+                                    var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Checkout/Sendcode");?>';
+                                    var phone = $("input[name='telephone']").val();
+                                    var param = {phone:phone};
+                                    $.ajax({
+                                        showLoader: true,
+                                        url: requestUrl,
+                                        data: param,
+                                        type: "POST",
+                                        dataType: 'json'
+                                    }).done(function (data) {
+                                        console.log('verified2');
+                                        //alert(data.message);
+                                        $('#vcodeErr').css('color','green');
+                                        $('#vcodeErr').html(data.message);
+                                    });
+
+                                }
+                            }]
+                        };
+                        console.log('oin');
+                        popupModal = $('#otp-popup-modal');
+                        modal(options, popupModal);
+
+               
+
+
+                    }
+                        var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Checkout/Sendcode");?>';
+                        var fullPhone = $("input[name='telephone']").val();
+                        var param = {phone:fullPhone};
+                        var phoneInput = this;
+                        $.ajax({
+                            showLoader: true,
+                            url: requestUrl,
+                            data: param,
+                            type: "POST",
+                            dataType: 'json'
+                        }).done(function (data) {
+                            if(data.status){
+                                console.log('non-verified');
+                                $('span#mobileverified').remove();
+                                $('#otp-popup-modal').show();
+                                popupModal.modal('openModal');
+                            }else{
+                                console.log('verified');
+                                var telephoneLabel = 'div[name="shippingAddress.telephone"] > label > span';
+                                //if (!$('mobileverified').length) {
+                                    $('<span id="mobileverified" title="verified"><i class="porto-icon-check-circle"></i></span>').insertAfter(telephoneLabel);
+                                //}
+                                 $('#otp-popup-modal').hide();
+                                if(data.message){
+                                    console.log('error-verified');
+                                    $('span#mobileverified').remove();
+                                    alert(data.message);
+                                }
+                                
+                            }
+                        });
+
+             
+                // });
+            }
+    });
+</script>

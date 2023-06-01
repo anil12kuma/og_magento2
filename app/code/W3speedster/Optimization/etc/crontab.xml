@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="W3speedster\Optimization\Model\Observer" method="w3speedsterPreloadCssCallback" name="w3speedsterPreloadCssCallback">
+            <schedule>*/15 * * * *</schedule>			
+        </job>
+        <job instance="W3speedster\Optimization\Model\Observer" method="w3speedster_add_image_optimization_schedule" name="w3speedster_add_image_optimization_schedule">
+            <schedule>*/15 * * * *</schedule>			
+        </job>
+    </group>
+</config>

@@ -1,0 +1,23 @@
+<?php
+$_item = $block->getItem();
+if ($_item->getGstExclusive()) {
+    $taxableAmount = $_item->getRowTotal();
+    $_item->setRowTotal(
+        round($taxableAmount,2) +
+        round($_item->getCgstAmount() ? $_item->getCgstAmount() : 0,2) +
+        round($_item->getSgstAmount() ? $_item->getSgstAmount() : 0,2) +
+        round($_item->getIgstAmount() ? $_item->getIgstAmount() : 0,2) +
+        round($_item->getUtgstAmount() ? $_item->getUtgstAmount() : 0,2)
+    );
+} else {
+    $taxableAmount =
+        round($_item->getRowTotal(),2) -
+        round($_item->getDiscountAmount(),2) -
+        round($_item->getCgstAmount() ? $_item->getCgstAmount(): 0,2) -
+        round($_item->getSgstAmount() ? $_item->getSgstAmount() : 0,2) -
+        round($_item->getIgstAmount() ? $_item->getIgstAmount() : 0,2) -
+        round($_item->getUtgstAmount() ? $_item->getUtgstAmount() : 0,2);
+}
+?>
+<?= /* @noEscape */ $block->getOrder()->formatPrice($taxableAmount) ?>
+

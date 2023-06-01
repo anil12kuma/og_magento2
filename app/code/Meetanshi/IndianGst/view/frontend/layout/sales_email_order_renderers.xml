@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Creditmemo Items List" design_abstraction="custom">
+    <body>
+        <referenceBlock name="sales.email.order.renderers">
+            <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder"
+                   name="sales.email.order.renderers.default" as="default"
+                   template="Meetanshi_IndianGst::order/email/items/order/default.phtml"/>
+            <block class="Magento\Downloadable\Block\Sales\Order\Email\Items\Order\Downloadable"
+                   name="sales.email.order.renderers.downloadable" as="downloadable"
+                   template="Meetanshi_IndianGst::order/email/items/order/default.phtml"/>
+            <block class="Meetanshi\IndianGst\Model\Bundle\Block\Sales\Order\Items\Renderer"
+                   name="sales.email.order.renderers.bundle" as="bundle"
+                   template="Meetanshi_IndianGst::order/email/items/order/bundle.phtml"/>
+            <block class="Magento\GroupedProduct\Block\Order\Email\Items\Order\Grouped"
+                   name="sales.email.order.renderers.grouped" as="grouped"
+                   template="Meetanshi_IndianGst::order/email/items/order/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder"
+                   name="sales.email.order.renderers.virtual" as="virtual"
+                   template="Meetanshi_IndianGst::order/email/items/order/default.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

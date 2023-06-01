@@ -1,0 +1,22 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\CancelOrder\Api\Data\CancelOrderInterface" type="Amasty\CancelOrder\Model\CancelOrder" />
+    <preference for="Amasty\CancelOrder\Api\CancelOrderRepositoryInterface" type="Amasty\CancelOrder\Model\Repository\CancelOrderRepository" />
+
+    <type name="Amasty\CancelOrder\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amasty_cancel_order</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_cancel_order_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">amasty_cancel_order_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\CancelOrder\Model\ResourceModel\CancelOrder</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="am_cancel_order_listing_data_source"
+                      xsi:type="string">Amasty\CancelOrder\Model\ResourceModel\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

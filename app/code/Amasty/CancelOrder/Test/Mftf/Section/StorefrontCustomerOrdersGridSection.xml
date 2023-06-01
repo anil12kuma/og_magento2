@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd"> 
+   <section name="StorefrontCustomerOrdersGridSection">
+       <element name="cancelOrder"
+                type="button"
+                selector="//td[contains(text(),'{{orderNumber}}')]/following-sibling::td[contains(@class,'col') and contains(@class,'actions')]/button"
+                parameterized="true" timeout="30" />
+       <element name="popupOkButton" type="button" selector="//button/span[text()='Ok']"/>
+       <element name="popupSubmitButton" type="button" selector="//button/span[text()='Submit']"/>
+       <element name="popupCancelButton" type="button" selector="//button/span[text()='Cancel']"/>
+       <element name="popupLeaveCommentField" type="textarea" selector="#amcorder-textarea"/>
+       <element name="popupChooseReasonSelect" type="select" selector="#amcorder-select"/>
+   </section>
+</sections>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Magestore\Shopbybrand\Block\Adminhtml\Brand\Edit\Tabs" name="ms_brand_edit_tabs">
+                <block class="Magestore\Shopbybrand\Block\Adminhtml\Brand\Edit\Tab\Main" name="ms_brand_edit_tab_main"/>
+                <block class="Magento\Backend\Block\Widget\Tab" name="brand_edit_tab_product">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Products</argument>
+                        <argument name="url" xsi:type="url" path="shopbybrand/*/products">
+                            <param name="_current">1</param>
+                        </argument>
+                        <argument name="class" xsi:type="string">ajax</argument>
+                    </arguments>
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">ms_brand_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">product_section</argument>
+                    <argument name="block" xsi:type="string">brand_edit_tab_product</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magestore\Shopbybrand\Block\Adminhtml\Brand\Edit" name="adminhtml.shopbybrand.brand.edit.container"/>
+        </referenceContainer>
+    </body>
+</page>

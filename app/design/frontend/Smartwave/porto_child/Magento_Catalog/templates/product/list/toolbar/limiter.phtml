@@ -1,0 +1,58 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+?>
+<div class="field limiter">
+    <label class="label" for="limiter">
+        <span><?php //$block->escapeHtml(__('Sort by view')) ?></span>
+    </label>
+    <div class="control" style="display:none;">
+        <select id="limiter" data-role="limiter" class="limiter-options" style="display: none;">
+            <?php foreach ($block->getAvailableLimit() as $_key => $_limit) :?>
+                <option value="<?= $block->escapeHtmlAttr($_key) ?>"
+                    <?php if ($block->isLimitCurrent($_key)) :?>
+                        selected="selected"
+                    <?php endif ?>>
+                    <?= $block->escapeHtml($_limit) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <ul class="limiter-option">
+            <?php foreach ($block->getAvailableLimit() as $_key => $_limit) :?>
+                <?php 
+                if ($block->escapeHtmlAttr($_key) == "") {
+                    $limit ="";
+                } else {
+                    $limit = "product_list_limit=".$block->escapeHtmlAttr($_key);
+                }
+                ?>
+                <a class="<?= $block->escapeHtml($_key) ?>" href="javascript:void(0)">
+                    <li <?php if ($block->isLimitCurrent($_key)) :?>
+                        class="active"
+                    <?php endif ?>>
+                     <?= $block->escapeHtml($_limit) ?> </li></a>
+            <?php endforeach; ?>
+        </ul> 
+
+    </div>
+    <span class="limiter-text"><?= $block->escapeHtml(__('per page')) ?></span>
+</div>
+
+<script>
+require(['jquery'], function($){ 
+    jQuery('.toolbar-products .field.limiter ul.limiter-option a').click(function(){
+        var className = jQuery(this).attr('class');
+        jQuery('#limiter option[value='+className+']').attr('selected','selected').change();
+    });
+});
+</script>

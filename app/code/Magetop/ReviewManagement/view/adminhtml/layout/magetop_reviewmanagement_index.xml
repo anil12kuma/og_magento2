@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @Author      Magetop Team
+ * @package     Review Management
+ * @copyright   Copyright (c) 2019 MAGETOP (http://www.magetop.com)
+ * @terms       http://www.magetop.com/terms
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ **/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magetop\ReviewManagement\Block\Adminhtml\ReviewManagement" name="magetop_reviewmanagement.grid"/>
+        </referenceContainer>
+        <referenceContainer name="admin.reviewmanagement.grid.view">
+            <block class="Magento\Framework\View\Element\Text\ListText" name="grid.bottom.links">
+                <block class="Magento\Catalog\Block\Adminhtml\Rss\Grid\Link" name="grid.rss.link"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

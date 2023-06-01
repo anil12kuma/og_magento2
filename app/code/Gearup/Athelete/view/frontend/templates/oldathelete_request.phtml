@@ -1,0 +1,99 @@
+<div id="athlete-popup-modal" class="partner-athlet-popup" style="display:none;">
+    <h2><?php echo __('Become an athlete');?></h2>
+    <span><?php echo __('Are you an expert with information, knowledge that can help our community?');?></span>
+    <form method="post" id="athelete-request-form" class="partner-athlet-form" action="javascript:void(0)">
+        <div class="control">
+            <input type="text" name="name" required="required" placeholder="Name">
+        </div>
+        <div class="control">
+            <input type="email" name="email" required="required" placeholder="Email">
+        </div>
+        <div class="control">
+            <input type="text" name="phone" required="required" placeholder="Phone No.">
+        </div>
+        <div class="control">
+            <label><?php echo __('Select Activities');?></label>
+            <div class="checkbox-section">
+                <div class="control">
+                    <input type="checkbox" name="activities[]" value="Tracking"><label><?php echo __('Tracking');?></label>
+                </div>
+                <div class="control">
+                    <input type="checkbox" name="activities[]" value="Running"><label><?php echo __('Running');?></label>
+                </div>
+                <div class="control">
+                    <input type="checkbox" name="activities[]" value="Kayaking"><label><?php echo __('Kayaking');?></label>
+                </div>
+            </div>
+        </div>
+        <div class="control">
+            <textarea rows="5" cols="50" name="message" placeholder="Your message"></textarea>
+        </div>
+        <button type="submit" class="submit-btn"><?php echo __('Submit');?></button>
+    </form>
+</div>
+
+<div id="athlete-success-modal" class="partner-athlet-popup" style="display:none;">
+    <div class="success-section">
+        <img src="<?php echo $this->getViewFileUrl('Gearup_Athelete::images/path608.png');?>"/>
+        <h2><?php echo __('Your request has been received, keep adventuring.');?></h2>
+    </div>
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $, modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: [{
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var options1 = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: [{
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('.partner-athlet-popup'));
+            var popup1 = modal(options1, $('#athlete-success-modal'));
+            
+            $(".athlete-popup-section").on('click',function(){ 
+                $("#athlete-popup-modal").modal("openModal");
+            });
+
+            $('#athelete-request-form').on('submit', function (e) {
+                var form = $("#athelete-request-form");
+                url = "<?php echo $this->getUrl('athelete/index/postdata');?>";         
+                    
+                jQuery.ajax({
+                    url: url,
+                    type: 'Post',
+                    dataType: 'json',
+                    showLoader: true,
+                    data: form.serialize()
+                }).done(function (result) {
+                    $("#athelete-request-form")[0].reset();
+                    $("#athlete-popup-modal").modal("closeModal");
+                    $("#athlete-success-modal").modal("openModal");
+                });
+                
+            });
+        }
+    );
+</script>

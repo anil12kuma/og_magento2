@@ -1,0 +1,17 @@
+
+type CartPrices {
+    cgst: [TotalSegmentsOutput] @doc(description:"Cgst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\Cgst")
+    igst: [TotalSegmentsOutput] @doc(description:"Igst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\Igst")
+    sgst: [TotalSegmentsOutput] @doc(description:"Sgst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\Sgst")
+    shipping_cgst: [TotalSegmentsOutput] @doc(description:"Shipping Cgst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\ShippingCgst")
+    shipping_igst: [TotalSegmentsOutput] @doc(description:"Shipping Igst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\ShippingIgst")
+    shipping_sgst: [TotalSegmentsOutput] @doc(description:"Shipping Sgst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\ShippingSgst")
+    shipping_utgst: [TotalSegmentsOutput] @doc(description:"Shipping Utgst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\ShippingUtgst")
+    utgst: [TotalSegmentsOutput] @doc(description:"Utgst Segments") @resolver(class: "\\Meetanshi\\IndianGst\\Model\\Resolver\\Utgst")
+}
+type TotalSegmentsOutput {
+     code: String
+     title: String
+     value: Float
+     currency: CurrencyEnum
+}

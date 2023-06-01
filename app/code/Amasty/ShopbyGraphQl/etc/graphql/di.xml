@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="amshopby_slider_slider_style" xsi:type="string">amshopby/slider/slider_style</item>
+                <item name="amshopby_general_unfolded_options_state" xsi:type="string">amshopby/general/unfolded_options_state</item>
+                <item name="amshopby_general_keep_single_choice_visible" xsi:type="string">amshopby/general/keep_single_choice_visible</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

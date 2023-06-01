@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Amasty_Rules">
+        <sequence>
+            <module name="Magento_SalesRule" />
+            <module name="Magento_SalesRuleStaging" />
+            <module name="Magento_Staging" />
+            <module name="Magento_Reward" />
+            <module name="Amasty_Conditions"/>
+            <module name="Amasty_Promo"/>
+        </sequence>
+    </module>
+</config>

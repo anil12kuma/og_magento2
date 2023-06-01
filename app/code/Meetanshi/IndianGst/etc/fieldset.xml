@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+            <field name="cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="igst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_igst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_igst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_igst_amount">
+                <aspect name="to_order"/>
+            </field>
+        </fieldset>
+        <fieldset id="sales_convert_quote">
+            <field name="cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="igst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_igst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_cgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_utgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_sgst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="shipping_igst_amount">
+                <aspect name="to_order"/>
+            </field>
+            <field name="base_shipping_igst_amount">
+                <aspect name="to_order"/>
+            </field>
+        </fieldset>
+        <fieldset id="sales_order_address">
+            <field name="buyer_gst_number">
+                <aspect name="create" />
+                <aspect name="update" />
+                <aspect name="to_quote_address" />
+            </field>
+
+        </fieldset>
+        <fieldset id="sales_copy_order_billing_address">
+            <field name="buyer_gst_number">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+        <fieldset id="sales_convert_order_address">
+            <field name="buyer_gst_number">
+                <aspect name="to_quote_address" />
+            </field>
+        </fieldset>
+        <fieldset id="order_address">
+            <field name="buyer_gst_number">
+                <aspect name="to_customer_address" />
+            </field>
+        </fieldset>
+        <fieldset id="customer_address">
+            <field name="buyer_gst_number">
+                <aspect name="create" />
+                <aspect name="update" />
+                <aspect name="to_quote_address" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

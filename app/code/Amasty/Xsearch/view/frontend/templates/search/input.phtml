@@ -1,0 +1,43 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Amasty_Xsearch
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<section class="amsearch-input-wrapper"
+         data-bind="
+            css: {
+                '-dynamic-width': data.isDynamicWidth,
+                '-match': $data.readyForSearch(),
+                '-typed': inputValue && inputValue().length
+            }">
+    <input type="text"
+           name="q"
+           placeholder="<?= $escaper->escapeHtmlAttr(__('Enter Keyword or Item')) ?>"
+           class="amsearch-input"
+           maxlength="128"
+           role="combobox"
+           aria-haspopup="false"
+           aria-autocomplete="both"
+           autocomplete="off"
+           aria-expanded="false"
+           data-amsearch-block="input"
+           data-bind="
+                hasFocus: focused,
+                value: inputValue,
+                event: {
+                    keypress: onEnter
+                },
+                valueUpdate: 'afterkeyup'">
+    <!-- ko template: { name: templates.loader } --><!-- /ko-->
+    <!-- ko template: { name: templates.clear_button } --><!-- /ko-->
+    <!-- ko template: { name: templates.search_button } --><!-- /ko-->
+</section>

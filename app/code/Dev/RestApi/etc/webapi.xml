@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V4/getProductByCategory" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getItemLists" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getProduct" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getItem" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getProductLink" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getProductLink" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/review/public" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getPublicProductReview" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/review/customer/brand" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getReviewByBrand" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/review/athelete" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getAtheleteProductReview" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/review/add" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="addProductReview" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getAvailableAttribute" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getAvailableAttribute" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/bannersliders" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getSliders" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getAthlete" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getAthletes" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getBrands" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getBrands" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getFilterList" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getFilterList" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getShopByCategory" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getShopByCategory" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getAds" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getAds" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/category/all" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getAllCategory" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/getBestCategoryDeals" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getBestCategoryDeals" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/wishlist" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getWishlistProducts" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/wishlist/add" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="saveProductToWishlist" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/wishlist/remove" method="DELETE">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="removeProductFromWishlist" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/customer/token" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="createCustomerToken" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/socialcustomer" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="createSocialCustomer" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/orders/custom" method="GET">
+        <service class="Magento\Sales\Api\OrderRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/orders/:id/cancel/custom" method="POST">
+        <service class="Magento\Sales\Api\OrderManagementInterface" method="cancel"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/products/newly" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getNewlyProducts" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/products/trend" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getTrendingProducts" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/products/deals" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getDealsProducts" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/products/recently" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getRecentlyViewedProducts" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/products/buy-now" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="buyNow" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/products/buy-now" method="DELETE">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="deleteBuyNow" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/customer/directpassword" method="PUT">
+        <service class="Dev\RestApi\Api\CustomerInterface" method="changePassword" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/customer/create-customer" method="POST">
+        <service class="Dev\RestApi\Api\CustomerInterface" method="createCustomer" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/razor-pay/order" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="createRazorPayOrder" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/razor-pay/validate" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="validateRazorPaySignature" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/return/options" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getReturnOptions" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V4/return/create" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="createReturnOrderItem" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/return/cancel/:id" method="PUT">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="cancelReturnOrderItem" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/mine/coupon-list" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getCouponList" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/mine/invoices" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getInvoiceList" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/mine/send-otp" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="sendOtp" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/mine/verify-number" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="verifyNumber" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/mine/verify-otp" method="POST">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="verifyOtp" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+    <route url="/V4/athlete" method="GET">
+        <service class="Dev\RestApi\Api\ProductRepositoryInterface" method="getAllAthletes" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

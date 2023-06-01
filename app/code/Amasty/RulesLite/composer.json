@@ -1,0 +1,25 @@
+{
+    "name": "amasty\/module-special-promotions-lite-package",
+    "description": "Special Promotions Lite Package by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty\/base": ">=1.13.3",
+        "amasty\/module-special-promo": ">=2.9.1",
+        "amasty\/module-banners-lite": ">=1.0.20",
+        "amasty\/rgrid": ">=1.0.8"
+    },
+    "homepage": "https:\/\/amasty.com\/",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\SpecialPromotionsLite\\": ""
+        }
+    }
+}

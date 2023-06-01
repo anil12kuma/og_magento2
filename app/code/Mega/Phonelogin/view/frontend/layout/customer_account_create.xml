@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mega_Phonelogin/css/plugin/intlTelInput.css"/>
+       <!--  <link src="Mega_Phonelogin/js/codeVerification.js"/> -->
+    </head>
+    <body>
+        <!--<referenceContainer name="form.additional.info">
+            <block class="Mega\Phonelogin\Block\Customer\Account\Create\Phone" name="mega_phonelogin_register_phone" template="Mega_Phonelogin::customer/account/create/phone.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="customer_form_register">
+            <action method='setTemplate'>
+                <argument name='template' xsi:type='string'>Mega_Phonelogin::form/register.phtml</argument>
+            </action>
+        </referenceBlock>-->
+    </body>
+</page>

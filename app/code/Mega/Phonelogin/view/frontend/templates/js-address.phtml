@@ -1,0 +1,12 @@
+<?php
+/**
+ * @var $block  Mega\Phonelogin\Block\PhoneNumber
+ */
+?>
+<script type="text/x-magento-init">
+    {
+        "input[name='telephone']": {
+            "Mega_Phonelogin/js/internationalTelephoneInput": <?php echo $block->phoneConfig(); ?>
+        }
+    }
+</script>

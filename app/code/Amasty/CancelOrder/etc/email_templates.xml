@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="am_cancel_order_admin_email_template"
+              label="Amasty Cancel Orders Admin Notification"
+              file="am_cancel_order_admin_notifications_template.html"
+              type="html"
+              module="Amasty_CancelOrder"
+              area="frontend"
+    />
+
+    <template id="am_cancel_order_admin_email_auto_canceled_template"
+              label="Amasty Auto-Cancel Order Admin Notification"
+              file="am_cancel_order_admin_email_auto_canceled_template.html"
+              type="html"
+              module="Amasty_CancelOrder"
+              area="frontend"
+    />
+</config>

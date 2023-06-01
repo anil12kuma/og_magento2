@@ -1,0 +1,116 @@
+<?php
+$heading     = $block->getHeading();
+$description = $block->getDescription();
+$optionIds = $block->getAllOptionIds();
+
+$sliderItems = array();
+$arr = array();
+$i = 0;
+$maxcount = array();
+
+foreach ($optionIds as $id) {
+    $brandcollection = $block->getProductCollection($id);
+    $count = 0;
+    $temp = array();
+    foreach ($brandcollection as $b) {
+        $temp[] = array(
+            'entity_id' => $b['entity_id'],
+            'name' => $b['name'],
+            'image' => $b['image'],
+            'sku' => $b['sku'],
+            'created_at' => $b['created_at'],
+            'updated_at' => $b['updated_at'],
+            'brand' => $b['brand'],
+            'brand_value' => $b['brand_value'],
+            'url_key' => $b['url_key'],
+            'color' => $b['color'],
+            'status' => $b['status'],
+            'price' => $b['price'],
+            'description' => $b['description'],
+            'is_brand_slider' => $b['is_brand_slider']
+        );
+        $count++;
+    }
+    if (!empty($temp)) {
+        $arr[$i] = $temp;
+        $maxcount[] = $count;
+        $i++;
+    }
+}
+if (!empty($arr)) {
+    rsort($maxcount);
+    for ($i = 0; $i <= $maxcount[0]; $i++) { //4
+        $t = 0;
+        $temp = array();
+        for ($j = 0; $j < count($arr); $j++) { //5
+            if (isset($arr[$j][$i])) {
+                $temp[] = $arr[$j][$i];
+            }
+        }
+        if (!empty($temp)) {
+            $sliderItems[] = $temp;
+        }
+    }
+}
+
+?>
+
+<div class="brand-slider-widget">
+    <h1><?= $heading ?></h1>
+    <ol class="product-items">
+        <?php $iterator = 1; ?>
+        <div id="brand_slider" class="owl-carousel owl-theme">
+            <?php foreach ($sliderItems as $items) : ?>
+                <?php foreach ($items as $item) : ?>
+                    <li class="product-item product-slider">              
+                        <div class="slider-product-item-info">
+                            <br/>
+                            <?= $item['brand_value'] ?>
+                            <?= $item['entity_id'] ?>
+                            <br/>
+                            <?= $item['name'] ?>
+                            <br/>
+                            <img src="https://wildcountrygear.in/pub/media/catalog/product/cache/1789e4a77e512d987f91ebb7044b92c4/<?= $item['image'] ?>" width="270px">
+                        </div>
+                    </li>
+                <?php endforeach ?>
+            <?php endforeach ?>
+        </div>
+    </ol>
+</div>
+
+<script>
+    require(['jquery', 'OwlCarousel'], function($) {
+        $('#brand_slider').owlCarousel({
+            loop: true,
+            nav: true,
+            dots: false,
+            lazyLoad: true,
+            autoplay: true,
+            autoplayHoverPause: true,
+            items: 4,
+            responsive: {
+                0: {
+                    items: 1,
+                    mouseDrag: true,
+                    touchDrag: true
+                },
+                480: {
+                    items: 2,
+                    mouseDrag: true,
+                    touchDrag: true
+                },
+                750: {
+                    items: 4,
+                    mouseDrag: true,
+                    touchDrag: true
+                },
+                1000: {
+                    items: 4,
+                    mouseDrag: true,
+                    touchDrag: true
+                }
+            }
+        });
+    });
+</script>

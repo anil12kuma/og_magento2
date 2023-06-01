@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="cancelOrderPopUpContent1">
+        <data key="text">sampleText</data>
+        <data key="option">I have changed my mind</data>
+    </entity>
+    <!--StorefrontAmastyCancelPendingOrderWithoutPopUpTest-->
+    <entity name="cancelOrderSettingsGeneral1">
+        <data key="customerGroups">'1','2'</data>
+        <data key="allowedStatuses">'pending'</data>
+        <data key="refundMethod">Disabled</data>
+    </entity>
+        <entity name="cancelOrderSettingsGeneral2">
+        <data key="customerGroups">'1','2'</data>
+        <data key="allowedStatuses">'pending','processing'</data>
+        <data key="refundMethod">Online (if possible)</data>
+    </entity>
+
+
+</entities>

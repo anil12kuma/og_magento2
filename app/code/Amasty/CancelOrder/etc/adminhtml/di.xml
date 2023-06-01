@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Amasty\CancelOrder\Model\Source\AdminEmailTemplate" type="Amasty\CancelOrder\Model\Source\AbstractTemplate">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">am_cancel_order_admin_email_template</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\CancelOrder\Model\Source\AutoEmailTemplate" type="Amasty\CancelOrder\Model\Source\AbstractTemplate">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">am_cancel_order_admin_email_auto_canceled_template</argument>
+        </arguments>
+    </virtualType>
+</config>

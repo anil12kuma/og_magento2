@@ -1,0 +1,12 @@
+<button class="amsearch-button -loupe -clear -icon"
+        data-bind="
+            event: {
+                click: search
+            },
+            css: {
+                '-disabled': !$data.match()
+            },
+            attr: {
+                title: $t('Search')
+            }">
+</button>

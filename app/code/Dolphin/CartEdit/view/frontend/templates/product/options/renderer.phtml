@@ -1,0 +1,27 @@
+<?php
+$option_data = $block->getData('superdata');
+?>
+<?php
+/** @var $block \Magento\Swatches\Block\Product\Renderer\Listing\Configurable */
+$productId = $block->getProduct()->getId();
+?>
+<div class="swatch-opt carteditswatch-opt-<?= /* @noEscape */ $block->getProduct()->getId() ?>"></div>
+<script>
+    require([
+        'jquery',
+        'jquery/ui',
+        'Dolphin_CartEdit/js/cart-edit-swatch-renderer',
+       ], function ($) {
+        var jsonConfig = <?= /* @noEscape */ $block->getJsonConfig() ?>;
+
+        $('.carteditswatch-opt-<?= /* @noEscape */ $block->getProduct()->getId() ?>').carteditSwatchRenderer({
+            selectorProduct: '.product-item-details',
+            onlySwatches: true,
+            numberToShow: <?= /* @noEscape */ $block->getNumberSwatchesPerProduct() ?>,
+            customjsonConfig: jsonConfig,
+            selectedoptions: <?= /* @noEscape */ $option_data ?>,
+            customjsonSwatchConfig: <?= /* @noEscape */ $block->getJsonSwatchConfig() ?>
+        });
+
+    });
+</script>

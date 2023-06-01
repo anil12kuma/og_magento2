@@ -1,0 +1,7 @@
+crons:
+    magento:
+        spec: '* * * * *'
+        cmd: 'php bin/magento cron:run'
+    productcatalog:
+        spec: '* * * * *'
+        cmd: 'php bin/magento queue:consumers:start exportProcessor'

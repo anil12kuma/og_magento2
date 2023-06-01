@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\Controller\Account\LoginPost" type="Mega\Phonelogin\Controller\Rewrite\Customer\Account\LoginPost" />
+    <preference for="Magento\Customer\Controller\Account\ForgotPasswordPost" type="Mega\Phonelogin\Controller\Rewrite\Customer\Account\ForgotPasswordPost" />
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin disabled="false" name="Mega_Phonelogin_Plugin_Block_Checkout_LayoutProcessor"
+                type="Mega\Phonelogin\Plugin\Block\Checkout\LayoutProcessor"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="before_place_order_operation"
+                type="Mega\Phonelogin\Plugin\OrderManagement"/>
+    </type>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="validate_address_place"
+                type="Mega\Phonelogin\Plugin\ValidateAddressPlace"/>
+    </type>
+</config>

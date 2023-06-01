@@ -1,0 +1,98 @@
+<?php
+$heading     = $block->getHeading();
+$brandProductCollection = $block->getProductCollection();
+?>
+<!-- CustomerReview-->
+<div class="CustomerReview">
+    <div class="review">
+        <div class="container">
+            <h2 class="main-title">Customer Reviews</h2>
+            <div id="review_slider" class="owl-carousel owl-theme">
+                <?php foreach ($brandProductCollection as $brandProduct) :
+                    $id = $brandProduct->getId();
+                    $reviewsCollection = $block->getReviewsCollection($id);
+                    if ($reviewsCollection && count($reviewsCollection) > 0) :
+                        $i = 0;
+                        foreach ($reviewsCollection as $review) : ?>
+                            <?php $product = $block->getProduct($review->getEntityPkValue()); ?>
+                            <div class="card byproduct <?= count($reviewsCollection) ?>">
+                                <div class="review-inr">
+                                    
+                                    <div class="review-top">
+                                        <span><a href="<?php echo $product->getProductUrl() ?>" title="<?= $product->getName() ?>"><?= $product->getName() ?></a></span>
+                                        <div class="review-star">
+
+                                            <?php
+                                            $countRatings = count($review->getRatingVotes());
+                                            if ($countRatings > 0) :
+                                                $allRatings = 0;
+                                                foreach ($review->getRatingVotes() as $vote) {
+                                                    $allRatings = $allRatings + $vote->getPercent();
+                                                }
+                                                $allRatingsAvg = $allRatings / $countRatings; ?>
+                                                <div class="rating-summary">
+                                                    <div class="rating-result" title="<?php echo $allRatingsAvg; ?>%">
+                                                        <meta itemprop="worstRating" content="1" />
+                                                        <meta itemprop="bestRating" content="100" />
+                                                        <span style="width:<?php echo $allRatingsAvg; ?>%">
+                                                            <span itemprop="ratingValue"><?php echo $allRatingsAvg; ?>%</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            <?php endif    ?>
+                                        </div>
+                                    </div>
+                                    <div class="review-bottom">
+                                        <p><?= $review->getDetail()  ?></p>
+                                        <span><?= $review->getNickname()  ?></span>
+                                        <br/>
+                                        <span><?= $review->getCreatedAt()  ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $i++;
+                            if ($i == 12) break; ?>
+                        <?php endforeach ?>
+
+                    <?php endif    ?>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require(['jquery', 'OwlCarousel'], function($) {
+        $('#review_slider').owlCarousel({
+            loop: true,
+            nav: false,
+            dots: false,
+            lazyLoad: true,
+            autoplay: true,
+            autoplayHoverPause: true,
+            items: 4,
+            responsive: {
+                0: {
+                    items: 1,
+                    mouseDrag: true,
+                    touchDrag: true
+                },
+                480: {
+                    items: 2,
+                    mouseDrag: true,
+                    touchDrag: true
+                },
+                750: {
+                    items: 4,
+                    mouseDrag: true,
+                    touchDrag: true
+                },
+                1000: {
+                    items: 4,
+                    mouseDrag: true,
+                    touchDrag: true
+                }
+            }
+        });
+    });
+</script>

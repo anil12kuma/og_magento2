@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	    <wishtech_productzoom>
+            <general>
+                <enabled>1</enabled>
+                <responsive>false</responsive>
+                <scrollZoom>true</scrollZoom>
+                <zIndex>999</zIndex>
+                <cursor>default</cursor>
+                <borderSize>1</borderSize>
+                <borderColour>#666</borderColour>
+                <easing>false</easing>
+                <easingType>zoomdefault</easingType>
+                <easingDuration>2000</easingDuration>
+                <lensBorder>1</lensBorder>
+                <lensColour>#fff</lensColour>
+                <lensOpacity>0.4</lensOpacity>
+                <tintColour>#333</tintColour>
+                <tintOpacity>0.4</tintOpacity>
+            </general>
+        </wishtech_productzoom>    
+	</default>
+</config>

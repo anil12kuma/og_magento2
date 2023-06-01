@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:helloworld:Magento_Widget:etc/widget.xsd">
+    <widget class="Rb\BrandReviewSlider\Block\Widget\Slider" id="Rb_BrandReviewSlider">
+        <label>Brand Review Slider Widget</label>
+        <description>Brand Review Slider Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true" sort_order="0">
+                <label translate="true">Title</label>
+                <value>Brand Slider</value>
+            </parameter>
+            <parameter name="brand" xsi:type="text" visible="true" sort_order="1">
+                <label translate="true">Brand</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

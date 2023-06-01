@@ -1,0 +1,93 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_creditmemo = $block->getCreditmemo() ?>
+<?php $_order      = $block->getOrder() ?>
+<?php if ($_creditmemo && $_order): ?>
+    <table class="email-items">
+        <thead>
+            <tr>
+                <th class="item-info">
+                    <?= /* @escapeNotVerified */  __('Items') ?>
+                </th>
+                <th class="col cgst" style="vertical-align:middle" colspan="2">
+                    <table class="cgst">
+                        <tbody style="background:none;text-align:center;font-weight: bold">
+                        <tr>
+                            <td colspan="2"><?php /* @escapeNotVerified */ echo __('CGST') ?></span></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Rate (%)') ?></span></td>
+                            <td><?php echo __('Amount') ?></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </th>
+                <th class="col sgst" style="vertical-align:middle" colspan="2">
+                    <table class="sgst">
+                        <tbody style="background:none;text-align:center;font-weight: bold">
+                        <tr>
+                            <td colspan="2"><?php /* @escapeNotVerified */ echo __('SGST') ?></span></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Rate (%)') ?></span></td>
+                            <td><?php echo __('Amount') ?></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </th>
+                <th class="col utgst" style="vertical-align:middle" colspan="2">
+                    <table class="utgst">
+                        <tbody style="background:none;text-align:center;font-weight: bold">
+                        <tr>
+                            <td colspan="2"><?php /* @escapeNotVerified */ echo __('UTGST') ?></span></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Rate (%)') ?></span></td>
+                            <td><?php echo __('Amount') ?></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </th>
+                <th class="col igst" style="vertical-align:middle" colspan="2">
+                    <table class="igst">
+                        <tbody style="background:none;text-align:center;font-weight: bold">
+                        <tr>
+                            <td colspan="2"><?php /* @escapeNotVerified */ echo __('IGST') ?></span></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo __('Rate (%)') ?></span></td>
+                            <td><?php echo __('Amount') ?></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </th>
+                <th class="item-qty">
+                    <?= /* @escapeNotVerified */  __('Qty') ?>
+                </th>
+                <th class="item-subtotal">
+                    <?= /* @escapeNotVerified */  __('Subtotal') ?>
+                </th>
+            </tr>
+        </thead>
+        <?php foreach ($_creditmemo->getAllItems() as $_item): ?>
+            <?php
+                if ($_item->getOrderItem()->getParentItem()) {
+                    continue;
+                }
+            ?>
+            <tbody>
+                <?= $block->getItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+        <tfoot class="order-totals">
+            <?= $block->getChildHtml('creditmemo_totals') ?>
+        </tfoot>
+    </table>
+<?php endif; ?>

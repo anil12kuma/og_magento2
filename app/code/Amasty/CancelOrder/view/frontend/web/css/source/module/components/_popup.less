@@ -1,0 +1,77 @@
+//
+//  Magento PopUp Styles
+//  _____________________________________
+
+//
+//  Imports
+//  -------------------------------------
+
+@import '../_mixins';
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amcorder-popup-block {
+        & {
+            box-sizing: border-box;
+        }
+
+        .modal-title {
+            padding: 0;
+            border: none;
+        }
+
+        .modal-inner-wrap {
+            max-width: 520px;
+            width: 100%;
+            border: 1px solid #fff;
+            border-radius: 4px;
+        }
+
+        .modal-header {
+            box-sizing: border-box;
+            margin: 0;
+            padding: @amcorder__indent__l * 2 @amcorder__indent @amcorder__indent;
+            width: 100%;
+            border: none;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .amcorder-notice {
+            display: block;
+            margin: 0;
+            padding: 0 0 @amcorder__indent;
+            width: 100%;
+            border-bottom: 1px solid #c1c1c1;
+            text-align: center;
+            word-break: break-word;
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        .modal-footer {
+            padding: @amcorder__indent__m @amcorder__indent__m @amcorder__indent__xl;
+        }
+
+        .amcorder-button {
+            margin: 0 @amcorder__indent 0 0;
+        }
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amcorder-popup-block .modal-inner-wrap .modal-footer {
+        border-top: none;
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-google-address-autocomplete",
+    "description": "Google Address Autocomplete By Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.2"
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\GoogleAddressAutocomplete\\": ""
+        }
+    }
+}

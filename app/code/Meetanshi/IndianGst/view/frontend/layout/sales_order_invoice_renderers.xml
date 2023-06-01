@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sales.order.invoice.renderers">
+            <block class="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer"
+                   name="sales.order.invoice.renderers.default.simple" before="-" as="simple"
+                   template="Meetanshi_IndianGst::order/invoice/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer"
+                   name="sales.order.invoice.renderers.default.configurable" before="-" as="configurable"
+                   template="Meetanshi_IndianGst::order/invoice/items/renderer/default.phtml"/>
+            <block class="Magento\Bundle\Block\Sales\Order\Items\Renderer"
+                   name="sales.order.invoice.renderers.bundle" before="-" as="bundle"
+                   template="Meetanshi_IndianGst::order/invoice/items/renderer/bundle.phtml"/>
+            <block class="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer"
+                   name="sales.order.invoice.renderers.default.virtual" before="-" as="virtual"
+                   template="Meetanshi_IndianGst::order/invoice/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer"
+                   name="sales.order.invoice.renderers.grouped" before="-" as="grouped"
+                   template="Meetanshi_IndianGst::order/invoice/items/renderer/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer"
+                   name="sales.order.invoice.renderers.downloadable" before="-" as="downloadable"
+                   template="Meetanshi_IndianGst::order/invoice/items/renderer/default.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

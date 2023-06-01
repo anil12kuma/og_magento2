@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Gearup_Athelete::parent" title="Gearup" module="Gearup_Athelete" sortOrder="100" resource="Gearup_Athelete::parent"/>
+		<add id="Gearup_Athelete::athelete" title="Athelete Request" module="Gearup_Athelete" sortOrder="20" parent="Gearup_Athelete::parent" action="athelete/athelete" resource="Gearup_Athelete::athelete"/>
+		<add id="Gearup_Athelete::partner" title="Partner Request" module="Gearup_Athelete" sortOrder="21" parent="Gearup_Athelete::parent" action="partner/partner" resource="Gearup_Athelete::partner"/>
+		<add id="Gearup_Feedback::feedback" title="Feedback Request" module="Gearup_Feedback" sortOrder="22" parent="Gearup_Athelete::parent" action="feedback/feedback" resource="Gearup_Athelete::feedback"/>
+    </menu>
+</config>

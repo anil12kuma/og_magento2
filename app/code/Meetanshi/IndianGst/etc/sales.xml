@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="cgst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\Cgst" sort_order="500"/>
+            <item name="utgst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\Utgst" sort_order="500"/>
+            <item name="sgst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\Sgst" sort_order="500"/>
+            <item name="igst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\Igst" sort_order="500"/>
+            <item name="shipping_cgst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\ShippingCgst" sort_order="570"/>
+            <item name="shipping_utgst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\ShippingUtgst" sort_order="570"/>
+            <item name="shipping_sgst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\ShippingSgst" sort_order="570"/>
+            <item name="shipping_igst_amount" instance="Meetanshi\IndianGst\Model\Quote\Address\Total\ShippingIgst" sort_order="570"/>
+        </group>
+    </section>
+
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="subtotal" instance="Meetanshi\IndianGst\Model\Order\Invoice\Total\AbstractTotal" sort_order="150"/>
+            <item name="shipping_cgst_amount" instance="Meetanshi\IndianGst\Model\Order\Invoice\Total\ShippingCgst" sort_order="99"/>
+            <item name="shipping_utgst_amount" instance="Meetanshi\IndianGst\Model\Order\Invoice\Total\ShippingUtgst" sort_order="100"/>
+            <item name="shipping_sgst_amount" instance="Meetanshi\IndianGst\Model\Order\Invoice\Total\ShippingSgst" sort_order="101"/>
+            <item name="shipping_igst_amount" instance="Meetanshi\IndianGst\Model\Order\Invoice\Total\ShippingIgst" sort_order="102"/>
+        </group>
+    </section>
+
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="subtotal" instance="Meetanshi\IndianGst\Model\Order\Creditmemo\Total\AbstractTotal" sort_order="150"/>
+            <item name="shipping_cgst_amount" instance="Meetanshi\IndianGst\Model\Order\Creditmemo\Total\ShippingCgst" sort_order="99"/>
+            <item name="shipping_utgst_amount" instance="Meetanshi\IndianGst\Model\Order\Creditmemo\Total\ShippingUtgst" sort_order="100"/>
+            <item name="shipping_sgst_amount" instance="Meetanshi\IndianGst\Model\Order\Creditmemo\Total\ShippingSgst" sort_order="101"/>
+            <item name="shipping_igst_amount" instance="Meetanshi\IndianGst\Model\Order\Creditmemo\Total\ShippingIgst" sort_order="102"/>
+        </group>
+    </section>
+</config>

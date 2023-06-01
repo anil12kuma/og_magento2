@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="default" engine="innodb" comment="Sales Flat Quote">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="base_igst_amount" scale="4" precision="12"
+                comment="Base Igst Amount"/>
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="int" name="gst_exclusive" unsigned="true" nullable="false"
+                comment="Is Exclusive Gst"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+    </table>
+
+    <table name="quote_address" resource="default" engine="innodb" comment="Sales Flat Quote Address">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="base_igst_amount" scale="4" precision="12"
+                comment="Base Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="cgst_percent" scale="4" precision="12"
+                comment="Cgst Percentage of Item"/>
+        <column xsi:type="decimal" name="sgst_percent" scale="4" precision="12"
+                comment="Sgst Percentage of Item"/>
+        <column xsi:type="decimal" name="igst_percent" scale="4" precision="12"
+                comment="Igst Percentage of Item"/>
+        <column xsi:type="decimal" name="shipping_cgst_percent" scale="4" precision="12"
+                comment="Shipping Cgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_sgst_percent" scale="4" precision="12"
+                comment="Shipping Sgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_igst_percent" scale="4" precision="12"
+                comment="Shipping Igst Percentage"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Utgst Percentage of Item"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Percentage"/>
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+    </table>
+
+    <table name="sales_order" resource="default" engine="innodb" comment="Sales Flat Order">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_percent" scale="4" precision="12"
+                comment="Shipping Cgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_sgst_percent" scale="4" precision="12"
+                comment="Shipping Sgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_igst_percent" scale="4" precision="12"
+                comment="Shipping Igst Percentage"/>
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Percentage"/>
+    </table>
+
+    <table name="sales_order_item" resource="default" engine="innodb" comment="Sales Flat Order Item">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="cgst_percent" scale="4" precision="12"
+                comment="Cgst Percentage of Item"/>
+        <column xsi:type="decimal" name="sgst_percent" scale="4" precision="12"
+                comment="Sgst Percentage of Item"/>
+        <column xsi:type="decimal" name="igst_percent" scale="4" precision="12"
+                comment="Igst Percentage of Item"/>
+        <column xsi:type="int" name="gst_exclusive" unsigned="true" nullable="false"
+                comment="Is Exclusive Gst"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Utgst Percentage of Item"/>
+    </table>
+
+    <table name="sales_invoice" resource="default" engine="innodb" comment="Sales Flat Invoice">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_percent" scale="4" precision="12"
+                comment="Shipping Cgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_sgst_percent" scale="4" precision="12"
+                comment="Shipping Sgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_igst_percent" scale="4" precision="12"
+                comment="Shipping Igst Percentage"/>
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Percentage"/>
+    </table>
+
+    <table name="sales_invoice_item" resource="default" engine="innodb" comment="Sales Flat Invoice Item">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="cgst_percent" scale="4" precision="12"
+                comment="Cgst Percentage of Item"/>
+        <column xsi:type="decimal" name="sgst_percent" scale="4" precision="12"
+                comment="Sgst Percentage of Item"/>
+        <column xsi:type="decimal" name="igst_percent" scale="4" precision="12"
+                comment="Igst Percentage of Item"/>
+        <column xsi:type="int" name="gst_exclusive" unsigned="true" nullable="false"
+                comment="Is Exclusive Gst"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Utgst Percentage of Item"/>
+    </table>
+
+    <table name="sales_creditmemo" resource="default" engine="innodb" comment="Sales Flat Creditmemo">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_percent" scale="4" precision="12"
+                comment="Shipping Cgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_sgst_percent" scale="4" precision="12"
+                comment="Shipping Sgst Percentage"/>
+        <column xsi:type="decimal" name="shipping_igst_percent" scale="4" precision="12"
+                comment="Shipping Igst Percentage"/>
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Percentage"/>
+    </table>
+
+    <table name="sales_creditmemo_item" resource="default" engine="innodb" comment="Sales Flat Creditmemo Item">
+        <column xsi:type="decimal" name="cgst_amount" scale="4" precision="12"
+                comment="Cgst Amount"/>
+        <column xsi:type="decimal" name="base_cgst_amount" scale="4" precision="12"
+                comment="Base Cgst Amount"/>
+        <column xsi:type="decimal" name="sgst_amount" scale="4" precision="12"
+                comment="Sgst Amount"/>
+        <column xsi:type="decimal" name="base_sgst_amount" scale="4" precision="12"
+                comment="Base Sgst Amount"/>
+        <column xsi:type="decimal" name="igst_amount" scale="4" precision="12"
+                comment="Igst Amount"/>
+        <column xsi:type="decimal" name="shipping_cgst_amount" scale="4" precision="12"
+                comment="Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_cgst_amount" scale="4" precision="12"
+                comment="Base Shipping Cgst Amount"/>
+        <column xsi:type="decimal" name="shipping_sgst_amount" scale="4" precision="12"
+                comment="Sgst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_sgst_amount" scale="4" precision="12"
+                comment="Base Shipping Sgst Amount"/>
+        <column xsi:type="decimal" name="shipping_igst_amount" scale="4" precision="12"
+                comment="Igst Shipping Amount"/>
+        <column xsi:type="decimal" name="base_shipping_igst_amount" scale="4" precision="12"
+                comment="Base Shipping Igst Amount"/>
+        <column xsi:type="decimal" name="cgst_percent" scale="4" precision="12"
+                comment="Cgst Percentage of Item"/>
+        <column xsi:type="decimal" name="sgst_percent" scale="4" precision="12"
+                comment="Sgst Percentage of Item"/>
+        <column xsi:type="decimal" name="igst_percent" scale="4" precision="12"
+                comment="Igst Percentage of Item"/>
+        <column xsi:type="int" name="gst_exclusive" unsigned="true" nullable="false"
+                comment="Is Exclusive Gst"/>
+        <column xsi:type="decimal" name="utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Utgst Amount"/>
+        <column xsi:type="decimal" name="base_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Utgst Amount"/>
+        <column xsi:type="decimal" name="shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="base_shipping_utgst_amount" scale="4" precision="12" nullable="false"
+                comment="Base Shipping Utgst Amount"/>
+        <column xsi:type="decimal" name="utgst_percent" scale="4" precision="12" nullable="false"
+                comment="Utgst Percentage of Item"/>
+    </table>
+
+    <table name="sales_order_address" resource="default" engine="innodb" comment="Sales Flat Order Address">
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+    </table>
+    <table name="customer_address_entity" resource="default" engine="innodb" comment="Customer Address Entity">
+        <column xsi:type="text" name="buyer_gst_number" nullable="false"/>
+    </table>
+</schema>

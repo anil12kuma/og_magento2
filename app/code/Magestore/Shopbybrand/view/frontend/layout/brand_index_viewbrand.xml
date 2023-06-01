@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_category_view"/>
+    <body>
+        <attribute name="class" value="page-with-filter"/>
+        <referenceContainer name="sidebar.main">
+         <!-- <block class="Magento\LayeredNavigation\Block\Navigation\Category" name="catalog.leftnav" before="-" template="Magento_LayeredNavigation::layer/view.phtml" cacheable="false">
+                <block class="Magento\LayeredNavigation\Block\Navigation\State" name="catalog.navigation.state" as="state" />
+                <block class="Magento\LayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer" template="Magento_LayeredNavigation::layer/filter.phtml"/>
+            </block> -->
+            <block class="Magestore\Shopbybrand\Block\Sidebar" name="shopbybrand.block.sidebar" before="-" template="Magestore_Shopbybrand::sidebar.phtml">
+            </block>
+            <block class="Magestore\Shopbybrand\Block\Searchbox"  ifconfig="ms_shopbybrand/brand_details/details_search_box" name="brand.searchbox" before="-" template="Magestore_Shopbybrand::searchboxsidebar.phtml"/>
+            <block class="Magestore\Shopbybrand\Block\Bestseller" ifconfig="ms_shopbybrand/brand_details/details_best_seller" name="brand.best_seller" after="-" template="Magestore_Shopbybrand::bestsellersidebar.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional">
+            <block class="Magestore\Shopbybrand\Block\Bestseller" ifconfig="ms_shopbybrand/brand_details/details_best_seller" name="brand.best_seller.right" after="-" template="Magestore_Shopbybrand::bestsellersidebar.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="content">
+            <block class="Magestore\Shopbybrand\Block\View" name="brand.products" template="Magestore_Shopbybrand::view.phtml" before="-" >
+                <block class="Magestore\Shopbybrand\Block\Featureproduct" name="brand.feature.products"/>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

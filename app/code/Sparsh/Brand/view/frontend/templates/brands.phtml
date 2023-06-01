@@ -1,0 +1,15 @@
+<?php
+$brand = $block->getBrands();
+if (!empty($brand) && $brand['title']) {
+    ?>
+    <div class="product attribute sparsh-brand">
+        <span>Brand :</span>
+        <div class="value" itemprop="brand">
+            <a href="<?= $block->escapeUrl($this->getBrandUrl($brand['brand_id'], $brand['url_key'])); ?>" title="<?= /* @noEscape */ $brand['title'];?>">
+                <?= /* @noEscape */ $brand['title'];?>
+            </a>
+        </div>
+    </div>
+    <?php
+}
+?>

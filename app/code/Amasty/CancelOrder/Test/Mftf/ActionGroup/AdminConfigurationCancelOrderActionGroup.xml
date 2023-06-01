@@ -1,0 +1,99 @@
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminAmastyCancelOrderConfigurationGeneralActionGroup">
+        <arguments>
+            <argument name="customerGroups" type="string"/>
+            <argument name="allowedStatuses" type="string"/>
+            <argument name="refundMethod" type="string"/>
+        </arguments>
+        <!--Configure general tab -->
+        <amOnPage url="{{AdminAmastyCancelOrderConfigurationPage.url}}"
+                  stepKey="onCancelOrderConfigurationPage"/>
+        <waitForPageLoad stepKey="waitForCancelOrderConfigPage"/>
+        <selectOption selector="{{AdminAmastyCancelOrderGeneralConfigurationSection.customerGroup}}" stepKey="selectGroups" parameterArray="[{{customerGroups}}]"/>
+        <selectOption selector="{{AdminAmastyCancelOrderGeneralConfigurationSection.orderStatus}}" stepKey="selectStatuses" parameterArray="[{{allowedStatuses}}]"/>
+        <selectOption selector="{{AdminAmastyCancelOrderGeneralConfigurationSection.refundMethod}}" userInput="{{refundMethod}}" stepKey="refundMethod" />
+    </actionGroup>
+    <actionGroup name="AdminAmastyCancelOrderModuleStatusSwitchActionGroup">
+        <!--Switch module status - on/off -->
+        <arguments>
+            <argument name="moduleStatus" type="string"/>
+        </arguments>
+        <amOnPage url="{{AdminAmastyCancelOrderConfigurationPage.url}}"
+                  stepKey="onCancelOrderConfigurationPage"/>
+        <waitForPageLoad stepKey="waitForCancelOrderConfigPage"/>
+        <conditionalClick selector="{{AdminAmastyCancelOrderGeneralConfigurationSection.generalTab}}"
+                          dependentSelector="{{AdminAmastyCancelOrderGeneralConfigurationSection.checkIfGeneralTabOpen}}"
+                          visible="true"
+                          stepKey="expandCancelOrderGeneralTab"/>
+        <waitForElementVisible selector="{{AdminAmastyCancelOrderGeneralConfigurationSection.checkIfEnableDropdownIsVisible}}"
+                               stepKey="waitForEnableSettingToShowUp"/>
+        <selectOption selector="{{AdminAmastyCancelOrderGeneralConfigurationSection.settingEnable}}"
+                      userInput="{{moduleStatus}}"
+                      stepKey="changeModuleStatus"/>
+    </actionGroup>
+    <actionGroup name="AdminAmastyCancelOrderPopupStatusSwitchActionGroup">
+        <!--Switch pop-up status - on/off -->
+        <arguments>
+            <argument name="popupStatus" type="string"/>
+        </arguments>
+        <amOnPage url="{{AdminAmastyCancelOrderConfigurationPage.url}}"
+                  stepKey="onCancelOrderConfigurationPage"/>
+        <waitForPageLoad stepKey="waitForCancelOrderConfigPage"/>
+        <conditionalClick selector="{{AdminAmastyCancelOrderFrontendConfigurationSection.frontendTab}}"
+                          dependentSelector="{{AdminAmastyCancelOrderFrontendConfigurationSection.checkIfFrontendTabOpen}}"
+                          visible="true"
+                          stepKey="expandCancelOrderFrontendTab"/>
+        <waitForElementVisible selector="{{AdminAmastyCancelOrderFrontendConfigurationSection.checkIfEnablePopupIsVisible}}"
+                               stepKey="waitForSettingToShowUp"/>
+        <selectOption selector="{{AdminAmastyCancelOrderFrontendConfigurationSection.settingPopupStatus}}"
+                      userInput="{{popupStatus}}"
+                      stepKey="changeStatus"/>
+    </actionGroup>
+    <actionGroup name="AdminAmastyCancelOrderAutoCancelStatus" extends="AdminAmastyCancelOrderModuleStatusSwitchActionGroup">
+        <arguments>
+            <argument name="consideredStatuses" type="string"/>
+        </arguments>
+        <scrollTo selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.autoCancelTab}}" after="waitForCancelOrderConfigPage" stepKey="scrollToTab"/>
+        <conditionalClick selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.autoCancelTab}}"
+                          dependentSelector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.checkIfAutoCancelTab}}"
+                          visible="true"
+                          stepKey="expandCancelOrderFrontendTab"/>
+        <waitForElementVisible selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.autoCancelStatusSwitcher}}"
+                               stepKey="waitForSettingToShowUp"/>
+        <selectOption selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.autoCancelStatusSwitcher}}"
+                      userInput="{{moduleStatus}}"
+                      stepKey="changeStatus"/>
+        <selectOption selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.autoCancelStatuses}}"
+                      parameterArray="[{{consideredStatuses}}]"
+                      stepKey="selectStatuses"/>
+    </actionGroup>
+    <actionGroup name="AdminAmastyCancelOrderConfigurationAutoCancelActionGroup">
+        <arguments>
+            <argument name="consideredStatuses" type="string"/>
+            <argument name="paymentMethod" type="string"/>
+            <argument name="durationUnit" type="string"/>
+            <argument name="duration" type="string"/>
+        </arguments>
+        <!--Configure auto cancel tab -->
+        <amOnPage url="{{AdminAmastyCancelOrderConfigurationPage.url}}"
+                  stepKey="onCancelOrderConfigurationPage"/>
+        <waitForPageLoad stepKey="waitForCancelOrderConfigPage"/>
+        <selectOption selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.autoCancelStatuses}}"
+                      parameterArray="[{{consideredStatuses}}]"
+                      stepKey="selectStatuses"/>
+        <click selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.addButton}}" stepKey="addMethod"/>
+        <selectOption selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.paymentMethod}}" userInput="{{paymentMethod}}" stepKey="paymentMethod" />
+        <selectOption selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.durationUnit}}" userInput="{{durationUnit}}" stepKey="durationUnit" />
+        <fillField selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.duration}}" userInput="{{duration}}" stepKey="duration"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="clickSave"/>
+        <waitForElementVisible selector="{{AdminMessagesSection.success}}" stepKey="waitMessage" />
+        <click selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.runButton}}" stepKey="clickRun"/>
+        <seeElement selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.runStatusMessage}}" stepKey="seeMessage"/>
+        <click selector="{{AdminAmastyCancelOrderAutoCancelConfigurationSection.removeButton}}" stepKey="clickRemove"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="clickSaveAgain"/>
+        <waitForElementVisible selector="{{AdminMessagesSection.success}}" stepKey="waitMessageAgain" />
+
+
+        </actionGroup>
+</actionGroups>

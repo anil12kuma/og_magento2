@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @var \Mageplaza\HelloWorld\Block\Display $block
+ */
+
+$blog = $block->sayHello();
+//print_r($blog);
+?>
+<div class="blog-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"> 
+        <div class="admin__data-grid-outer-wrap" data-bind="scope: 'widget_recently_viewed.widget_recently_viewed'">
+          <div class="block widget block-viewed-products-grid"  style="display:flex">
+            <div class="block-title" style="margin-bottom:4px !important">
+              <strong role="heading" aria-level="2">Our Recent Blogs</strong>
+            </div>
+            <a target="_blank" href="https://www.outdoorgoats.com/blog/" class="button-new" style="
+			    position: absolute; color: #36656D !important;
+			    right: 12px;
+			    /*margin-right: 16px;*/
+			    /*border: 1px solid #1b666e;*/
+			    font-size: 14px;
+			    /*padding: 8px 25px;*/
+			    /*border-radius: 10px;*/
+			    display: inline-block;
+			    font-weight: 300;
+			    font-family: 'Overpass', sans-serif;
+			    top: 54px;
+			">View all ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hor-scroll">
+      <div class="row"> 
+        <!-- <h1>Blog</h1> -->
+        <?php foreach($blog as $each):?>
+            <div class="col-3"> 
+              <div class="blog-single-wrap"> 
+                <div class="blog-image"> 
+                  <img src="<?php print_r($each->acf->cover_image); ?>">
+                </div>
+                <div class="blog-category">
+                  <?php echo implode(", ",$each->activities); ?> 
+                </div>
+                <div class="blog-title">
+                  <h3><?php echo limit_char($each->title->rendered, 28); ?></h3>
+                </div>
+                <div class="blog-exerpt"> 
+                  <?php echo limit_char($each->post_content, 78); ?>
+                </div>
+                <div class="blog-link"> 
+                  <a target="_blank" href="https://www.outdoorgoats.com/blog/<?php echo $each->slug; ?>"> Continue Reading </a>
+                </div>
+              </div>
+            </div>
+        <?php endforeach; ?>
+
+        <?php 
+          function limit_text($text, $limit) {
+            if (str_word_count($text, 0) > $limit) {
+              $words = str_word_count($text, 2);
+              $pos   = array_keys($words);
+              $text  = substr($text, 0, $pos[$limit]) . '...';
+            }
+            return $text;
+          }
+
+          function limit_char($text, $limit) {
+          	$length = strlen($text);
+            if($length > $limit) {
+               $output = str_split($text, $limit);
+               $text = $output[0].'...';
+            }
+            return $text;
+          }
+        ?>   
+      </div>
+    </div>
+  </div>
+</div>

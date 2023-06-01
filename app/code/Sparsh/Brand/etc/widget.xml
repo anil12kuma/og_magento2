@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget class="Sparsh\Brand\Block\BrandSlider" id="brand_slider_widget">
+		<label>Brand Slider</label>
+		<description>Sparsh Brand Slider</description>
+	</widget>
+
+	<widget class="Sparsh\Brand\Block\AtheleteSlider" id="athelete_slider_widget">
+		<label>Athelete Slider</label>
+		<description>Athelete Slider</description>
+	</widget>
+
+	<widget class="Sparsh\Brand\Block\Athelete" id="athelete_widget">
+		<label>Athelete</label>
+		<description>Athelete</description>
+	</widget>
+</widgets>

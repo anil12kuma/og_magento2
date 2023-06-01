@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="AdminAmastyCancelOrderGeneralConfigurationSection">
+        <element name="generalTab" type="button" selector="#am_cancel_order_general-head"/>
+        <element name="checkIfGeneralTabOpen" type="button" selector="#am_cancel_order_general-head:not(.open)"/>
+        <element name="checkIfEnableDropdownIsVisible" type="button" selector="#row_am_cancel_order_general_enabled"/>
+        <element name="settingEnable" type="input" selector="#am_cancel_order_general_enabled"/>
+        <element name="customerGroup" type="multiselect" selector="#am_cancel_order_general_customer_group"/>
+        <element name="orderStatus" type="multiselect" selector="#am_cancel_order_general_order_status"/>
+        <element name="refundMethod" type="multiselect" selector="#am_cancel_order_general_refund"/>
+    </section>
+
+    <section name="AdminAmastyCancelOrderFrontendConfigurationSection">
+        <element name="frontendTab" type="button" selector="#am_cancel_order_frontend-head"/>
+        <element name="checkIfFrontendTabOpen" type="button" selector="#am_cancel_order_frontend-head:not(.open)"/>
+        <element name="checkIfEnablePopupIsVisible" type="button" selector="#am_cancel_order_frontend_popup_enabled"/>
+        <element name="settingPopupStatus" type="input" selector="#am_cancel_order_frontend_popup_enabled"/>
+    </section>
+    <!--
+    <section name="AdminAmastyCancelOrderNotificationsConfigurationSection">
+    </section>
+    -->
+    <section name="AdminAmastyCancelOrderAutoCancelConfigurationSection">
+        <element name="autoCancelTab" type="button" selector="#am_cancel_order_auto_cancel_mode-head"/>
+        <element name="checkIfAutoCancelTab" type="button" selector="#am_cancel_order_auto_cancel_mode-head:not(.open)"/>
+        <element name="autoCancelStatusSwitcher" type="input" selector="#am_cancel_order_auto_cancel_mode_enabled"/>
+        <element name="autoCancelStatuses" type="multiselect" selector="#am_cancel_order_auto_cancel_mode_order_status"/>
+        <element name="runButton" type="button" selector="//button[@title='Run']"/>
+        <element name="paymentMethod" type="select" selector=".amcorder-label select[name='groups[auto_cancel_mode][fields][conditions][value][0][payment_methods]']"/>
+        <element name="duration" type="input" selector=".duration input"/>
+        <element name="durationUnit" type="select" selector=".amcorder-label select[name='groups[auto_cancel_mode][fields][conditions][value][0][duration_unit]']"/>
+        <element name="removeButton" type="button" selector=".duration-unit + button"/>
+        <element name="addButton" type="button" selector="#row_am_cancel_order_auto_cancel_mode_conditions button[title = 'Add Item']"/>
+        <element name="runStatusMessage" type="text" selector=".messages div.message-success"/>
+
+    </section>
+</sections>

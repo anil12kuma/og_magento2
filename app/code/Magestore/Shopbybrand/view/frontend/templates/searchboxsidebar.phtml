@@ -1,0 +1,114 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\Shopbybrand\Block\Searchbox $block */
+?>
+<div class="block brand-search block-subscribe">
+    <div class="shopbybrand-title"><h1><?php echo __('Brand Search'); ?></h1></div>
+    <div class="brand-search-content" style="min-height: 3.5em;">
+        <div id="brand_search_box" class="brand-sidebar">
+            <input type="text" class="brandsearch form-control" id="brandsearch" autocorrect="off" autocomplete="off" placeholder="<?php echo __('Search by name'); ?>">
+            <ul id="searchbrand" class="searchbrand"></ul>
+        </div>
+    </div>
+</div>
+<style>
+    .bestsllerbrand .shopbybrand-title h1, .brand-search .shopbybrand-title h1, .shopbybrand-title h1 {
+        background-color: #3399CC;
+        color: #FFFFFF;
+    }
+    #brand_search_box {
+        float: left !important;
+        max-width: 370px!important;
+        position: relative !important;
+        margin-left: 0px !important;
+        width: 100% !important;
+    }
+    .searchbrand {
+        overflow-x: hidden !important;
+        max-height: 275px !important;
+        overflow-y: auto !important;
+        margin-left: 0px !important;
+        position: absolute !important;
+        width: 100% !important;
+        left: 0;
+
+    }
+
+</style>
+<script type="text/javascript" charset="utf-8">
+
+    var searchWidth = 35;
+    var brands = <?php echo json_encode($this->getSearchData()); ?>;
+    var brandIndex = 0;
+    require(['jquery'], function($) {
+        $('#brandsearch').on("input", null, null, function (el) {
+            $('#searchbrand').html('');
+            var count = 0;
+            for(var i = 0; i < brands.length;i++){
+                if ( brands[i].n.toLowerCase().search(el.target.value.toLowerCase()) != -1) {
+                    count++;
+                    $('#searchbrand').append('<li  onclick="redirect(\'' + brands[i].k + '\',\'' + brands[i].k + '\')">' + brands[i].n + '</li>');
+                }
+            }
+            brandIndex = 0;
+            if (count) {
+                $('#searchbrand li').first().addClass('selected');
+            }else{
+                $('#searchbrand').append('<li>Not found, please try again.</li>');
+            }
+        });
+        var click = $('body').first().click(function (event) {
+            if (event.target.id == 'brandsearch' || event.target.id == 'searchbrand')
+                return;
+            else $('#searchbrand').html('');
+        });
+
+        $('#brandsearch').keyup(function (event) {
+            if (event.keyCode == 38 || event.keyCode == 40) {
+                if ($F('brandsearch') == '' && !$$('#searchbrand li').length)
+                    brands.each(function (el) {
+                        $('searchbrand').insert('<li  onclick="redirect(\'' + el.k + '\',\'' + el.n + '\')">' + el.n + '</li>');
+                    });
+                $$('#searchbrand li')[brandIndex].removeClassName('selected');
+                getSelectedIndex(event.keyCode);
+                $$('#searchbrand li')[brandIndex].addClassName('selected');
+                searchScroll();
+                $('brandsearch').value = $$('#searchbrand li.selected').first().textContent;
+            }
+            if (event.keyCode == 13) {
+                $('#brandsearch').value = '';
+                if ($('#searchbrand li.selected').first())
+                    $('#searchbrand li.selected').first().click();
+            }
+        });
+        window.searchScroll = function() {
+            if ($('searchbrand').scrollTop > brandIndex * searchWidth)
+                $('searchbrand').scrollTop = brandIndex * searchWidth;
+            else if ($('searchbrand').scrollTop + 8 * searchWidth < brandIndex * searchWidth)
+                $('searchbrand').scrollTop = brandIndex * searchWidth - 7 * searchWidth;
+        }
+
+        window.getSelectedIndex = function(keycode) {
+            var length = $$('#searchbrand li').length;
+            if (keycode == 38 && brandIndex == 0)
+                brandIndex = length - 1;
+            else if (keycode == 40 && brandIndex == (length - 1))
+                brandIndex = 0;
+            else if (keycode == 38)
+                brandIndex--;
+            else if (keycode == 40)
+                brandIndex++;
+        }
+
+        window.redirect = function(url_key, name) {
+            $('brandsearch').value = name;
+            window.location.href = '<?php echo $this->storeManager()->getStore()->getBaseUrl();?>' + url_key;
+        }
+    });
+</script>
+
+

@@ -1,0 +1,48 @@
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontAmastyCancelOrderWithoutPopupActionGroup">
+        <!-- Go to the orders on the frontend - StorefrontCustomerReorderActionGroup -->
+        <amOnPage url="{{StorefrontCustomerDashboardPage.url}}" stepKey="goToCustomerDashboardPage"/>
+        <waitForPageLoad stepKey="waitForCustomerDashboardPageLoad"/>
+        <click selector="{{StorefrontCustomerSidebarSection.sidebarTab('My Orders')}}" stepKey="navigateToOrders"/>
+        <waitForPageLoad stepKey="waitForOrdersPageLoad1"/>
+
+        <!-- Default magento Customer order gririd has been augumented-->
+        <grabCookie userInput="cookieWithOrdNum" stepKey="grabCookieOrdNum"/>
+        <click selector="{{StorefrontCustomerOrdersGridSection.cancelOrder({$grabCookieOrdNum})}}"
+                stepKey="cancelOrder" />
+        <wait time="3" stepKey="waitThreeSeconds"/>
+        <click selector="{{StorefrontCustomerOrdersGridSection.popupOkButton}}" stepKey="agreeInPopUp"/>
+
+        <!-- Check the success message -->
+        <wait time="3" stepKey="waitFewSeconds"/>
+        <see selector="{{StorefrontCategoryMainSection.SuccessMsg}}"
+             userInput="Your order has been canceled successfully."
+             stepKey="assertSuccessMessage"/>
+
+        <!-- Check the order status on the front-end -->
+        <see selector="{{StorefrontCustomerOrderViewSection.orderStatus}}"
+             userInput="Canceled"
+             stepKey="assertCancelLabel"/>
+        <see selector="{{StorefrontCustomerOrderViewSection.commentContent}}"
+             userInput="Order was cancelled by customer."
+             stepKey="assertCancelComment"/>
+    </actionGroup>
+
+    <actionGroup name="StorefrontAmastyCancelOrderWithPopupActionGroup" extends="StorefrontAmastyCancelOrderWithoutPopupActionGroup">
+        <arguments>
+            <argument name="textToFillIn" type="string"/>
+            <argument name="optionToSelect" type="string"/>
+        </arguments>
+        <fillField selector="{{StorefrontCustomerOrdersGridSection.popupLeaveCommentField}}"
+                   userInput="{{textToFillIn}}"
+                   stepKey="fillField"
+                   before="agreeInPopUp"/>
+        <selectOption selector="{{StorefrontCustomerOrdersGridSection.popupChooseReasonSelect}}"
+                      userInput="{{optionToSelect}}"
+                      stepKey="choseAnOption"
+                      before="agreeInPopUp"/>
+        <click selector="{{StorefrontCustomerOrdersGridSection.popupSubmitButton}}" stepKey="agreeInPopUp"/>
+
+    </actionGroup>
+</actionGroups>

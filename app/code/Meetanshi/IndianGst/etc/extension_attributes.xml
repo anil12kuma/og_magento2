@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Checkout\Api\Data\ShippingInformationInterface">
+        <attribute code="cgst_amount" type="float"/>
+        <attribute code="utgst_amount" type="float"/>
+        <attribute code="sgst_amount" type="float"/>
+		<attribute code="igst_amount" type="float"/>
+        <attribute code="shipping_cgst_amount" type="float"/>
+        <attribute code="shipping_utgst_amount" type="float"/>
+        <attribute code="shipping_sgst_amount" type="float"/>
+        <attribute code="shipping_igst_amount" type="float"/>
+        <attribute code="buyer_gst_number" type="string"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="buyer_gst_number" type="string"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
+        <attribute code="buyer_gst_number" type="string"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Customer\Api\Data\AddressInterface">
+        <attribute code="buyer_gst_number" type="string"/>
+    </extension_attributes>
+</config>

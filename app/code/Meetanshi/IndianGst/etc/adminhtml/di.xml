@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sales\Model\Order\Pdf\Items\Invoice\DefaultInvoice"
+                type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Items\Invoice\PrintInvoice"/>
+    <preference for="Magento\Downloadable\Model\Sales\Order\Pdf\Items\Invoice"
+                type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Items\Invoice\PrintInvoice"/>
+    <type name="Magento\Sales\Model\Order\Pdf\Invoice">
+        <plugin name="mt_indian_gst_override_invoice_pdf" type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Invoice" sortOrder="1"/>
+    </type>
+    <preference for="Magento\Bundle\Model\Sales\Order\Pdf\Items\Invoice"
+                type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Items\Invoice\Bundle\Invoice"/>
+
+
+    <preference for="Magento\Sales\Model\Order\Pdf\Items\Creditmemo\DefaultCreditmemo"
+                type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Items\Creditmemo\PrintCreditmemo"/>
+    <preference for="Magento\Downloadable\Model\Sales\Order\Pdf\Items\Creditmemo"
+                type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Items\Creditmemo\PrintInvoice"/>
+    <type name="Magento\Sales\Model\Order\Pdf\Creditmemo">
+        <plugin name="mt_indian_gst_override_creditmemo_pdf" type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Creditmemo" sortOrder="1"/>
+    </type>
+    <preference for="Magento\Bundle\Model\Sales\Order\Pdf\Items\Invoice"
+                type="Meetanshi\IndianGst\Model\Rewrite\Order\Pdf\Items\Creditmemo\Bundle\Creditmemo"/>
+</config>

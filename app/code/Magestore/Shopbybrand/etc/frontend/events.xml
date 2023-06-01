@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="page_block_html_topmenu_gethtml_before">
+        <observer name="catalog_add_topmenu_items" instance="Magestore\Shopbybrand\Model\Observer\AddToTopMenu" />
+    </event>
+    <event name="catalog_block_product_list_collection">
+        <observer name="shopbybrand_catalog_block_product_list_collection" instance="Magestore\Shopbybrand\Observer\Catalog\BlockProductListCollection" />
+    </event>
+    <event name="catalog_product_collection_before_add_count_to_categories">
+        <observer name="shopbybrand_catalog_product_collection_before_add_count_to_categories" instance="Magestore\Shopbybrand\Observer\Catalog\Product\Collection\BeforeAddCountToCategories" />
+    </event>
+    <event name="catalog_product_collection_load_before">
+        <observer name="shopbybrand_catalog_product_collection_load_before" instance="Magestore\Shopbybrand\Observer\Catalog\Product\Collection\BeforeAddCountToCategories" />
+    </event>
+    <event name="catalog_category_load_after">
+        <observer name="shopbybrand_catalog_category_load_after" instance="Magestore\Shopbybrand\Observer\Catalog\Category\LoadAfter" />
+    </event>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magestore_Shopbybrand::main_menu" title="Shop By Brand" module="Magestore_Shopbybrand" sortOrder="10" resource="Magestore_Shopbybrand::main_menu"/>
+        <add id="Magestore_Shopbybrand::brand" title="Manage Brands" module="Magestore_Shopbybrand" action="shopbybrand/brand" sortOrder="1"  parent="Magestore_Shopbybrand::main_menu" resource="Magestore_Shopbybrand::brand"/>
+        <add id="Magestore_Shopbybrand::settings" title="Settings" module="Magestore_Shopbybrand" action="adminhtml/system_config/edit/section/ms_shopbybrand" sortOrder="2"  parent="Magestore_Shopbybrand::main_menu" resource="Magestore_Shopbybrand::settings"/>
+    </menu>
+</config>

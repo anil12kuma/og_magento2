@@ -1,0 +1,99 @@
+<?php
+/**
+ * Copyright © 2018 Porto. All rights reserved.
+ */
+
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see \Smartwave\Megamenu\Block\Topmenu
+ */
+?>
+<?php
+$_helper = $this->helper('Smartwave\Megamenu\Helper\Data');
+$_config = $_helper->getConfig('sw_megamenu');
+$columnsLimit = 0;
+$header_type = $_helper->getConfig('porto_settings/header/header_type');
+
+if ($_config['general']['enable']) {
+    ?>
+    <?php $_menu = $block->getMegamenuHtml(); ?>
+
+    <nav class="navigation sw-megamenu <?php if ($header_type == 7 || $header_type == 8 || $header_type == 18 || $header_type == 22): ?>side-megamenu<?php endif; ?>"
+        role="navigation">
+        <ul>
+            <?php echo $_menu; ?>
+            <!--<li class="ui-menu-item level0">
+                <a href="<?php //echo $this->getUrl('all-brands'); ?>" class="level-top" target="_blank"><span>
+                        <?php //echo __('Brands'); ?>
+                    </span></a>
+            </li>
+            <li class="ui-menu-item level0">
+                <a href="<?php //echo $this->getUrl('popular-athelete'); ?>" class="level-top" target="_blank"><span>
+                        <?php //echo __('Popular Atheletes'); ?>
+                    </span></a>
+            </li>-->
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'Smartwave_Megamenu/js/sw_megamenu'
+        ], function ($) {
+            $(".sw-megamenu").swMegamenu();
+            if ($(window).width() < 960) {
+                $('.parent').find(".submenu").slideUp();
+                $('.level1').find(".subchildmenu").slideUp();
+            }
+            $('.top-parent').click(function () {
+
+                // $('.navigation.sw-megamenu > ul > li.ui-menu-item > .open-children-toggle').toggleClass('active');
+                // $('.navigation.sw-megamenu > ul > li.ui-menu-item > a.level-top').toggleClass('ui-state-active');
+                // $('.navigation.sw-megamenu > ul > li.ui-menu-item > .submenu').toggleClass('opened');
+                // $(this).parent('li').find('a.level-top').toggleClass('ui-state-active');
+                // $(this).parent('li').find('.submenu').toggleClass('opened');
+                // $(this).toggleClass('active');
+
+                $(this).toggleClass('active');
+                $(this).parent(".parent").prevAll(".parent").find(".open-toggle").removeClass('active');
+                $(this).parent(".parent").nextAll(".parent").find(".open-toggle").removeClass('active');
+
+
+                $(this).parent(".parent").find(".submenu").slideToggle();
+                $(this).parent(".parent").prevAll(".parent").find(".submenu").slideUp();
+                $(this).parent(".parent").nextAll(".parent").find(".submenu").slideUp();
+
+
+            })
+
+            $('.child-parent').click(function () {
+
+                $(this).toggleClass('active');
+                $(this).parent(".parent").prevAll(".parent").find(".open-toggle").removeClass('active');
+                $(this).parent(".parent").nextAll(".parent").find(".open-toggle").removeClass('active');
+
+                $(this).parent(".parent").find(".subchildmenu").slideToggle();
+                $(this).parent(".parent").prevAll(".parent").find(".subchildmenu").slideUp();
+                $(this).parent(".parent").nextAll(".parent").find(".subchildmenu").slideUp();
+            })
+        });
+
+
+    </script>
+<?php
+} else {
+    ?>
+    <?php $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit); ?>
+
+    <nav class="navigation sw-megamenu" role="navigation">
+        <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+            <?php /* @escapeNotVerified */echo $_menu; ?>
+        </ul>
+    </nav>
+
+<?php
+}
+?>

@@ -1,0 +1,106 @@
+Day(s),Day(s)
+Hour(s),Hour(s)
+"Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
+"Sorry, something seems to have gone wrong. Please, check the logs.","Sorry, something seems to have gone wrong. Please, check the logs."
+"%1 orders with corresponding Status(es) were found. 
+                <br> %2 orders with matching payment method conditions were successfully canceled.","%1 orders with corresponding Status(es) were found. 
+                <br> %2 orders with matching payment method conditions were successfully canceled."
+"%1 orders with corresponding Status(es) were found, 
+                but none of them matches Payment Method conditions. None of orders was canceled.","%1 orders with corresponding Status(es) were found, 
+                but none of them matches Payment Method conditions. None of orders was canceled."
+"There are no orders matching the conditions.","There are no orders matching the conditions."
+"Cancel Orders Grid","Cancel Orders Grid"
+"We can't delete item right now. Please review the log and try again.","We can't delete item right now. Please review the log and try again."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"No records have been deleted.","No records have been deleted."
+"Your order has been canceled successfully.","Your order has been canceled successfully."
+"You can`t cancel the order.","You can`t cancel the order."
+"You can`t cancel the order. Message:","You can`t cancel the order. Message:"
+"You have not canceled the order.","You have not canceled the order."
+"""Creditmemo Document Validation Error(s):\n"" .","""Creditmemo Document Validation Error(s):\n"" ."
+"Order was cancelled automatically.","Order was cancelled automatically."
+"Order was cancelled by customer.","Order was cancelled by customer."
+"Unable to save cancelOrder with ID %1. Error: %2","Unable to save cancelOrder with ID %1. Error: %2"
+"Unable to save new cancelOrder. Error: %1","Unable to save new cancelOrder. Error: %1"
+"CancelOrder with specified ID ""%1"" not found.","CancelOrder with specified ID ""%1"" not found."
+"Unable to remove cancelOrder with ID %1. Error: %2","Unable to remove cancelOrder with ID %1. Error: %2"
+"Unable to remove cancelOrder. Error: %1","Unable to remove cancelOrder. Error: %1"
+"%1 (Default)","%1 (Default)"
+Pending,Pending
+"Pending Payment","Pending Payment"
+Customer,Customer
+"Auto Cancel","Auto Cancel"
+Comment,Comment
+Reason,Reason
+Disabled,Disabled
+"Online (if possible)","Online (if possible)"
+Offline,Offline
+"View order","View order"
+"Conditions based on Payment Method","Conditions based on Payment Method"
+"Payment Method(s) ","Payment Method(s) "
+Duration,Duration
+"Duration unit","Duration unit"
+Actions,Actions
+"Remove Item","Remove Item"
+"Add Item","Add Item"
+Add,Add
+Run,Run
+"Cron is running each hour by default. If you need to apply Auto Cancel immediately, click the ‘Run’ button (before performing the action please make sure that conditions are saved).","Cron is running each hour by default. If you need to apply Auto Cancel immediately, click the ‘Run’ button (before performing the action please make sure that conditions are saved)."
+"Order Cancellation Reasons","Order Cancellation Reasons"
+Reasons,Reasons
+"Specify the reasons for Cancel Orders and set the sequence for frontend display.","Specify the reasons for Cancel Orders and set the sequence for frontend display."
+"Choose a Reason for Order Cancellation","Choose a Reason for Order Cancellation"
+"Choose a reason...","Choose a reason..."
+"Leave a Comment","Leave a Comment"
+"Order #%increment_id was automatically cancelled","Order #%increment_id was automatically cancelled"
+"Hello,","Hello,"
+"This is an automatic notification about the order cancellation. ","This is an automatic notification about the order cancellation. "
+Details,Details
+"Customer: %name ","Customer: %name "
+"Order: ","Order: "
+"Created at: %order_created_at","Created at: %order_created_at"
+"Canceled at: %canceled_at","Canceled at: %canceled_at"
+"Payment method"": %payment_method","Payment method"": %payment_method"
+"Thank you!","Thank you!"
+"Order #%increment_id was cancelled by the customer","Order #%increment_id was cancelled by the customer"
+"Reason: %reason","Reason: %reason"
+"Comment: %comment","Comment: %comment"
+"Cancel Order","Cancel Order"
+Cancel,Cancel
+Submit,Submit
+"Are you sure you want to cancel the order?","Are you sure you want to cancel the order?"
+Ok,Ok
+"Amasty Cancel Orders","Amasty Cancel Orders"
+"Cancel Orders","Cancel Orders"
+Information,Information
+General,General
+Enabled,Enabled
+"Allow for Selected Group(s)","Allow for Selected Group(s)"
+"Allowed Order Status(es)","Allowed Order Status(es)"
+"Refund Paid Processing Orders Automatically","Refund Paid Processing Orders Automatically"
+Frontend,Frontend
+"Button Label","Button Label"
+"Enable Cancellation Popup","Enable Cancellation Popup"
+"Choose Yes to configure comment and reasons fields and find out why customers Cancel Orders.","Choose Yes to configure comment and reasons fields and find out why customers Cancel Orders."
+"Popup Notice","Popup Notice"
+"Is Required","Is Required"
+"Admin Email Notifications","Admin Email Notifications"
+"Notify Admin about Orders Canceled by Customers","Notify Admin about Orders Canceled by Customers"
+"Send Email to","Send Email to"
+"Email Sender","Email Sender"
+"Email Template","Email Template"
+"Notify Admin about Auto-Canceled Orders","Notify Admin about Auto-Canceled Orders"
+"Auto Cancel Mode","Auto Cancel Mode"
+"Enable to automatically cancel pending orders after a set period of time.","Enable to automatically cancel pending orders after a set period of time."
+"Consider Orders Created from","Consider Orders Created from"
+"Orders with older Creation Date will not be automatically canceled. If left empty, all orders are considered.","Orders with older Creation Date will not be automatically canceled. If left empty, all orders are considered."
+"Consider Order Status(es)","Consider Order Status(es)"
+Delete,Delete
+"Delete items","Delete items"
+"Are you sure to delete selected items?","Are you sure to delete selected items?"
+ID,ID
+"Order ID","Order ID"
+"Customer Email","Customer Email"
+"Cancellation Reason","Cancellation Reason"
+"Canceled by","Canceled by"
+"Cancel Date","Cancel Date"

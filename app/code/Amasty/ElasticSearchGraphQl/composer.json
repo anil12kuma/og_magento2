@@ -1,0 +1,25 @@
+{
+    "name": "amasty/module-elastic-search-graphql",
+    "description": "Elastic Search GraphQl By Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.2",
+        "amasty/module-elastic-search": ">=1.8.6",
+        "magento/module-graph-ql": "*",
+        "magento/module-catalog-graph-ql": "*",
+        "amasty/xsearch": ">=1.15.4"
+    },
+    "type": "magento2-module",
+    "version": "1.0.6",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\ElasticSearchGraphQl\\": ""
+        }
+    }
+}

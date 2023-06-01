@@ -1,0 +1,77 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+?>
+<?php
+/**
+ *  Amasty reason list template
+ *
+ * @var \Amasty\CancelOrder\Block\Adminhtml\Reason $block
+ */
+
+$element = $block->getElement();
+$isCheckboxRequired = $block->isInheritCheckboxRequired($element);
+$isDisabled = (bool)($element->getInherit() == 1 && $isCheckboxRequired);
+?>
+
+<td class="amcorder-label label">
+    <label>
+        <span <?= /* @noEscape */ $block->renderScopeLabel($element) ?>>
+            <?= $block->escapeHtml(__('Order Cancellation Reasons')); ?>
+        </span>
+    </label>
+</td>
+<td class="amcorder-reason-block amcorder-dragndrop-block">
+    <div class="amcorder-wrapper"
+         data-mage-init='{"amOrderList": {
+            "namePrefix": "<?= $block->escapeHtmlAttr($block->getNamePrefix('#')); ?>"
+        }}'>
+        <p class="amcorder-legend">
+            <span><?= $block->escapeHtml(__('Reasons')) ?></span>
+            <span><?= $block->escapeHtml(__('Actions')) ?></span>
+        </p>
+        <!-- should be empty element to clear all items and save it-->
+        <input name="<?= $block->escapeHtmlAttr($block->getElement()->getName()); ?>"
+               type="text"
+               <?= $isDisabled ? 'disabled' : '' ?>
+               class="amcorder-hidden  <?= $isDisabled ? 'disabled' : '' ?>"
+               value=""/>
+        <ul class="amcorder-order" data-amcorder-js="items">
+            <?php foreach ($block->getReasons() as $key => $text): ?>
+                <li class="amcorder-item -draggable" data-amcorder-js="item">
+                    <label class="amcorder-label">
+                        <input name="<?= $block->escapeHtmlAttr($block->getNamePrefix($key)); ?>"
+                               type="text"
+                                <?= $isDisabled ? 'disabled' : '' ?>
+                               class="required-entry  <?= $isDisabled ? 'disabled' : '' ?>"
+                               value="<?= $block->escapeHtml($text); ?>"
+                               data-amcorder-js="input"
+                        />
+                    </label>
+                    <button class="amcorder-button -clear -delete <?= $isDisabled ? 'disabled' : '' ?>"
+                            <?= $isDisabled ? 'disabled' : '' ?>
+                            title="<?= $block->escapeHtml(__('Remove Item')); ?>"
+                            type="button"
+                            data-amcorder-js="remove">
+                    </button>
+                </li>
+            <?php endforeach ?>
+        </ul>
+        <button class="amcorder-button <?= $isDisabled ? 'disabled' : '' ?>"
+                title="<?= $block->escapeHtml(__('Add Item')); ?>"
+                <?= $isDisabled ? 'disabled' : '' ?>
+                type="button"
+                data-amcorder-js="add">
+            <?= $block->escapeHtml(__('Add')); ?>
+        </button>
+    </div>
+    <p class="amcorder-note">
+        <?= $block->escapeHtml(__('Specify the reasons for Cancel Orders and set the sequence for frontend display.')); ?>
+    </p>
+</td>
+<?php if ($isCheckboxRequired): ?>
+    <?= $block->renderInheritCheckboxHtml($element); ?>
+<?php endif; ?>

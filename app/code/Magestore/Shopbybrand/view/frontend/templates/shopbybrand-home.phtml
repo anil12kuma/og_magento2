@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\Shopbybrand\Block\Brand $block */
+
+$lists = $block->getListCharacterBegin();
+?>
+
+<ul class="products products-container">
+    <?php
+    $shopbybrands = $block->brandFactory()->create()->getBrandsData();
+    $noImg = '';
+
+    if(isset($shopbybrands[0]) && $shopbybrands[0]){
+        $noImg =  $block->getViewFileUrl('Magestore_Shopbybrand::images/shopbybrand/no-image.png');
+    }
+    foreach ($shopbybrands as $brand) : ?>
+        <?php if($brand['number_product'] >= 1) { ?>
+            <li class="product-category product-col">
+                <a href="<?php echo $block->storeManager()->getStore()->getUrl($brand['url_key']); ?>">
+                    <?php
+                    $path = $brand['logo'];
+                    $img = ($brand['logo']==NULL) ? $noImg : $block->getImageHelper()
+                        ->getMediaUrlImage($brand['logo']);
+                    ?>
+                    <img src="<?php echo $img; ?>" alt="<?= $brand['brand_name'];?>" title="<?= $brand['brand_name'];?>" />
+                </a>
+            </li>
+        <?php } ?>                 
+        <?php
+    endforeach;
+    ?>
+</ul>

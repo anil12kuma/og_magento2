@@ -1,0 +1,36 @@
+//
+//  Mixins
+//  _____________________________________
+
+.am-flex(
+    @horiz-pos: none,
+    @vert-pos: none,
+    @wrap: none
+) {
+    & {
+        display: flex;
+    }
+
+    & when not (@horiz-pos = none) {
+        justify-content: @horiz-pos;
+    }
+
+    & when not (@vert-pos = none) {
+        align-items: @vert-pos;
+    }
+
+    & when not (@wrap = none) {
+        flex-wrap: @wrap;
+    }
+}
+
+.am-mage-icon(@ico: none) {
+    .am-flex(center, center);
+
+    font-family: @icons-admin__font-name;
+    content: @ico;
+}
+
+.transition(@del: .3) {
+    transition: ~'@{del}s all ease-in';
+}

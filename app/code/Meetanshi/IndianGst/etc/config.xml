@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <indiangst>
+            <general>
+                <min_amount>0.00</min_amount>
+                <apply_gst_on>1</apply_gst_on>
+            </general>
+        </indiangst>
+    </default>
+</config>

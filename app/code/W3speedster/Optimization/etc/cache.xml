@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="optimization" translate="label,description" instance="W3speedster\Optimization\Model\Cache\Type\CacheType">
+        <label>W3Speedster</label>
+        <description>Delete W3Speedster Cache</description>
+    </type>
+    <type name="critical" translate="label,description" instance="W3speedster\Optimization\Model\Cache\Type\CacheType">
+        <label>W3Speedster critical</label>
+        <description>Delete W3Speedster critical Cache</description>
+    </type>
+    <type name="translate" translate="label,description" instance="Magento\Framework\App\Cache\Type\Translate">
+        <label>Translations</label>
+        <description>Translation files</description>
+    </type>
+    
+</config>

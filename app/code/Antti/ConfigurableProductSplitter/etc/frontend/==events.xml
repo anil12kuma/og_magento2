@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_block_product_list_collection">
+        <observer name="cps_catalog_block_product_list_collection" instance="Antti\ConfigurableProductSplitter\Observer\CatalogBlockProductCollectionBeforeToHtmlObserver" shared="false" />
+    </event>
+    <event name="cps_product_data_merge_after">
+        <observer name="cps_product_data_merge_after" instance="Antti\ConfigurableProductSplitter\Observer\SetColorPreselectedAfterProductDataMerge" shared="false" />
+    </event>
+</config>

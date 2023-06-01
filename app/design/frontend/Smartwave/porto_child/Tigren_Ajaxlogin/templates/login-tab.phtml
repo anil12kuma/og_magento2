@@ -1,0 +1,86 @@
+<div class="login-container">
+    <ul class="tabs-menu customer-tabs-menu">
+        <li>    
+            <a href="javascript:void(0);" data-tab="tab-1" class="login-title current">
+                <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Log in')) ?></strong>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" data-tab="tab-2" class="login-title">
+                <strong id="block-customer-register-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Sign Up')) ?></strong>
+            </a>
+        </li>
+    </ul>
+    <div class="tab">
+        <div id="tab-1" class="timber-login tab-content current"> 
+            <?php echo $block->getChildHtml('customer_form_login'); ?>
+            <?php echo $block->getChildHtml('social-login-popup-authentication-social-login'); ?>
+        </div>
+        <div id="tab-2" class="timber-register tab-content" style="display: none;">
+            <?php echo $block->getChildHtml('customer_form_register'); ?>
+            <?php echo $block->getChildHtml('social-login-popup-authentication-social-login'); ?>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery',"mage/url"],function($,url){
+        $(document).ready(function() {
+            $('ul.customer-tabs-menu li a').click(function(){
+                $('.tab-content').hide();
+                var tab_id = $(this).attr('data-tab');
+                $('ul.tabs-menu li a').removeClass('current');
+                $('.tab-content').removeClass('current');
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+                $("#"+tab_id).show();
+            })
+        });
+    });
+</script>
+
+<style type="text/css">
+.login-container {
+    background: #ffffff;
+    max-width: 700px;
+    margin: 40px auto;
+}
+.tabs-menu li {
+    margin: 0;
+    width: 100%;
+}
+.login-container .login-title.current {
+    background: #e8e7e7;
+    color: #010101;
+}
+.login-container .login-title strong {
+    font-family: "Arkibal Display";
+    font-weight: 400;
+}
+.login-container .login-title {
+    background: #666568;
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+}
+.tab-content.current {
+    clear: both;
+}
+.block-customer-login, .form-create-account {
+    max-width: 450px !important;
+    margin: auto !important;
+    padding: 50px 15px !important;
+}
+.timber-login {
+    float: left;
+    width: 100%;
+}
+ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+}
+</style>

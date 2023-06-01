@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontAmastyCancelPendingOrderWithPopUpTest"
+          extends="StorefrontAmastyCancelPendingOrderWithoutPopUpTest">
+        <annotations>
+            <title value="Cancel an order in pending status using pop-up"/>
+            <description value="Configure module, create an order, than cancel it from storefront filling in reasons, and check the status"/>
+            <testCaseId value="Cancel-2"/>
+            <severity value="CRITICAL"/>
+            <group value="Cancel"/>
+        </annotations>
+
+        <actionGroup ref="AdminAmastyCancelOrderPopupStatusSwitchActionGroup" stepKey="enablePopUp">
+            <argument name="popupStatus" value="Yes"/>
+        </actionGroup>
+        <actionGroup ref="StorefrontAmastyCancelOrderWithPopupActionGroup" stepKey="cancelOrder">
+            <argument name="textToFillIn" value="{{cancelOrderPopUpContent1.text}}"/>
+            <argument name="optionToSelect" value='{{cancelOrderPopUpContent1.option}}'/>
+        </actionGroup>
+    </test>
+</tests>

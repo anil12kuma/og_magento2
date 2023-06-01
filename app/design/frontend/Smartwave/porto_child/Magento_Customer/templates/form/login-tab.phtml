@@ -1,0 +1,44 @@
+<div class="login-container">
+    <ul class="tabs-menu customer-tabs-menu">
+        <li>    
+            <a href="javascript:void(0);" data-tab="tab-1" class="login-title current">
+                <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Log in')) ?></strong>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" data-tab="tab-2" class="login-title">
+                <strong id="block-customer-register-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Sign Up')) ?></strong>
+            </a>
+        </li>
+    </ul>
+    <div class="tab">
+        <div id="tab-1" class="timber-login tab-content current"> 
+            <?php echo $block->getChildHtml('customer_form_login'); ?>
+            <?php echo $block->getChildHtml('social-login-popup-authentication-social-login'); ?>
+        </div>
+        <div id="tab-2" class="timber-register tab-content" style="display: none;">
+            <?php echo $block->getChildHtml('customer_form_register'); ?>
+            <?php echo $block->getChildHtml('social-login-popup-authentication-social-login'); ?>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery',"mage/url"],function($,url){
+        $(document).ready(function() {
+            $('ul.customer-tabs-menu li a').click(function(){
+                $('.tab-content').hide();
+                var tab_id = $(this).attr('data-tab');
+                $('ul.tabs-menu li a').removeClass('current');
+                $('.tab-content').removeClass('current');
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+                $("#"+tab_id).show();
+            })
+        });
+    });
+</script>
+
+<style type="text/css">
+
+</style>

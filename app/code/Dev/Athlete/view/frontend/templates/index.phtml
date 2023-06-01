@@ -1,0 +1,1137 @@
+<style>
+    .main-cotainer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-part {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .top-left-part {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        margin-right: 40px;
+        flex-direction: column;
+    }
+
+    .top-right-part {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-dp {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-width: 450px;
+        margin: auto;
+    }
+
+    .inner-left-part {
+        display: flex;
+        width: 50%;
+    }
+
+    .inner-right-part {
+        display: flex;
+        width: 50%;
+    }
+
+    .inner-content {
+        display: flex;
+    }
+
+    .left-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+    }
+
+    .sub-title-ib {
+        font-size: 18px;
+        margin-bottom: 0px;
+    }
+
+    .tab-section-bar {
+        margin: 50px 0;
+    }
+
+    .tab-section-bar ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        padding: 0px;
+    }
+
+    .tab-section-bar ul li a:hover {
+        border-bottom: 3px solid #FF7D00;
+        transition: 0.3s;
+    }
+
+    .tab-section-bar ul li a {
+        text-decoration: none;
+        color: #000;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .tab-section-bar ul li {
+        padding: 0px 20px;
+        margin-bottom: 5px;
+    }
+
+    .review-section {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .left-review img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+    }
+
+    .right-review {
+        padding-left: 30px;
+    }
+
+    h2 {
+        line-height: 50px !important;
+    }
+
+    .rating-box {
+        display: inline-block;
+    }
+
+    .rating-box .rating-container {
+        direction: rtl !important;
+    }
+
+    .rating-box .rating-container label {
+        display: inline-block;
+        margin: 15px 0;
+        color: #d4d4d4;
+        cursor: pointer;
+        font-size: 50px;
+        transition: color 0.2s;
+    }
+
+    .rating-box .rating-container input {
+        display: none;
+    }
+
+    .rating-box {
+        display: inline-block;
+    }
+
+    .rating-box .rating-container {
+        direction: rtl !important;
+    }
+
+    .rating-box .rating-container label {
+        display: inline-block;
+        margin: 15px 0;
+        color: #d4d4d4;
+        cursor: pointer;
+        font-size: 50px;
+        transition: color 0.2s;
+    }
+
+    .rating-box .rating-container input {
+        display: none;
+    }
+
+    .rating-ib-n {
+        display: flex;
+    }
+
+    .rating-inner {
+        padding-right: 60px;
+    }
+    .page-main .blog-section .block {
+        margin-top: 40px!important;
+    }
+
+    @media screen and (max-width: 991px) {
+        .top-part {
+            flex-direction: column;
+        }
+
+        .top-left-part {
+            width: 100%;
+            margin-right: 0px;
+        }
+
+        .top-right-part {
+            width: 100%;
+            padding-top: 30px;
+        }
+
+        .tab-section-bar ul li a {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .tab-section-bar ul li {
+            padding: 0px 5px;
+        }
+
+        .tab-section-bar ul {
+            width: 500px;
+        }
+
+        .tab-section-bar {
+            overflow: auto;
+        }
+
+        .tab-section-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-section-bar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    }
+
+    .owl-profile-slider .owl-stage-outer {
+        overflow: hidden !important;
+    }
+
+    .owl-profile-slider .owl-stage {
+        display: flex !important;
+    }
+
+    .owl-profile-slider .owl-item {
+        padding: 0 !important;
+    }
+    .owl-item img{
+        width: 100%;
+    }
+    .owl-profile-slider {
+        position: relative;
+        /*    left: -10px;*/
+    }
+
+    .owl-profile-slider .owl-dots {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+        text-align: center;
+    }
+
+    .owl-profile-slider .owl-dots button.owl-dot {
+        width: 10px !important;
+        height: 10px !important;
+        padding: 0;
+        margin: 3px;
+        border-radius: 50%;
+    }
+
+    .owl-profile-slider .owl-dots button.owl-dot.active {
+        background: #000;
+    }
+
+    .athelete-name h2:after {
+        display: none;
+    }
+
+    .athelete-name h2 {
+        font-size: 30px !important;
+    }
+
+    .athelete-name {
+        padding: 0px 0px 20px 0;
+    }
+    .athelete-fav-brand {
+        padding: 0 0 20px 0px;
+        border-bottom: 1px solid #e7e7e7;
+        margin-bottom: 20px;
+    }
+    .athelete-bio {
+        padding: 0 0 20px 0px;
+        border-bottom: 1px solid #e7e7e7;
+        margin-bottom: 20px;
+    }
+    .athelete-bio .readmore {
+        font-weight: 600;
+        font-size: 90%;
+        cursor: pointer; transition: all 0.5s ease 0s;
+    }
+
+    .athelete-bio .readmore:hover {
+        color: #000;
+    }
+
+    .athelete-bio .text-bio{
+        overflow: hidden; transition: all 0.5s ease 0s;
+    }
+    .athelete-bio::-webkit-scrollbar {
+      display: none;
+    }
+    .athelete-bio {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .athelete-details {
+        padding-bottom: 20px;
+    }
+
+    .athelete-prop {
+        display: flex;
+        align-items: center;
+        padding: 15px 0px;
+    }
+
+    .left-pop-icon {
+        margin-right: 15px;
+    }
+
+    .key-name {
+        color: #626262;
+        font-size: 14px;
+        text-transform: capitalize;
+    }
+
+    .key-value {
+        font-size: 16px;
+        color: #383838;
+    }
+
+    .right-prop {
+        line-height: 22px;
+    }
+
+    .bottom-part {
+        padding: 20px 0px;
+    }
+
+    .tab-section-bar {
+        margin: 0 0 20px 0;
+        border-top: 1px solid #e7e7e7;
+        padding: 20px 0px;
+        border-bottom: 1px solid #e7e7e7;
+    }
+
+    .tab-section-bar ul {
+        margin: 0;
+        padding: 0;
+        justify-content: flex-start;
+        font-size: 14px;
+    }
+
+    .tab-section-bar ul li {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .tab-section-bar ul li a {
+        font-size: 14px;
+    }
+
+
+    /*Reveiw */
+    .catalog-product-view .block.review-list {
+        margin-top: 0;
+    }
+
+
+    .catalog-product-view .review-item {
+        padding-bottom: 25px;
+        padding-top: 25px;
+    }
+
+    li.item.review-item {
+        border-bottom: 1px solid #e7e7e7 !important;
+    }
+
+    li.item.review-item {
+        display: flex;
+        border-bottom: 0;
+    }
+
+    .review-item {
+        padding: 20px 0;
+    }
+
+    li.item.review-item span.name-letter {
+        width: 84px;
+        height: 78px;
+        background: #e7e7e7;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 75px;
+        color: #494646;
+        font-size: 25px;
+        text-transform: uppercase;
+    }
+
+    .review-image-section {
+        max-width: 142px;
+        max-height: 142px;
+        margin-right: 0px;
+        width: 142px;
+        position: unset!important;
+    }
+
+    .review-summary-section {
+        padding-left: 25px;
+        width: 100%;
+    }
+
+    .review-item:after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+    li.rv-readmore {
+        text-align: center;
+        padding: 20px 0px;
+    }
+    li.rv-readmore a {
+        background: #ff7d00;
+        padding: 10px 30px;
+        display: inline-block;
+        color: #fff !important;
+        font-weight: 600;
+        border-radius: 5px;
+        text-decoration: none !important;
+        cursor: pointer;
+    }
+    .review-summary-section .review-title {
+        margin: 0 0 5px;
+        font-size: 18px;
+    }
+
+    .review-item .review-summary-section .review-title {
+        margin: 5px 0 5px;
+        font-family: 'Overpass' !important;
+        color: #494646;
+    }
+
+    li.item.review-item .review-summary-section .review-ratings {
+        float: left;
+        max-width: 100% !important;
+    }
+
+    .review-summary-section .review-details,
+    .review-summary-section .review-details strong {
+        font-size: 14px !important;
+        font-weight: 500;
+    }
+
+    .review-summary-section .review-title .review-author {
+        margin: 0;
+    }
+
+    .review-summary-section .review-title .review-author strong {
+        font-size: 18px !important;
+        text-transform: capitalize;
+        line-height: 18px;
+    }
+
+    .review-summary-section .review-title .review-date {
+        clear: both;
+        display: block;
+        line-height: 14px;
+        margin-top: 5px;
+    }
+
+    .review-ratings .rating-summary.item {
+        width: 112px;
+        display: block;
+        border: none !important;
+        float: left;
+        margin-right: 75px;
+    }
+
+    .review-summary-section .div_2 {
+        clear: both;
+        display: block;
+        margin-top: 20px;
+        overflow: hidden;
+    }
+
+    .review-summary-section .div_2 .review-title {
+        margin: 0 0 5px;
+        font-size: 18px;
+        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .review-item .review-summary-section .review-title {
+        margin: 20px 0 5px;
+        font-family: 'Overpass' !important;
+        color: #494646;
+    }
+
+    .catalog-product-view .review-item .review-content {
+        margin-bottom: 0;
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .review_helpful {
+        display: none;
+
+    }
+
+    .left-pop-icon {
+        max-width: 20px;
+    }
+
+    .left-pop-icon svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .rating-summary .rating-result>span:before {
+        color: #fdb65d;
+    }
+
+    span.label.rating-label {
+        padding-bottom: 5px;
+        font-weight: 600;
+        color: #494646;
+    }
+
+    h4 {
+        font-family: 'Overpass' !important;
+    }
+
+    .athelete-section a {
+        text-decoration: none;
+        color: #494646 !important;
+    }
+
+    .athelete-section a:visited {
+        text-decoration: none;
+        color: #494646 !important;
+    }
+
+    .athelete-section a:visited,
+    .alink:visited {
+        color: #494646 !important;
+        text-decoration: none;
+    }
+
+.about-us-image, .goto-image {
+    max-height: 600px;
+    width: calc(100vw - 0px);
+    margin-left: calc(-50vw + 50% + 0px);
+    flex-basis: 100% !important;
+    background-position: center center !important;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+@media(max-width: 1399px){
+    .about-us-image, .goto-image {
+        width: calc(100vw + 8px);
+        margin-left: calc(-50vw + 50% - 16px);
+    }
+}
+
+@media(max-width:767px){
+    .tab-section-bar ul {
+    font-size: 12px;
+    align-items: center;
+}
+     .tab-section-bar ul li a {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tab-section-bar ul li {
+            padding: 0px 7px;
+        }
+    .about-us-image, .goto-image {
+        width: calc(100vw - 0px);
+    margin-left: calc(-50vw + 50% + 0px);
+    }
+    .product.info #rating-review, #review-form, .reviews-based, .reviews-rating-container{text-align:center;}
+    #rating-review .rating-wrapper{display:inline-block; clear:unset;}
+    #rating-review .rating-wrapper{float:left; margin-left: 20px;}
+    .review-summary-section::before{content:""; height:1px; width:100%; clear:both; display:block; }
+    li.item.review-item { display: block ;}
+    .review-summary-section {  padding-left: 0px;  width: 100%;}
+    li.item.review-item span.name-letter{display:inline-block;}
+    .review-item .review-summary-section .review-title {  margin: 10px 0 5px;}
+    .review-ratings .rating-summary.item { width: 33%; margin-right: 0;}
+    .review-image-section {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+}
+</style>
+<?php
+$athelete_details = $block->getAtheleteDetails();
+$blogs = $block->getAllBlog();
+$reviews = $block->getAllReviews();
+?>
+
+
+<section class="athelete-section">
+    <div class="">
+        <div class="row">
+            <div class="col-sm-5 col-xs-12">
+                <div class="owl-profile-slider">
+                    <?php
+                    $gallery = $athelete_details->gallery;
+                    foreach ($gallery as $image_url) {
+                        ?>
+                                            <img src="<?php echo $image_url ?>">
+                                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="col-sm-7 col-xs-12">
+                <div class="athelete-name">
+                    <h2>
+                        <?php echo $athelete_details->title ?>
+                    </h2>
+                </div>
+
+                <div class="athelete-bio">
+                    <div class="text-bio"> <?php echo $athelete_details->about_athlete ?></div>
+                    <div class="readmore"> </div>
+                </div>
+                <?php if (!empty($athelete_details->my_favourite_brands)) { ?>
+                                        <div class="athelete-fav-brand">
+                                            <h4 class="review-title">
+                                                Favourite Brands
+                                            </h4>
+                                                <?php echo $athelete_details->my_favourite_brands ?>
+                                        </div>
+            <?php } ?>
+
+                <div class="athelete-details">
+                    <div class="row">
+
+                        <?php
+                        $attribute = $athelete_details->attribute;
+                        if (!empty($athelete_details->attribute[0]->value)) { ?>
+                                                    <div class="col-6">
+                                                        <div class="athelete-prop">
+                                                            <div class="left-pop-icon">
+                                                                <img src="<?php echo $athelete_details->attribute[0]->icon ?>">
+
+                                                            </div>
+                                                            <div class="right-prop">
+                                                                <div class="key-name">
+                                                                    <?php echo $athelete_details->attribute[0]->label ?>
+                                                                </div>
+                                                                <div class="key-value">
+                                                                    <?php echo $athelete_details->attribute[0]->value ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        <?php } ?>
+
+                        <?php if (!empty($athelete_details->attribute[1]->value)) { ?>
+                                                    <div class="col-6">
+                                                        <div class="athelete-prop">
+                                                            <div class="left-pop-icon">
+                                                                <img src="<?php echo $athelete_details->attribute[2]->icon ?>">
+                                                            </div>
+                                                            <div class="right-prop">
+                                                                <div class="key-name">
+                                                                    <?php echo $athelete_details->attribute[1]->label ?>
+                                                                </div>
+                                                                <div class="key-value">
+                                                                    <?php echo $athelete_details->attribute[1]->value ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        <?php } ?>
+
+                        <?php if (!empty($athelete_details->attribute[2]->value)) { ?>
+                                                    <div class="col-6">
+                                                        <div class="athelete-prop">
+                                                            <div class="left-pop-icon">
+
+                                                                <img src="<?php echo $athelete_details->attribute[1]->icon ?>">
+                                                            </div>
+                                                            <div class="right-prop">
+                                                                <div class="key-name">
+                                                                    <?php echo $athelete_details->attribute[2]->label ?>
+                                                                </div>
+                                                                <div class="key-value">
+                                                                    <?php echo $athelete_details->attribute[2]->value ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        <?php } ?>
+
+                        <?php if (!empty($athelete_details->attribute[3]->value)) { ?>
+                                                    <div class="col-6">
+                                                        <div class="athelete-prop">
+                                                            <div class="left-pop-icon">
+                                                                <img src="<?php echo $athelete_details->attribute[2]->icon ?>">
+
+                                                            </div>
+                                                            <div class="right-prop">
+                                                                <div class="key-name">
+                                                                    <?php echo $athelete_details->attribute[3]->label ?>
+                                                                </div>
+                                                                <div class="key-value">
+                                                                    <?php echo $athelete_details->attribute[3]->value ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        <?php } ?>
+
+                        <?php if (!empty($athelete_details->attribute[4]->value)) { ?>
+                                                    <div class="col-6">
+                                                        <div class="athelete-prop">
+                                                            <div class="left-pop-icon">
+                                                                <img src="<?php echo $athelete_details->attribute[4]->icon ?>">
+                                                            </div>
+                                                            <div class="right-prop">
+                                                                <div class="key-name">
+                                                                    <?php echo $athelete_details->attribute[4]->label ?>
+                                                                </div>
+                                                                <div class="key-value">
+                                                                    <?php echo $athelete_details->attribute[4]->value ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        <?php } ?>
+
+                        <?php if (!empty($athelete_details->attribute[5]->value)) { ?>
+                                                    <div class="col-6">
+                                                        <div class="athelete-prop">
+                                                            <div class="left-pop-icon">
+
+                                                                <img src="<?php echo $athelete_details->attribute[5]->icon ?>">
+
+                                                            </div>
+                                                            <div class="right-prop">
+                                                                <div class="key-name">
+                                                                    <?php echo $athelete_details->attribute[5]->label ?>
+                                                                </div>
+                                                                <div class="key-value">
+                                                                    <?php echo $athelete_details->attribute[5]->value ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-part">
+            <div class="tab-section-bar">
+                <ul>
+                    <?php if (!empty($reviews) ||  $athelete_details->username == 'cocod') { ?>
+                                                <li style="padding-left: 0px;"><a href="#section1">REVIEWS</a></li> |
+                    <?php } ?>
+                    <li><a href="#section2">ABOUT ME</a></li> 
+                    <?php if (!empty($athelete_details->kit)) { ?>
+                                              | <li><a href="#section4">GEARING-UP</a></li> 
+                    <?php } ?>
+                    <?php if (!empty($blogs) ||  $athelete_details->username == 'cocod') { ?>
+                                            | <li><a href="#section3">ARTICLES</a></li>
+                    <?php } ?>
+
+                </ul>
+            </div>
+            <?php if (!empty($reviews)) { ?>
+                                        <div class="tab_ib" id="section1">
+                                            <div class="block review-list customer-reviews" id="customer-reviews" style="display: block;">
+                                                <div class="block-content">
+                                                    <div class="toolbar review-toolbar">
+                                                    </div>
+                                                    <ol class="items review-items">
+
+                                                        <?php foreach ($reviews as $review) { ?>
+                                                                                    <li class="item review-item" itemscope="" itemprop="review" itemtype="http://schema.org/Review">
+
+                                                                                        <div class="review-image-section">
+                                                                                            <div class="review_image">
+                                                                                                <?php
+                                                                                                $media_url = "";
+                                                                                                if (isset($review->acf->image[0])) {
+                                                                                                    $media_url = $review->acf->image[0];
+                                                                                                }
+                                                                                                ?>
+                                                                                                <a href="#"><img src="<?php echo $media_url ?>"></a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="review-summary-section">
+                                                                                            <div class="review-title" itemprop="name">
+                                                                                                <div class="review-details">
+                                                                                                    <p class="review-author">
+                                                                                                        <a href="#"> <strong class="review-details-value" itemprop="author">
+                                                                                                                <?php echo $review->acf->product_name ?>
+                                                                                                            </strong></a>
+                                                                                                    </p>
+                                                                                                    <p class="review-date">
+                                                                                                        <time class="review-details-value" itemprop="datePublished" datetime="11/24/22"><?php
+                                                                                                        if (isset($review->acf->brand_name)) {
+                                                                                                            echo $review->acf->brand_name;
+                                                                                                        }
+                                                                                                        ?></time>
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="review-ratings" style="float: right;width: 30%">
+                                                                                                <div class="rating-summary item" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
+                                                                                                    <span class="label rating-label"><span>Price</span></span>
+                                                                                                    <div class="rating-result" title="<?php echo $review->acf->price_rating * 20 ?>%">
+                                                                                                        <meta itemprop="worstRating" content="1">
+                                                                                                        <meta itemprop="bestRating" content="100">
+                                                                                                        <span style="width:<?php echo $review->acf->price_rating * 20 ?>%">
+                                                                                                            <span itemprop="ratingValue">
+                                                                                                                <?php echo $review->acf->price_rating * 20 ?>%
+                                                                                                            </span>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="rating-summary item" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
+                                                                                                    <span class="label rating-label"><span>Quality</span></span>
+                                                                                                    <div class="rating-result" title="<?php echo $review->acf->quality_rating * 20 ?>%">
+                                                                                                        <meta itemprop="worstRating" content="1">
+                                                                                                        <meta itemprop="bestRating" content="100">
+                                                                                                        <span style="width:<?php echo $review->acf->quality_rating * 20 ?>%">
+                                                                                                            <span itemprop="ratingValue">
+                                                                                                                <?php echo $review->acf->quality_rating * 20 ?>%
+                                                                                                            </span>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="rating-summary item" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
+                                                                                                    <span class="label rating-label"><span>Value</span></span>
+                                                                                                    <div class="rating-result" title="<?php echo $review->acf->value_rating * 20 ?>%">
+                                                                                                        <meta itemprop="worstRating" content="1">
+                                                                                                        <meta itemprop="bestRating" content="100">
+                                                                                                        <span style="width:<?php echo $review->acf->value_rating * 20 ?>%">
+                                                                                                            <span itemprop="ratingValue">
+                                                                                                                <?php echo $review->acf->value_rating * 20 ?>%
+                                                                                                            </span>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="div_2">
+                                                                                                <h4 class="review-title">
+                                                                                                    <?php echo $review->acf->product_name ?>
+                                                                                                </h4>
+                                                                                                <div class="review-content" itemprop="description">
+                                                                                                    <?php
+                                                                                                    if (isset($review->acf->summary)) {
+                                                                                                        echo $review->acf->summary;
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </div>
+
+                                                                                                <div class="review_helpful" style="">
+                                                                                                    <div class="review_helpful_report" style=" margin-bottom: 5px; ">
+                                                                                                        <span class="title-helpful">Was this helpful?</span>
+                                                                                                        <a class="review_helpful_a review_helpful_like_132">
+                                                                                                            <img src="https://www.outdoorgoats.com/static/frontend/Smartwave/porto_child/en_US/Magento_Catalog/images/helpful.svg">
+                                                                                                            <span class="like_count_132">0</span>
+                                                                                                        </a>
+                                                                                                        <a class="review_helpful_a review_helpful_dislike_132">
+                                                                                                            <img src="https://www.outdoorgoats.com/static/frontend/Smartwave/porto_child/en_US/Magento_Catalog/images/unhelpful.svg">
+                                                                                                            <span class="dislike_count_132">0</span>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                    <div class="review_helpful_comment_132" style="display: none;">
+                                                                                                        <ul class="review_helpful_comment_list_132" style="list-style:none;padding:10px;border: 1px solid silver;margin-bottom: 10px;display:none">
+
+                                                                                                        </ul>
+                                                                                                        <div class="error message message_132" style="display: none;"></div>
+                                                                                                        <textarea class="input review_helpful_comment_content_132" maxlength="500"></textarea>
+                                                                                                        <button type="submit" title="Submit" class="button review_helpful review_helpful_comment_submit_132"><span><span>Submit</span></span></button>
+                                                                                                        <img src="https://www.outdoorgoats.com/static/frontend/Smartwave/porto_child/en_US/Magetop_ReviewManagement/images/loading.gif" class="review_helpful_comment_submit_loading_132" style="display: none;">
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </div>
+                                        
+                                                                                    </li>
+
+                                                        <?php } ?>
+                                                    </ol>
+                                                    <div class="toolbar review-toolbar">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+            <?php } ?>
+            <div class="tab_ib">
+                <div class="">
+                    <div class="admin__data-grid-outer-wrap" data-bind="scope: 'widget_recently_viewed.widget_recently_viewed'">
+                        <div class="block widget block-viewed-products-grid" data-bind="css: additionalClasses" style="display:flex">
+                            <div class="block-title" style="margin-bottom:4px !important">
+                                <strong role="heading" aria-level="2" data-bind="text: label" id="section2">About Me</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- About US Image -->
+                <?php if (!empty($athelete_details->about_image)) { ?>
+                <div class="about-us-image"> 
+                    <img src="<?php echo $athelete_details->about_image ?>">
+                </div>
+                <?php } ?>
+
+                <?php
+                $about_me = $athelete_details->about_me;
+                foreach ($about_me as $single_about_me) {
+                    ?>
+
+                                            <h4 class="review-title">
+                                                <?php echo $single_about_me->title ?>
+                                            </h4>
+                                            <p>
+                                                <?php echo $single_about_me->description ?>
+                                            </p>
+                <?php } ?>
+
+            </div>
+             <?php if (!empty($athelete_details->kit)) { ?>
+                                        <div class="tab_ib">
+                                            <div class="">
+                                                <div class="admin__data-grid-outer-wrap" data-bind="scope: 'widget_recently_viewed.widget_recently_viewed'">
+                                                    <div class="block widget block-viewed-products-grid" data-bind="css: additionalClasses" style="display:flex">
+                                                        <div class="block-title" style="margin-bottom:4px !important">
+                                                            <strong role="heading" aria-level="2" data-bind="text: label" id="section4">Gearing-up</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Goto Setup Image -->
+                                            <?php if (!empty($athelete_details->kit->kit_image_url)) { ?>
+                                            <div class="goto-image"> 
+                                                <img src="<?php echo $athelete_details->kit->kit_image_url ?>">
+                                            </div>
+                                            <?php } ?>
+                                            <?php echo $athelete_details->kit->kit_description ?>
+                    
+                                        </div>
+            <?php } ?>
+            <?php if (!empty($blogs)) { ?>
+                                    <div class="tab_ib">
+                                        <div class="blog-section">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="admin__data-grid-outer-wrap" data-bind="scope: 'widget_recently_viewed.widget_recently_viewed'">
+                                                            <div class="block widget block-viewed-products-grid" data-bind="css: additionalClasses" style="display:flex">
+                                                                <div class="block-title" style="margin-bottom:4px !important">
+                                                                    <strong role="heading" aria-level="2" data-bind="text: label" id="section3">Articles</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="hor-scroll">
+                                                    <div class="row">
+                                                        <!-- <h1>Blog</h1> -->
+                                                        <?php foreach ($blogs as $blog): ?>
+                                                                                    <div class="col-3">
+                                                                                        <div class="blog-single-wrap">
+                                                                                            <div class="blog-image"> 
+                                                                                              <img src="<?php echo $blog->acf->cover_image ?>">
+                                                                                            </div>
+                                                                                            <div class="blog-category">
+                                                                                                <?php echo implode(", ", $blog->activities); ?>
+                                                                                            </div>
+                                                                                            <div class="blog-title">
+                                                                                                <h3>
+                                                                                                    <?php echo limit_char($blog->title->rendered, 28); ?>
+                                                                                                </h3>
+                                                                                            </div>
+                                                                                            <div class="blog-exerpt">
+                                                                                                <?php echo limit_char($blog->post_content, 78); ?>
+                                                                                            </div>
+                                                                                            <div class="blog-link">
+                                                                                                <a target="_blank" href="https://wildcountrygear.in/blog/<?php echo $blog->slug ?>">
+                                                                                                    Continue Reading </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+        <?php } ?>
+        </div>
+    </div>
+</section>
+
+
+<?php
+function limit_char($text, $limit)
+{
+    $length = strlen($text);
+    if ($length > $limit) {
+        $output = str_split($text, $limit);
+        $text = $output[0] . '...';
+    }
+    return $text;
+}
+?>
+
+
+
+
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'owl.carousel/owl.carousel.min'
+        ],
+        function() {
+
+            
+
+            jQuery(document).ready(function() {
+                var athBioHeight = jQuery(".athelete-bio .text-bio").height();
+
+                if(athBioHeight > 96){
+                    jQuery(".athelete-bio .text-bio").attr('style', 'max-height: 100px;');
+                    setTimeout(function (){jQuery('.athelete-bio .readmore').show();}, 1000)
+                    jQuery('.athelete-bio .readmore').text("Read More");
+                }
+
+                
+
+                jQuery(document).on('click', '.athelete-bio .readmore', function(){
+                   
+                    if (jQuery(this).text() == "Read Less"){
+                       jQuery(this).text("Read More");
+                       jQuery(".athelete-bio .text-bio").attr('style', 'max-height: 100px;');
+                    }
+                    else{
+                        jQuery(this).text("Read Less");
+                        jQuery(".athelete-bio .text-bio").attr('style', 'max-height:'+ athBioHeight+'px;');
+                    }
+
+                });
+
+
+                var reviewCount = 0;
+
+                jQuery('li.review-item').each(function(i, v){
+                    if(i > 2){
+                        reviewCount++;
+                        jQuery(this).hide()
+                        jQuery(this).addClass('rv-hidden');
+                    }
+                })
+
+                if (jQuery('li.review-item').length > 3){
+                    jQuery('.review-items').append('<li class="rv-readmore"> <a>View All Reviews</a> </li> ');
+                }
+
+
+                jQuery(document).on('click', '.rv-readmore a', function(){
+                    jQuery('.rv-hidden').slideToggle(500);
+                    jQuery(this).toggleClass("active");
+
+                    if (jQuery(this).text() == "View Less"){
+                       jQuery(this).text("View All Reviews");
+                    }
+                    else{
+                        jQuery(this).text("View Less");
+                    }
+                       
+
+
+                });
+
+
+                
+                
+
+                var carousel = jQuery(".owl-profile-slider");
+
+                carousel.owlCarousel({
+
+                    //singleItem: true,
+                    //autoWidth: true,
+                    //responsive: true,
+                    addClassActive: true,
+                    slideSpeed: 300,
+                    paginationSpeed: 400,
+                    autoPlay: true,
+                    stopOnHover: true,
+                    pagination: true,
+                    navigation: true,
+                    lazyLoad: true,
+                    /* navigationText: ['<', '>'], */
+                    navigationText: [
+                        "",
+                        ""
+                    ],
+                    items: 1,
+                    margin: 0
+                });
+
+            });
+
+            let anchorSelector = 'a[href^="#"]';
+
+            jQuery(anchorSelector).on('click', function(e) {
+
+                // Prevent scrolling if the
+                // hash value is blank
+                e.preventDefault();
+
+                // Get the destination to scroll to
+                // using the hash property
+                let destination = jQuery(this.hash);
+
+                // Get the position of the destination
+                // using the coordinates returned by
+                // offset() method
+                let scrollPosition = destination.offset().top - 160;
+
+                // Specify animation duration
+                let animationDuration = 500;
+
+                // Animate the html/body with
+                // the scrollTop() method
+                jQuery('html, body').animate({
+                    scrollTop: scrollPosition
+                }, animationDuration);
+            });
+
+        }
+    )
+</script>
+
+<script type="text/javascript">
+
+</script>

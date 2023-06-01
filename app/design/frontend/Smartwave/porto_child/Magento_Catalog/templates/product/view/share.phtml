@@ -1,0 +1,52 @@
+<div class="share-wrapper">
+    <a href="#"><img src="<?= $block->getViewFileUrl('Magento_Catalog::images/share.svg'); ?>"/></a>
+</div>
+<div id="share-modal">
+    <div class="modal-inner-content">
+        <div class="share-wrap-inner">
+            <input type="text" value="<?= $block->getProduct()->getProductUrl() ?>" id="share_url">
+            <button onclick="copyText()"><img src="<?= $block->getViewFileUrl('Magento_Catalog::images/copy_to_clipboard.svg'); ?>"/></button>
+            <p id="copied">Link copied to clipboard!</p>
+        </div>
+    </div>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Share this',
+                modalClass: 'share-this-modal',
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: 'modal-close',
+                    click: function (){
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            modal(options, $('#share-modal'));
+            $(".share-wrapper a").on('click',function(){
+                document.getElementById("copied").style.display = 'none';
+                $("#share-modal").modal("openModal");
+            });
+
+            
+        }
+    );
+
+    function copyText() {
+        var copyText = document.getElementById("share_url");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        document.getElementById("copied").style.display = 'block';
+    }
+</script>

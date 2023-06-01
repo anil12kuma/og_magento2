@@ -1,0 +1,9 @@
+<pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/PageObject.xsd">
+    <page name="AdminAmastyCancelOrderConfigurationPage" url="admin/system_config/edit/section/am_cancel_order/" area="admin" module="Amasty_CancelOrder">
+        <section name="AdminAmastyCancelOrderGeneralConfigurationSection"/>
+        <section name="AdminAmastyCancelOrderFrontendConfigurationSection"/>
+        <section name="AdminAmastyCancelOrderAutoCancelConfigurationSection"/>
+        <section name="AdminAmastyCancelOrderNotificationsConfigurationSection"/>
+    </page>
+</pages>

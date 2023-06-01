@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="customer_form_login">
+        <action method="setTemplate">
+            <argument name="template" xsi:type="string">Mega_Phonelogin::rewrite/customer/account/login/login.phtml</argument>
+        </action>
+    </referenceBlock>
+    <!--<head>-->
+        <!--<css src="Mega_Phonelogin/css/plugin/intlTelInput.css"/>-->
+        <!--<link src="Mega_Phonelogin/js/codeVerification.js"/>-->
+    <!--</head>-->
+    <!--<referenceContainer name="form.additional.info">
+        <block class="Mega\Phonelogin\Block\Customer\Account\Create\Phone" name="mega_phonelogin_register_phone" template="Mega_Phonelogin::customer/account/create/phone.phtml"/>
+    </referenceContainer>-->
+</page>

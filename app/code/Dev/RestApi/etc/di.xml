@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Dev\RestApi\Api\ProductRepositoryInterface" type="Dev\RestApi\Model\Api\ProductRepository"/>
+    <preference for="Dev\RestApi\Api\ResponseItemListInterface" type="Dev\RestApi\Model\Api\ResponseItemList"/>
+    <preference for="Dev\RestApi\Api\ResponseSliderInterface" type="Dev\RestApi\Model\Api\ResponseSlider"/>
+    <preference for="Dev\RestApi\Api\ResponseAthleteInterface" type="Dev\RestApi\Model\Api\ResponseAthlete"/>
+    <preference for="Dev\RestApi\Api\ResponseSingleObjectInterface" type="Dev\RestApi\Model\Api\ResponseSingleObject"/>
+    <preference for="Dev\RestApi\Api\ResponseMsgInterface" type="Dev\RestApi\Model\Api\ResponseMsg"/>
+    <preference for="Dev\RestApi\Api\RequestProductReviewInterface" type="Dev\RestApi\Model\Api\RequestProductReview"/>
+    <preference for="Dev\RestApi\Api\CustomerInterface" type="Dev\RestApi\Model\Api\Customer"/>
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="add_custom_field_product_api" type="Dev\RestApi\Plugin\ProductCustAttr"/>
+    </type>
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="add_custom_field_cart_api" type="Dev\RestApi\Plugin\CartCustAttr"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+		<plugin name="order_custom_attribute" type="Dev\RestApi\Plugin\OrderCustAttr" />
+     </type>
+     <type name="Magento\Customer\Model\AccountManagement">
+		<plugin name="after_reset_password" type="Dev\RestApi\Plugin\AccountManagement" />
+     </type>
+</config>

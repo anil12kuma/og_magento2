@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox$block */
+/** @var \Magento\Framework\Pricing\Price\PriceInterface $priceModel */
+$priceModel = $block->getPriceType('regular_price');
+$finalPriceModel = $block->getPriceType('final_price');
+$idSuffix = $block->getIdSuffix() ? $block->getIdSuffix() : '';
+$schema = ($block->getZone() == 'item_view') ? true : false;
+?>
+
+<?php if($finalPriceModel->getAmount() < $priceModel->getAmount()) : ?>
+<span class="normal-price">
+        <?= /* @noEscape */ $block->renderAmount($finalPriceModel->getAmount(), [
+            'display_label' => __('As low as'),
+            'price_id' => $block->getPriceId('product-price-' . $idSuffix),
+            'price_type' => 'finalPrice',
+            'include_container' => true,
+            'schema' => $schema,
+        ]); ?>
+    </span>
+    <span class="old-price " style="text-decoration: line-through;">
+        <?= $block->renderAmount($priceModel->getAmount(), [
+            'price_id'          => $block->getPriceId('old-price-' . $idSuffix),
+            'price_type'        => 'oldPrice',
+            'include_container' => true,
+            'skip_adjustments'  => true
+        ]); ?>
+    </span>
+    
+    
+    <?php 
+
+        $array = (array)$priceModel->getAmount();
+        $prefix = chr(0).'*'.chr(0);
+        $price = $array[$prefix.'amount'];
+
+        $array = (array)$finalPriceModel->getAmount();
+        $prefix = chr(0).'*'.chr(0);
+        $finalPrice = $array[$prefix.'amount'];
+
+        $percentage = 100 - round(($finalPrice / $price)*100);
+
+    ?>
+    
+	<?php
+    echo '<div class="product-labels"><div class="product-label sale-label">'."(" . $percentage . '% OFF)</div></div>';
+    ////echo '<span style="color:#FF7D00;">'."(" . $percentage . '% OFF)</span>';
+    ?>
+    
+<?php else: ?>
+    <span class="normal-price">
+        <?= /* @noEscape */ $block->renderAmount($finalPriceModel->getAmount(), [
+            'display_label' => __('As low as'),
+            'price_id' => $block->getPriceId('product-price-' . $idSuffix),
+            'price_type' => 'finalPrice',
+            'include_container' => true,
+            'schema' => $schema,
+        ]); ?>
+    </span>
+<?php endif; ?>
+
+<?php if ($block->showMinimalPrice()) : ?>
+    <?php if ($block->getUseLinkForAsLowAs()) :?>
+        <a href="<?= $block->escapeUrl($block->getSaleableItem()->getProductUrl()) ?>" class="minimal-price-link">
+            <?= /* @noEscape */ $block->renderAmountMinimal() ?>
+        </a>
+    <?php else :?>
+        <span class="minimal-price-link">
+            <?= /* @noEscape */ $block->renderAmountMinimal() ?>
+        </span>
+    <?php endif?>
+<?php endif; ?>

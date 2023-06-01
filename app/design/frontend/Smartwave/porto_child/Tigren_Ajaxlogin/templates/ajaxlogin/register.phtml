@@ -1,0 +1,120 @@
+<?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+?>
+<div class="mb-register-popup">
+    <div class="mb-ajaxsuite-popup-border mb-ajaxlogin-popup mb-ajaxlogin-register">
+         
+        <form class="form form-create-account mb-login-form-register"
+              method="post"
+              id="ajax-register-form"
+              enctype="multipart/form-data" autocomplete="off">
+            <fieldset class="fieldset create info row">
+                 
+                 
+                <input type="hidden" name="success_url" value="">
+                <input type="hidden" name="error_url" value="">
+                <div class="field field-name-firstname required">
+                     
+                    <div class="control">
+                        <input type="text" id="firstname" name="firstname" placeholder="First Name" value="" title="First Name"
+                               class="input-text required-entry" data-validate="{required:true}" autocomplete="off"
+                               aria-required="true">
+                    </div>
+                </div>
+                <div class="field field-name-lastname required">
+                    
+                    <div class="control">
+                        <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="" title="Last Name"
+                               class="input-text required-entry" data-validate="{required:true}" autocomplete="off"
+                               aria-required="true">
+                    </div>
+                </div>
+
+               <!--  <div class="field choice newsletter">
+                    <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1"
+                           id="is_subscribed" class="checkbox">
+                    <label for="is_subscribed" class="label"><span><?= __('Sign Up for Newsletter') ?></span></label>
+                </div> -->
+
+            </fieldset>
+            <fieldset class="fieldset create account">
+               
+                <div class="field required">
+                        <div class="control">
+                        <input type="email" name="email" autocomplete="email" placeholder="Enter your email" id="customer-email" value="" title="Email"
+                               class="input-text" data-validate="{required:true, 'validate-email':true}"
+                               aria-required="true">
+                    </div>
+                </div>
+                <div class="field password required">
+                    <div class="control">
+                        <span toggle="#password" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                        <input type="password" name="password" placeholder="Enter your password" id="password" title="Password" class="input-text"
+                               data-password-min-length="8" data-password-min-character-sets="3"
+                               data-validate="{required:true, 'validate-customer-password':true}" autocomplete="off"
+                               aria-required="true">
+
+<script>
+
+require(['jquery', 'jquery/ui'], function($){
+  $(document).ready( function() {
+     
+  $("body").on('click', '.toggle-password', function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $("#password");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+});
+
+  $("body").on('click', '.toggle-password1', function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $("#password-confirmation");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+});
+
+
+});
+});
+</script>
+                    </div>
+
+                </div>
+                <div class="field confirmation required">
+                        <div class="control">
+                        <span toggle="#password" class="fa fa-fw fa-eye field_icon toggle-password1"></span>
+                        <input type="password" name="password_confirmation" placeholder="Confirm Password" title="Confirm Password"
+                               id="password-confirmation" class="input-text"
+                               data-validate="{required:true, equalTo:'#password'}" autocomplete="off"
+                               aria-required="true">
+                               
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions mb-style-actions">
+                <div class="primary rigsterpir">
+                    <button type="submit" class="action submit primary"
+                            title="Create Account"><span><?= __('Sign up') ?></span></button>
+                </div>
+            </div>
+             <div class="policycontent">
+                <p class="pcontent">By sign in you agree to OutdoorGoats' <a class="termsuse" href="https://www.outdoorgoats.com/terms-of-use-privacy-policy" target="_blank">Terms & Conditions</a> and  
+                    <a class="termpolicy" href="#">Privacy Policy.</a>
+                </p>
+                      </div>
+        </form>
+		  
+    </div>
+</div>

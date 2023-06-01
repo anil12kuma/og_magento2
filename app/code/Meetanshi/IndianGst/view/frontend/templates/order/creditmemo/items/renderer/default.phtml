@@ -1,0 +1,164 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var  $block \Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer */ ?>
+<?php $_item = $block->getItem();
+$_objectManager =   \Magento\Framework\App\ObjectManager::getInstance();
+$priceHelper = $_objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+?>
+<?php $_order = $block->getItem()->getOrderItem()->getOrder() ?>
+<tr id="order-item-row-<?= /* @escapeNotVerified */ $_item->getId() ?>">
+    <td class="col name" data-th="<?= $block->escapeHtml(__('Product Name')) ?>">
+        <strong class="product name product-item-name"><?= $block->escapeHtml($_item->getName()) ?></strong>
+        <?php if ($_options = $block->getItemOptions()): ?>
+        <dl class="item-options">
+        <?php foreach ($_options as $_option) : ?>
+            <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+            <?php if (!$block->getPrintStatus()): ?>
+                <?php $_formatedOptionValue = $block->getFormatedOptionValue($_option) ?>
+                <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="tooltip wrapper"<?php endif; ?>>
+                    <?= /* @escapeNotVerified */ $_formatedOptionValue['value'] ?>
+                    <?php if (isset($_formatedOptionValue['full_view'])): ?>
+                    <div class="tooltip content">
+                        <dl class="item options">
+                            <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                            <dd><?= /* @escapeNotVerified */ $_formatedOptionValue['full_view'] ?></dd>
+                        </dl>
+                    </div>
+                    <?php endif; ?>
+                </dd>
+            <?php else: ?>
+                <dd><?= $block->escapeHtml((isset($_option['print_value']) ? $_option['print_value'] : $_option['value'])) ?></dd>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </dl>
+        <?php endif; ?>
+
+        <?php /* downloadable */ ?>
+        <?php if ($links = $block->getLinks()): ?>
+            <dl class="item options">
+                <dt><?= /* @escapeNotVerified */ $block->getLinksTitle() ?></dt>
+                <?php foreach ($links->getPurchasedItems() as $link): ?>
+                    <dd><?= $block->escapeHtml($link->getLinkTitle()) ?></dd>
+                <?php endforeach; ?>
+            </dl>
+        <?php endif; ?>
+        <?php /* EOF downloadable */ ?>
+
+        <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+        <?php if ($addInfoBlock) :?>
+            <?= $addInfoBlock->setItem($_item->getOrderItem())->toHtml() ?>
+        <?php endif; ?>
+        <?= $block->escapeHtml($_item->getDescription()) ?>
+    </td>
+    <td class="col sku" data-th="<?= $block->escapeHtml(__('SKU')) ?>"><?= /* @escapeNotVerified */ $block->prepareSku($block->getSku()) ?></td>
+    <td class="col price" data-th="<?= $block->escapeHtml(__('Price')) ?>">
+        <?= $block->getItemPriceHtml() ?>
+    </td>
+    <td class="col price" data-th="<?php echo $block->escapeHtml(__('CGST')); ?>">
+        <table class="cgst">
+            <tbody style="background:none;text-align:center">
+            <tr>
+                <td><?php echo round($_item->getOrderItem()->getCgstPercent() ? $_item->getOrderItem()->getCgstPercent(): 0,2);?></span></td>
+                <td>
+                    <?php
+                    if($_item->getOrderItem()->getData('product_type') == 'configurable')
+                    {
+                        $item_id = $_item->getOrderItem()->getData('item_id');
+                        $item = $_objectManager->get('Magento\Sales\Model\Order\Item')->getCollection();
+                        $item->addFieldToFilter('parent_item_id',$item_id);
+                        foreach ($item as $value) {
+                            $formattedPrice = $priceHelper->currency($value->getData('cgst_amount'), true, false);
+                            echo $formattedPrice;
+                        }
+                    }
+                    else
+                    {
+                        $formattedPrice = $priceHelper->currency($_item->getData('cgst_amount'), true, false);
+                        echo $formattedPrice;
+                    }
+                    ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+    <?php
+    $sgstUtgstPercent=0;
+    $sgstUtgstAmount=0;
+    if($_item->getOrderItem()->getSgstPercent()>0){
+        $sgstUtgstPercent=$_item->getSgstPercent();
+        $sgstUtgstAmount=$_item->getData('sgst_amount');
+        $amountString='sgst_amount';
+    }
+    else{
+        $sgstUtgstPercent=$_item->getUtgstPercent();
+        $sgstUtgstAmount=$_item->getData('utgst_amount');
+        $amountString='utgst_amount';
+    }
+    ?>
+
+    <td class="col price" data-th="<?php echo $block->escapeHtml(__('SGST / UTGST')); ?>">
+        <table class="sgst">
+            <tbody style="background:none;text-align:center">
+            <tr>
+                <td><?php echo round($sgstUtgstPercent,2);?></span></td>
+                <td>
+                    <?php
+                    if($_item->getOrderItem()->getData('product_type') == 'configurable')
+                    {
+                        $item_id = $_item->getOrderItem()->getData('item_id');
+                        $item = $_objectManager->get('Magento\Sales\Model\Order\Item')->getCollection();
+                        $item->addFieldToFilter('parent_item_id',$item_id);
+                        foreach ($item as $value) {
+                            $formattedPrice = $priceHelper->currency($value->getData($amountString), true, false);
+                            echo $formattedPrice;
+                        }
+                    }
+                    else
+                    {
+                        $formattedPrice = $priceHelper->currency($sgstUtgstAmount, true, false);
+                        echo $formattedPrice;
+                    }
+                    ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td class="col price" data-th="<?php echo $block->escapeHtml(__('IGST')); ?>">
+        <table class="igst">
+            <tbody style="background:none;text-align:center">
+            <tr>
+                <td><?php echo round($_item->getOrderItem()->getIgstPercent() ? $_item->getOrderItem()->getIgstPercent(): 0,2);?></span></td>
+                <td>
+                    <?php
+                    if($_item->getOrderItem()->getData('product_type') == 'configurable')
+                    {
+                        $item_id = $_item->getOrderItem()->getData('item_id');
+                        $item = $_objectManager->get('Magento\Sales\Model\Order\Item')->getCollection();
+                        $item->addFieldToFilter('parent_item_id',$item_id);
+                        foreach ($item as $value) {
+                            $formattedPrice = $priceHelper->currency($value->getData('igst_amount'), true, false);
+                            echo $formattedPrice;
+                        }
+                    }
+                    else
+                    {
+                        $formattedPrice = $priceHelper->currency($_item->getIgstAmount(), true, false);
+                        echo $formattedPrice;
+                    }
+                    ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')) ?>"><?= /* @escapeNotVerified */ $_item->getQty()*1 ?></td>
+    <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
+        <?= $block->getItemRowTotalHtml() ?>
+    </td>
+</tr>

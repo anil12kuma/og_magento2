@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amasty_address_autocomplete"
+                 translate="label"
+                 sortOrder="151420"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="1">
+            <resource>Amasty_GoogleAddressAutocomplete::config</resource>
+            <class>separator-top</class>
+            <label>Google Address Autocomplete</label>
+            <tab>amasty</tab>
+
+            <group id="general"
+                   translate="label"
+                   sortOrder="0"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+
+                <field id="google_address_suggestion"
+                       translate="label comment"
+                       type="select"
+                       sortOrder="0"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Google Address Suggestion</label>
+                    <comment>Address auto complete while user is typing, using geolocation Google technology. The browser may ask permissions for Location</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="google_api_key"
+                       translate="label comment"
+                       type="text"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Google API Key</label>
+                    <comment><![CDATA[Click <a href="https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform" target="_blank">here</a> to get API key]]></comment>
+                    <depends>
+                        <field id="google_address_suggestion">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

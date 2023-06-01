@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_Base:etc/less_to_css.xsd">
+    <module name="Amasty_CancelOrder">
+        <handle name="sales_order_history" />
+        <handle name="sales_order_view" />
+        <cssOptions fileName="amcorder" path="css/source/mkcss" />
+        <ifconfig>am_cancel_order/general/enabled</ifconfig>
+    </module>
+</config>

@@ -1,0 +1,172 @@
+<fieldset class="fieldset create account" data-hasrequired="<?php /* @escapeNotVerified */
+echo __('* Required Fields') ?>">
+    <legend class="legend"><span><?php /* @escapeNotVerified */
+            echo __('Additional Information') ?></span></legend>
+    <p>
+    <div class="field regulation required">
+        <label for="mphone_number" class="label"><span><?php /* @escapeNotVerified */
+                echo __('Mobile Number') ?></span></label>
+        <div class="control">
+            <input type="tel" value="<?php echo $block->getMphoneNumber(); ?>"  name="mphone_number" id="mphone_number" title="<?php /*/* @escapeNotVerified */
+            echo __('Mobile Number') ?>" class="input-text phonelogin" data-validate="{required:true}">
+        </div>
+        <span class="mage-error" id="mphone-num-error" style="display: none;">
+            <?php echo __('Mobile Number Is Invalid');?>
+        </span>
+    </p>
+</fieldset>
+<div id="verification-modal">
+    <dl>
+        <dd>
+            <?php
+            echo __('A Verification Code Has been sent on entered mobile number. Please enter the verification code and click submit');
+            ?>
+        </dd>
+    </dl>
+    <div id="vcodeContainer">
+        <label for="name"><?php echo __('Verification Code')?></label>
+        <input type="text" id="verificationCode" name="verificationCode">
+        <div id="vcodeErr" style="color:red"></div>
+        <input type="hidden" value="0" name = 'mphone_verified'>
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Mega_Phonelogin/js/plugin/intlTelInput.min',
+        "Magento_Ui/js/modal/modal",
+        "Mega_Phonelogin/js/plugin/utils",
+        'mage/translate'
+    ], function($,intlTelInput,modal,utils,$tr) {
+        /*$ = jQuery.noConflict();*/
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            title: $.mage.__('Enter Verification Code'),
+            buttons: [{
+                text: $.mage.__('verify'),
+                class: 'button btn-success',
+                click: function () {
+                    var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Phone/verifyCode");?>';
+                    var verificationCode = $('#verificationCode').val();
+                    if(verificationCode == ''){
+                        $('#verificationCode').addClass('mage-error');
+                }
+                    $('#verificationCode').removeClass('mage-error');
+                    var phone = $('#mphone_number').val();
+                    var param = {phone:phone ,code:verificationCode};
+                    $.ajax({
+                        showLoader: true,
+                        url: requestUrl,
+                        data: param,
+                        type: "POST",
+                        dataType: 'json'
+                    }).done(function (data) {
+                        if(data.status){
+                            alert(data.message);
+                            $('.action-close').trigger('click');
+                            //$('#form-validate').submit();
+                        }else{
+                            alert(data.message);
+                        }
+
+                    });
+
+                }
+            },{
+                text: $.mage.__('Re-Send Code'),
+                class: 'button btn-warning',
+                click: function () {
+                    var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Phone/Sendcode");?>';
+                    var phone = $('#mphone_number').val();
+                    var param = {phone:phone};
+                        $.ajax({
+                        showLoader: true,
+                        url: requestUrl,
+                        data: param,
+                        type: "POST",
+                        dataType: 'json'
+                    }).done(function (data) {
+                        alert(data.message);
+                    });
+
+                }
+            }]
+        };
+        var popupdata = $('<div />').append($('#verification-modal'));
+        modal(options, popupdata);
+
+      
+        $(document).ready(function () {
+            
+           $("#mphone_number").intlTelInput({
+               // initialCountry: "auto",
+               'nationalMode' : false,
+               // geoIpLookup: function(callback) {
+               //     $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+               //         var countryCode = (resp && resp.country) ? resp.country : "";
+               //         callback(countryCode);
+               //     });
+               // },
+               'utilsScript' : utils
+           });
+        });
+        //$('#megaBtnSubmit').on('click',function () {
+        $('#mphone_number').on('change',function () {
+
+            var phone = $('#mphone_number').val();
+            if(phone.length == 0)
+                return this;
+            var errorMap = [$tr("Invalid number"), $tr("Invalid country code"), $tr("Too short Mobile Number"), $tr("Too long Mobile Number"), $tr("Invalid number")];
+
+            var fullPhone = $('#mphone_number').intlTelInput('getNumber');
+            var numberIsValid = $('#mphone_number').intlTelInput('isValidNumber');
+            
+            if(!numberIsValid){
+                var err = $('#mphone_number').intlTelInput('getValidationError');
+                console.log(err);
+                $('#mphone-num-error').html(errorMap[numberIsValid]);
+                $('#mphone-num-error').addClass('mage-failed');
+                $('#mphone-num-error').show();
+                return;
+            }
+
+
+            $('.intl-tel-input').removeClass('mage-failed');
+            $('#mphone-num-error').hide();
+
+            var countryCode = $('#mphone_number').intlTelInput('getSelectedCountryData');
+            var dialCode = countryCode.dialCode;
+            if(dialCode == null){
+                window.location.reload();
+                return;
+            }
+            //var fullPhone = '+'+dialCode+phone;
+            $(this).val(fullPhone);
+
+
+            var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Phone/Sendcode");?>';
+            var param = {phone:fullPhone};
+            var phoneInput = this;
+            $.ajax({
+                showLoader: true,
+                url: requestUrl,
+                data: param,
+                type: "POST",
+                dataType: 'json'
+            }).done(function (data) {
+                if(data.status){
+                    popupdata.modal('openModal');
+                }else{
+                    alert(data.message);
+                }
+            });
+        })
+    });
+</script>

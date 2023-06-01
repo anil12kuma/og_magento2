@@ -1,0 +1,23 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Mega_Phonelogin::configlbl"
+             title="Login By Mobile Number"
+             module="Mega_Phonelogin"
+             sortOrder="10"
+             resource="Mega_Phonelogin::configlbl" />
+        <add id="Mega_Phonelogin::smsLog"
+             title="SMS Log"
+             module="Mega_Phonelogin"
+             sortOrder="5"
+             parent="Mega_Phonelogin::configlbl"
+             action="megaphonelogin/smslog/index"
+             resource="Mega_Phonelogin::smsLog"/>
+        <add id="Mega_Phonelogin::config"
+             title="Configuration"
+             module="Mega_Phonelogin"
+             sortOrder="10"
+             parent="Mega_Phonelogin::configlbl"
+             action="adminhtml/system_config/edit/section/mega_phonelogin"
+             resource="Mega_Phonelogin::config"/>
+    </menu>
+</config>

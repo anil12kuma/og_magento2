@@ -1,0 +1,31 @@
+//
+//  Base Styles
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '_mixins';
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .amcorder-label {
+        & {
+            .am-flex();
+
+            position: relative;
+            margin: @amcorder__indent__xl 0 @amcorder__indent;
+        }
+
+        &.-required:after {
+            margin: 0 0 0 @amcorder__indent / 2;
+            color: #e02b27;
+            content: '*';
+            font-size: 1.2rem;
+        }
+    }
+}

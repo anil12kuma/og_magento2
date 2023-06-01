@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <am_cancel_order>
+            <general>
+                <enabled>1</enabled>
+                <customer_group>0,1,2,3</customer_group>
+                <order_status>pending</order_status>
+                <refund>online</refund>
+            </general>
+
+            <frontend>
+                <button_title>Cancel Order</button_title>
+                <popup_enabled>1</popup_enabled>
+                <notice>Your request will be solved in 48 hours</notice>
+                <reason><![CDATA[["",{"1":"I have changed my mind"},{"2":"I bought the wrong item(s) "},{"3":"I found a cheaper alternative"},{"4":"I placed a duplicate order"},{"5":"I received negative feedback about the item after purchase"},{"6":"Delivery takes too long"},{"7":"Other"}]]]></reason>
+            </frontend>
+        </am_cancel_order>
+    </default>
+</config>

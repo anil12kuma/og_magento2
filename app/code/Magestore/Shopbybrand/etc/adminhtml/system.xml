@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magestore" translate="label" sortOrder="400">
+            <label>magestore</label>
+        </tab>
+        <section id="ms_shopbybrand" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Shop By Brand</label>
+            <tab>magestore</tab>
+            <resource>Magestore_Shopbybrand::config_shopbybrand</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="enable_frontend" translate="label comment" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment>Enable frontend</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_toplink" translate="label comment" type="select" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Top Link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="frontend_url_path" translate="label comment" type="text" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Frontend URL Path</label>
+                    <comment>Set URL path for the Brand Listing page. For example: http://www.yourstore.com/brand.</comment>
+                </field>
+                <field id="attribute_code" translate="label comment" type="select" sortOrder="4" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Attribute Code</label>
+                    <source_model>Magestore\Shopbybrand\Model\System\Config\Source\Attributecode</source_model>
+                    <comment>Name of the Manufacturer attribute will be imported to brands. "manufacturer" is default .</comment>
+                </field>
+                <field id="menu_bra" translate="label comment" type="label" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Menu Bar</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="brand_link_menu" translate="label comment" type="select" sortOrder="6" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Link to Brand Listing Page</label>
+                    <comment>Support Magento Community Edition 1.7.x and later.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="number_of_brands_display" translate="label comment" type="text" sortOrder="7"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Brands Displayed</label>
+                    <comment>If empty or zero, there is no limitation.</comment>
+                </field>
+            </group>
+            <group id="brand_list" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Brand Listing Page</label>
+                <field id="brand_separator_list_brand_style" translate="label comment" type="label" sortOrder="9"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Brand Display</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="display_brand_group_by_name" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Group Brands by First Character</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_brand_have_product" translate="label comment" type="select" sortOrder="11"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide Brands Without Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_product_number" translate="label comment" type="select" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Number of Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show each brand’s product number next to its name.</comment>
+                </field>
+                <field id="brand_separator_brand_logo_size" translate="label comment" type="label" sortOrder="13"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Logo</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="display_brand_image" translate="label comment" type="select" sortOrder="14" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="brand_logo_width" translate="label comment" type="text" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Width</label>
+                    <comment>In pixel. Recommended size: smaller than 200px.</comment>
+                </field>
+                <field id="brand_logo_height" translate="label comment" type="text" sortOrder="16" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                    <comment>In pixel. Recommended size: smaller than 200px.</comment>
+                </field>
+                <field id="brand_separator_featured_brand" translate="label comment" type="label" sortOrder="17"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Featured Brands</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="display_featured_brand" translate="label comment" type="select" sortOrder="18"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_featured_brand_as_slider" translate="label comment" type="select" sortOrder="19"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shown as Slider</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="brand_separator_brand_filter_bar" translate="label comment" type="label" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Search and Filter</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="display_brand_character_list" translate="label comment" type="select" sortOrder="21"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Filter by Character</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_brand_search_box" translate="label comment" type="select" sortOrder="22"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Search Box</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_brand_category" translate="label comment" type="select" sortOrder="23"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Brand by Category</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="brand_details" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Brand Detailed Page</label>
+                <field id="details_layout" translate="label comment" type="select" sortOrder="25" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Layout</label>
+                    <source_model>Magestore\Shopbybrand\Model\System\Config\Source\Branddetailtemplate</source_model>
+                </field>
+                <field id="details_display_banner" translate="label comment" type="select" sortOrder="26"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Banner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="details_display_logo" translate="label comment" type="select" sortOrder="27"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="details_display_featured_products" translate="label comment" type="select" sortOrder="28"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Featured Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="details_display_brand_by_category" translate="label comment" type="select" sortOrder="29"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Brand by Category</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="details_in_sidebar" translate="label comment" type="label" sortOrder="36" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Brand Detailed Page On Sidebar</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="details_search_box" translate="label comment" type="select" sortOrder="37" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Search Box</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="details_best_seller" translate="label comment" type="select" sortOrder="38" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Bestseller Products</label>
+                    <source_model>Magestore\Shopbybrand\Model\System\Config\Source\Selectcolumn</source_model>
+                </field>
+                <field id="number_of_products_show" translate="label comment" type="text" sortOrder="39"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Products Shown</label>
+                </field>
+            </group>
+            <group id="brand_listing_sidebar" translate="label" type="text" sortOrder="40" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>Brand Listing Sidebar</label>
+
+                <field id="listing_sb_enable" translate="label comment" type="select" sortOrder="41" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable Block</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display the block on pages having sidebar.</comment>
+                </field>
+                <field id="listing_sb_num_brand" translate="label comment" type="text" sortOrder="42" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Number of Brands Shown</label>
+                    <comment>If empty or zero, there’s no limitation.</comment>
+                </field>
+                <field id="listing_sb_display_option" translate="label comment" type="select" sortOrder="43"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Option</label>
+                    <source_model>Magestore\Shopbybrand\Model\System\Config\Source\Displayoption</source_model>
+                    <comment>Show logo and name by default.</comment>
+                </field>
+            </group>
+            <group id="advance_config" translate="label" type="text" sortOrder="44" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Featured Brands Advanced Configuration</label>
+                <field id="advance_display_general" translate="label comment" type="label" sortOrder="45"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display On Other Places</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="advance_display" translate="label comment" type="select" sortOrder="46" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="advance_show_slider" translate="label comment" type="select" sortOrder="47" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Shown as Slider</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="embedded_code" translate="label comment" type="label" sortOrder="48" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Embedded Code</label>
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\Brand\Renderer\Separator</frontend_model>
+                </field>
+                <field id="embedded_code_details" translate="label comment" type="label" sortOrder="49"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\System\Config\Implementcode</frontend_model>
+                </field>
+            </group>
+            <group id="style_config" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Style Configuration</label>
+                <field id="background_title" translate="label comment" type="text" sortOrder="0" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Background Title Brand</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is FFA500</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="brand_title_color" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Brand Title Color</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <validate>color</validate>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+                <field id="background_filter_label" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Background Label Filter</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is 3399CC</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="color_filter_label" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Color Label Filter </label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="background_filter_link" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Background Link Filter</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is EEEEEE</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="background_filter_link_hover" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Background Link Filter Hover</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is 6F6F6F</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="color_link_fitler" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Color Link Filter </label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is 707070</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="color_filter_link_hover" translate="label comment" type="text" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Color Link Filter Hover</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is FFFFFF</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="color_link" translate="label comment" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Color Link</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is 3399CC</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="color_link_hover" translate="label comment" type="text" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Color link hover</label>
+                    <frontend_class>jscolor</frontend_class>
+                    <comment>Default is 6F6F6F</comment>
+                    <validate>color</validate>
+                </field>
+                <field id="add_js" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magestore\Shopbybrand\Block\Adminhtml\System\Config\AddJsColor</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

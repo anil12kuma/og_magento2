@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+
+<?php if (!class_exists(\Elasticsearch\ClientBuilder::class)): ?>
+    <div class="amasty-additional-content">
+        <span class="message success">
+            <?= /* @noEscape */ __('Elasticsearch package is not installed. Please, run the following'
+                . ' command in the SSH: composer require elasticsearch/elasticsearch ^7.9.'
+                . ' You can check Magento system requirements')?>
+            <a target="_blank" href="https://devdocs.magento.com/guides/v2.4/install-gde/system-requirements.html">
+                <?= /* @noEscape */ __('here') ?>
+            </a>
+        </span>
+    </div>
+<?php endif; ?>

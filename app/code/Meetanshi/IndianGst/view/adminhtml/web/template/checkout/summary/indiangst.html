@@ -1,0 +1,8 @@
+<!-- ko if: getIndianGst() -->
+<tr class="totals indiangst excl">
+   <th class="mark" colspan="1" scope="row" data-bind="text: cgst"></th>
+   <td class="amount">
+       <span class="price" data-bind="text: getIndianGst(), attr: {'data-th': cgst}"></span>
+   </td>
+</tr>
+<!-- /ko -->

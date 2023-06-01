@@ -1,0 +1,239 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\Shopbybrand\Block\Brand $block */
+
+$lists = $block->getListCharacterBegin();
+
+$store = $block->storeManager()->getStore()->getId();
+$showFeaturedBrands = $block->getSystemConfig()->isDisplayFeaturedBrand();
+$showBrandCategories = $block->getSystemConfig()->isDisplayBrandCategory();
+$showCharatersList = $block->getSystemConfig()->isDisplayBrandCharacterList();
+$showSearchBox = $block->getSystemConfig()->isDisplayBrandSearchBox();
+$showLogoImage = $block->getSystemConfig()->isDisplayBrandImage();
+$brandsListStyle = $block->getSystemConfig()->isDisplayBrandGroupByName();
+$logo_width = $block->getSystemConfig()->logoWidth();
+$logo_height = $block->getSystemConfig()->logoHeight();
+$showNumberOfProducts = $block->getSystemConfig()->isDisplayProductNumber();
+$onlyBrandHaveProduct = $block->getSystemConfig()->isDisplayBrandHaveProduct();
+?>
+
+<div class="page-title-wrapper">
+    <h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading toolbar-amount">
+        <span class="base" data-ui-id="page-title-wrapper"><?php echo __('Biggest Brand');?></span>
+    </h1>
+</div>
+<div class="shopbybrand-list">
+
+    <!-- Featured Brands box BEGIN -------------------------------------------->
+    <?php
+    if ($showFeaturedBrands) {
+        echo $block->getFeatureBrandHtml();
+    }
+    ?>
+    <!-- Featured Brands box END ---------------------------------------------->
+
+    <!-- Brands Categories END ------------------------------------------------>
+    <?php
+    if ($showBrandCategories) {
+        echo $block->getBrandCategoryHtml();
+    }
+    ?>
+    <!-- Brands Categories END ------------------------------------------------>
+
+    <!-- Filter bar & Search box BEGIN ---------------------------------------->
+    <div class="filterbar col" id="filterbar">
+        <!-- Character bar END-->
+        <?php if ($showCharatersList) :?>
+            <div class="shopbybrand-title">
+            <h1><?php echo __('Shop by Brand filter') ?></h1>
+        </div>
+            <div id="charaters-list" class="filter">
+                <ul>
+                    <li class="charlist charlist_all isActiveCate">
+                        <strong><a href="javascript:void(0)" group="" onclick="charFilter(this)">ALL</a></strong>
+                    </li>
+                    <li class="charlist">
+                        <a href="javascript:void(0)" id="charlist_number" group="number" style="opacity: 0.2;pointer-events: none;" onclick="charFilter(this)">0-9</a>
+                    </li>
+                    <?php foreach ($lists as $char): ?>
+                        <li class="charlist">
+                            <a href="javascript:void(0)" id="charlist_<?php echo $char ?>" group="<?php echo $char ?>" style="opacity: 0.2;pointer-events: none;" onclick="charFilter(this)"><?php echo $char;?></a>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+        <?php endif;?>
+        <!-- Character bar END-->
+
+        <!-- Search box BEGIN -->
+        <?php
+        if ($showSearchBox) {
+            echo $block->getSearchBoxHtml();
+        }
+        ?>
+        <!-- Search box END -->
+    </div>
+    <!-- Filter bar & Search box END ------------------------------------------>
+    <div class="brands">
+        <ul class="col">
+            <?php
+            $shopbybrands = $block->brandFactory()->create()->getBrandsData();
+            $noImg = '';
+
+            if(isset($shopbybrands[0]) && $shopbybrands[0]){
+                $noImg =  $block->getViewFileUrl('Magestore_Shopbybrand::images/shopbybrand/no-image.png');
+            }
+            foreach ($shopbybrands as $brand) :
+                if ($showLogoImage) :
+                    ?>
+                    <?php if($brand['number_product'] >= 1) { ?>
+                    <li class="list_1 <?php echo $block->getCateClass($brand['category_ids']); ?>">
+                        <a href="<?php echo $block->storeManager()->getStore()->getUrl($brand['url_key']); ?>">
+                            <?php
+                            $path = $brand['logo'];
+                            $img = ($brand['logo']==NULL) ? $noImg : $block->getImageHelper()
+                                ->getMediaUrlImage($brand['logo']);
+                            ?>
+                            <img src="<?php echo $img; ?>" alt="" />
+                            <!-- <div style="display: block;" class="box"><?php //echo ucfirst($brand['brand_name']); ?><?php //if ($showNumberOfProducts) echo '(',$brand['number_product'],')';?></div> -->
+                        </a>
+                    </li>
+                    <?php } ?>
+                <?php else : ?>
+                 <?php if($brand['number_product'] >= 1) { ?>
+                    <li class="list_1 <?php echo $block->getCateClass($brand['category_ids']); ?>" style="float: left">
+                        <a href="<?php echo $block->storeManager()->getStore()->getUrl($brand['url_key']); ?>">
+                            <div class="box">
+                                <?php echo ucfirst($brand['brand_name']);
+                                if ($showNumberOfProducts) echo '(',$brand['number_product'],')';?>
+                            </div>
+                        </a>
+                    </li>
+                    <?php } ?>
+                    <?php
+                endif;
+            endforeach;
+            ?>
+        </ul>
+        <div class="brand-ajax-loading"><img src="<?php echo $block->getViewFileUrl('Magestore_Shopbybrand::images/shopbybrand/ajax-loader.gif') ?>" style="display: none;"/></div>
+        <div class="brand-not-found" style="display: none;"><?php echo __('Brand Not Found!'); ?></div>
+    </div>
+</div>
+<script>
+    var listchars = <?php echo json_encode($lists); ?>;
+    var numbers = [0,1,2,3,4,5,6,7,8,9];
+    var curentActiveCate = null;
+    require(['jquery'], function($) {
+        var curentFilter = $('.charlist_all').first();
+        window.charFilter = function (el){
+            if(curentFilter)
+                curentFilter.removeClass('isActiveCate');
+            $(el).addClass('isActiveCate');
+            curentFilter = $(el);
+            brandFilter();
+        };
+        window.brandFilter = function (){
+            var cat = '';
+            var char = '';
+
+            if(curentActiveCate&&curentActiveCate.attr('cateId')!='')
+                cat = '.c'+curentActiveCate.attr('cateId');
+
+            if(curentFilter.length && curentFilter.attr('group'))
+                char = '.'+curentFilter.attr('group');
+
+            $('li.list_1').each(function () {
+                $(this).hide();
+            });
+            $('li.list_1' + cat + char).each(function () {
+                $(this).show();
+            });
+            if ($('.brandslist'))
+                $('.brandslist').each(function () {
+                    if (!$('.brandslist#' + $(this).attr('id') + ' li.list_1' + cat + char).length)
+                        $(this).hide();
+                    else
+                        $(this).show();
+                });
+
+            brandLoading($('li.list_1' + cat + char).length);
+        }
+
+        window.brandLoading = function (list){
+                $('.brands ul').first().hide();
+                $('.brand-ajax-loading img').first().show();
+                $('.brand-not-found').first().hide();
+                setTimeout(function () {
+                    $('.brand-ajax-loading img').first().hide();
+                    if (list)
+                        $('.brands ul').first().show();
+                    else
+                        $('.brand-not-found').first().show();
+                }, 2000);
+        }
+    });
+
+    require(['jquery'], function($) {
+        $('li.list_1').each(function () {
+            var char = $(this).text().trim().charAt(0);
+            if (listchars.indexOf(char) != -1)
+                $(this).addClass(char);
+            else if (listchars.indexOf(char) == -1)
+                $(this).addClass('number');
+        });
+        for(var i = 0; i < listchars.length; i++){
+            var el = listchars[i];
+            if ($('li.' + el).length) {
+                $('#charlist_' + el).css('opacity','');
+                $('#charlist_' + el).css('pointer-events','all');
+            }
+        }
+        if ($('li.number').length) {
+            $('#charlist_number').css('opacity','');
+            $('#charlist_number').css('pointer-events','all');
+        }
+        <?php if ($brandsListStyle) :?>
+        $('.brands').first().hide();
+        if ($('li.number').length) {
+            $('.brands ul').first().append('<li class="brandslist col" id="number"><div class="brand-begin-label"><strong>0-9</strong></div><ul></ul></li>');
+            $('.brands li.number').each(function () {
+                $('#number').append($(this)[0].outerHTML);
+                $(this)[0].outerHTML = '';
+            });
+        }
+        for(var i = 0; i < listchars.length; i++) {
+            var el = listchars[i];
+            if ($('li.' + el).length) {
+                $('.brands ul').first().append('<li class="brandslist col" id="' + el + '"><div class="brand-begin-label"><strong>' + el + '</strong></div><ul></ul></li>');
+                $('.brands li.' + el).each(function () {
+                    $('#'+el).append($(this)[0].outerHTML);
+                    $(this)[0].outerHTML = '';
+                });
+            }
+        }
+        $('.brands').first().show();
+        <?php endif; ?>
+    });
+
+</script>
+<!-- <style>
+    .brands .list_1 div{
+        max-width: 90%;
+        align-items: center;
+        display: inline-flex;
+        align-items: center;
+        width: <?php //echo $logo_width;?>px;
+        margin: 0 auto;
+        min-height: 85%;
+        overflow: hidden;
+    }
+    .brand-ajax-loading img{
+        width: 20%;
+        margin: 0px 40%;
+        clear: both;
+    }
+</style> -->

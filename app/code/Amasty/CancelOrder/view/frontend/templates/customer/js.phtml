@@ -1,0 +1,27 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+
+<script>
+    require([
+        'jquery',
+        ], function($) {
+            $('[data-amcorder-js="td"]').each(function (index, td) {
+                var $td = $(td),
+                    lastTr = $td.parent().find('.col.actions');
+                $td.children().each(function (i, button) {
+                    lastTr.append(button);
+                });
+
+                $td.remove();
+            });
+        }
+    );
+</script>

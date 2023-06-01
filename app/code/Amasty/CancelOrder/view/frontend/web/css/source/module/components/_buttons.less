@@ -1,0 +1,92 @@
+//
+//  Buttons
+//  _____________________________________
+
+//
+//  Imports
+//  -------------------------------------
+
+@import '../_mixins';
+
+//
+//  Colors
+//  -------------------------------------
+
+@amcorder-button__color: #4190c6;
+@amcorder-button__active__color: #026bb3;
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amcorder-button {
+        & {
+            .am-flex(center, center);
+            .transition(.1);
+
+            position: relative;
+            display: inline-flex;
+            min-width: 85px;
+            border: 1px solid @amcorder-button__color;
+            background: transparent;
+            box-shadow: none;
+            color: @amcorder-button__color;
+            font-weight: 400;
+            font-style: normal;
+            opacity: 1;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            border-color: @amcorder-button__active__color;
+            background: none;
+            box-shadow: none;
+            color: @amcorder-button__active__color;
+        }
+    }
+
+    .amcorder-button.-link {
+        & {
+            color: @amcorder-button__active__color;
+            vertical-align: baseline;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .amcorder-button.-clear {
+        & {
+            padding: 0;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        &:active,
+        &:hover,
+        &:focus {
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+    }
+
+    .amcorder-button.-fill {
+        & {
+            border-color: @amcorder-button__active__color;
+            background: @amcorder-button__active__color;
+            box-shadow: none;
+            color: #fff;
+        }
+
+        &:hover {
+            background: darken(@amcorder-button__active__color, 5%);
+        }
+    }
+}

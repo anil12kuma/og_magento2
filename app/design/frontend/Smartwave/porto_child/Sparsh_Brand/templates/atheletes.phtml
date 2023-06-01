@@ -1,0 +1,21 @@
+<?php
+/** @var \Sparsh\Brand\Block\BrandSlider $block */
+$brandCollection = $block->getBrandCollection();
+
+if (!empty($brandCollection)) {
+		?>
+
+	<div class="popular-athelete-collection">
+		<?php foreach ($brandCollection as $brand) {
+			$imageSize=getimagesize($brand['imageSize']);
+			?>       
+			<div class="brand-data">
+				<a href="<?= $brand['brandUrl'] ?>">
+					<img src="<?= $brand['brandImageUrl'] ?>" />
+				</a>
+				<span><b><?= $brand['title'] ?></b></span>
+				<span><?= $brand['description'] ?></span>
+			</div>
+		<?php } ?>
+	</div>
+<?php } ?>

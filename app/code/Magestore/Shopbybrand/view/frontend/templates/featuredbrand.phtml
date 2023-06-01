@@ -1,0 +1,224 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\Shopbybrand\Block\Featurebrand $block */
+
+$store = $block->storeManager()->getStore()->getId();
+    $featuredBrands = $block->getFeaturedBrands();
+    $showAsSlider = $block->showFeatureBrandAsSlider();
+    $logo_width = $block->getSystemConfig()->logoWidth();
+    $logo_height = $block->getSystemConfig()->logoHeight();
+    $brandWidth = $logo_width + 50;
+?>
+<style>
+    .ca-container {
+        padding: 0 45px;
+    }
+</style>
+<?php if (count($featuredBrands)):?>
+<?php if (!$showAsSlider) :?>
+<link rel="stylesheet" type="text/css" href="<?php echo $block->getSkinUrl('css/shopbybrand/templates/default/sliderstyle.css'); ?>" media="all" />
+
+<style type="text/css" media="screen">
+    .ca-container{
+        height: <?php echo $logo_height+55;?>px;
+    }
+    .ca-container .brand-logo {
+        height: <?php echo $logo_height;?>px;
+    }
+    .ca-item{
+        width:<?php echo $brandWidth;?>px;
+        height: <?php echo $logo_height+55;?>px;
+    }
+</style>
+
+<div class="featuredbrands col">
+
+    <div class="shopbybrand-title">
+        <h1><?php echo __('Featured Brands');?></h1>
+    </div>
+    <div id="ca-container" class="ca-container" style=" max-width: 100%; box-sizing: content-box; height: auto">
+        <div class="ca-wrapper">
+            <?php 
+                $i = 0;
+                $noImg = '';
+
+                if($featuredBrands->getSize()){
+                    $noImg =  $block->getViewFileUrl('Magestore_Shopbybrand::images/shopbybrand/no-image.png');
+                }
+                foreach ($featuredBrands as $featuredBrand) : 
+                    $i++;
+                    $path = $featuredBrand->getData('logo');
+                    $img = ($featuredBrand->getData('logo') == NULL) ? $noImg : $block->getImageHelper()
+                        ->getMediaUrlImage($featuredBrand->getData('logo'));
+            ?>
+            <div class="ca-item ca-item-<?php echo $i;?>">
+                <div class="ca-item-main">
+                    <a href="<?php echo $block->getBrandUrl($featuredBrand); ?>">
+                        <div class="brand-logo" style="margin-bottom: 5px; margin-top:5px;">
+                            <img style="width:<?php echo $logo_width;?>px; height:<?php echo $logo_height;?>px;" src="<?php echo $img; ?>" />
+                        </div>
+                        <div style="display: block;">
+                        <?php echo ucfirst($featuredBrand->getBrandName()); ?>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require(['jquery'], function($){
+            var brandWidth = <?php echo $brandWidth;?>;
+            var running = false;
+
+            var countFeaturedBrands = <?php echo count($featuredBrands);?>;
+            var featuredbrandsWidth = $('.featuredbrands').first().width()-50;
+            var numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+            numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+            $('#ca-container').css('width', numberofbrand*brandWidth + 5 +"px");
+            window.brandresize = function (){
+                featuredbrandsWidth = $('.featuredbrands').first().width()-50;
+                numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+                numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+                $('#ca-container').css('width', numberofbrand*brandWidth + 5 +"px");
+            }
+            window.onresize = brandresize;
+        });
+
+    </script>
+</div>
+<?php else:?>
+<link rel="stylesheet" type="text/css" href="<?php echo $block->getSkinUrl('css/shopbybrand/templates/default/sliderstyle.css'); ?>" media="all" />
+
+<style type="text/css" media="screen">
+    .ca-container{
+        height: <?php echo $logo_height+65;?>px;
+    }    
+    .ca-container .brand-logo {
+        height: <?php echo $logo_height;?>px;
+    }
+    .ca-item{
+        width:<?php echo $brandWidth;?>px;
+        height: <?php echo $logo_height+65;?>px;
+    }
+</style>
+
+<div class="featuredbrands col">
+
+    <div class="shopbybrand-title">
+
+        <h1><?php echo __('Featured Brands');?></h1>
+    </div>
+    <div id="ca-container" class="ca-container brand-contaner" style="overflow: hidden; max-width: 100%;  box-sizing: content-box;">
+        <div class="ca-nav ca-left"><span class="ca-nav-prev" onclick="brandNavPrev()">Previous</span></div>
+        <div class="ca-wrapper brand-wrapper" style="overflow: hidden;">            
+            <?php 
+                $i = 0;
+                $noImg = '';
+
+                if($featuredBrands->getSize()){
+                    $noImg =  $block->getViewFileUrl('Magestore_Shopbybrand::images/shopbybrand/no-image.png');
+                }
+                foreach ($featuredBrands as $featuredBrand) : 
+                    $i++;
+                    $path = $featuredBrand->getData('logo');
+                    $img = ($featuredBrand->getData('logo')==NULL) ? $noImg : $block->getImageHelper()
+                        ->getMediaUrlImage($featuredBrand->getData('logo'));
+
+            ?>
+            <div class="ca-item ca-item-<?php echo $i;?>">
+                <div class="ca-item-main slider">
+                    <a href="<?php echo $block->getBrandUrl($featuredBrand); ?>">
+                        <div class="brand-logo" style="margin-bottom: 5px; margin-top: 5px">
+                            <img style="width:<?php echo $logo_width;?>px; height:<?php echo $logo_height;?>px;" src="<?php echo $img; ?>" />
+                        </div>
+                        <div style="display: block;">
+                        <?php echo ucfirst($featuredBrand->getBrandName()); ?>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach;?>
+            </div>
+        <div class="ca-nav ca-right" id="ca-right"><span class="ca-nav-next" onclick="brandNavNext();">Next</span>
+        </div>
+    </div>
+        <div class="ca-nav ca-right-minwidth" id="ca-right-minwidth" style="display: none;"><span class="ca-nav-next" onclick="brandNavNext();">Next</span></div>
+        </div>
+        <script type="text/javascript">
+            require(['jquery'], function($) {
+                var countFeaturedBrands = <?php echo count($featuredBrands);?>;
+                var brandWidth = <?php echo $brandWidth;?>;
+                var running = false;
+                var featuredbrandsWidth = $('.featuredbrands').first().width() -50;
+                var numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+
+                numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+                $('#ca-container').css('width', numberofbrand*brandWidth +"px");
+                window.onresize = brandresize;
+                function brandresize(){
+                    featuredbrandsWidth = $('.featuredbrands').first().width()  -50;
+                    numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+                    numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+                    $('#ca-container').css('width', numberofbrand*brandWidth +"px");
+                }
+                $('#ca-container .ca-item').each(function (index) {
+                    $(this).css('position','absolute');
+                    $(this).css('left',brandWidth * index + 'px');
+                });
+                window.brandNavNext = function (e) {
+                    if (running)
+                        return;
+                    running = true;
+                    $('#ca-container .ca-wrapper').first().append($('#ca-container .ca-item').first().clone()[0].outerHTML);
+                    $('#ca-container .ca-item').each(function (index) {
+                        $(this).css('left',brandWidth * index + 'px')  ;
+                    });
+                    var i = 1;
+                    var interval = setInterval(function () {
+                        if (i <= 10) {
+                            $('.ca-item').each(function (index) {
+                                $(this).css('left',(index - 0.1 * i) * brandWidth + 'px');
+                            });
+                            i++;
+                        } else {
+                            $('#ca-container .ca-item').first().remove();
+                            clearInterval(interval);
+                            running = false;
+                        }
+                    }, 30);
+                }
+
+                window.brandNavPrev = function (e) {
+                    if (running)
+                        return;
+                    running = true;
+                    $('#ca-container .ca-wrapper').first().append($('#ca-container .ca-item').last().clone()[0].outerHTML);
+                    $('#ca-container .ca-item').each(function (index) {
+                        $(this).css('left',brandWidth * (index - 1) + 'px')  ;
+                    });
+                    var i = 1;
+                    var interval = setInterval(function () {
+                        if (i <= 10) {
+                            $('.ca-item').each(function (index) {
+                                $(this).css('left',(index + 0.1 * i - 1) * brandWidth + 'px') ;
+                            });
+                            i++;
+                        } else {
+                            $('#ca-container .ca-item').last().remove();
+                            clearInterval(interval);
+                            running = false;
+                        }
+                    }, 30);
+                }
+            });
+            setInterval( function(){
+                brandNavNext();
+            }, 2500);
+        </script>
+<?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,67 @@
+<?php
+$catalogHelper = $block->getData('catalogHelper');
+$hsn = '';
+?>
+<?php if ($_item = $block->getItem()):
+    $priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+    $_objectManager =   \Magento\Framework\App\ObjectManager::getInstance();
+    $product = $_objectManager->create('Magento\Catalog\Model\Product')->load($_item->getProductId());
+    $hsn = $product->getHsnCode();
+    ?>
+    <div id="order_item_<?= (int) $_item->getId() ?>_title"
+         class="product-title">
+        <?= $block->escapeHtml($_item->getName()) ?>
+    </div>
+    <div class="product-sku-block">
+        <span><?= $block->escapeHtml(__('SKU'))?>:</span> <?= implode('<br />', $this->helper('Magento\Catalog\Helper\Data')->splitSku($block->escapeHtml($block->getSku()))) ?>
+    </div>
+
+    <div class="product-sku-block">
+        <span><?= $block->escapeHtml(__('HSN Code'))?>:</span>
+        <?=  $block->escapeHtml(__($hsn))?>
+    </div>
+
+    <?php if ($block->getOrderOptions()): ?>
+        <dl class="item-options">
+            <?php foreach ($block->getOrderOptions() as $_option): ?>
+                <dt><?= $block->escapeHtml($_option['label']) ?>:</dt>
+                <dd>
+                    <?php if (isset($_option['custom_view']) && $_option['custom_view']): ?>
+                        <?= /* @noEscape */ $block->getCustomizedOptionValue($_option) ?>
+                    <?php else: ?>
+                        <?php $_option = $block->getFormattedOption($_option['value']); ?>
+                        <?php $dots = 'dots' . uniqid(); ?>
+                        <?php $id = 'id' . uniqid(); ?>
+                        <?= $block->escapeHtml($_option['value'], ['a', 'br']) ?>
+                        <?php if (isset($_option['remainder']) && $_option['remainder']): ?>
+                            <span id="<?= /* @noEscape */ $dots; ?>"> ...</span>
+                            <span id="<?= /* @noEscape */ $id; ?>">
+                                <?= $block->escapeHtml($_option['remainder'], ['a']) ?>
+                            </span>
+                            <?php $scriptString = <<<script
+                                require(['prototype'], function() {
+
+script;
+                            $scriptString .= "$('" . /* @noEscape */ $id . "').hide();" . PHP_EOL;
+                            $scriptString .= "$('" . /* @noEscape */ $id .
+                                "').up().observe('mouseover', function(){ $('" . /* @noEscape */ $id . "').show();});" .
+                                PHP_EOL;
+                            $scriptString .= "$('" . /* @noEscape */ $id .
+                                "').up().observe('mouseover', function(){ $('" . /* @noEscape */ $dots .
+                                "').hide();});" . PHP_EOL;
+                            $scriptString .= "$('" . /* @noEscape */ $id .
+                                "').up().observe('mouseout',  function(){ $('" . /* @noEscape */ $id .
+                                "').hide();});" . PHP_EOL;
+                            $scriptString .= "$('" . /* @noEscape */ $id .
+                                "').up().observe('mouseout',  function(){ $('" . /* @noEscape */ $dots .
+                                "').show();});" . PHP_EOL . "});" . PHP_EOL;
+                            ?>
+                            <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </dd>
+            <?php endforeach; ?>
+        </dl>
+    <?php endif; ?>
+    <?= $block->escapeHtml($_item->getDescription()) ?>
+<?php endif; ?>

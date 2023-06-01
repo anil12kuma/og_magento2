@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var $block \Meetanshi\IndianGst\Block\Config
+ */
+
+?>
+<script>
+    window.gstConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getCustomConfig()); ?>;
+
+    <?php
+    if($block->isEnabled() && $block->isGstOnBilling()) {
+    ?>
+    require(['jquery', 'jquery/ui', 'mage/url'], function ($, ui, url) {
+        jQuery(document).ready(function () {
+            $(document).on('click', '.action.action-update', function () {
+                updateBillingAddress();
+            });
+
+            function updateBillingAddress() {
+                try {
+                    $.ajax({
+                        url: url.build('indiangst/index/setBillingBuyerGst'),
+                        type: 'POST',
+                        dataType: 'json',
+                        showLoader: true,
+                        data: {
+                            buyer_gst_number: $('[name="custom_attributes[buyer_gst_number_billing]"]').val()
+                        },
+                        error: function (xhr, status, errorThrown) {
+                            console.log('Error happens. Try again.');
+                        }
+                    });
+                } catch (e) {
+                    console.log(e);
+                }}
+        });
+    });
+    <?php } ?>
+</script>

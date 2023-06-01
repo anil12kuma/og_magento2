@@ -1,0 +1,20 @@
+{
+    "name": "dolphin/cartedit",
+    "description": "User can easily edit cart without redirect to product page.",
+    "type": "magento2-module",
+    "version": "1.0.1",
+    "license": [
+        "https://shop.dolphinwebsolution.com/license-agreement"
+    ],
+    "require": {
+        "php": "7.0.2|7.0.4|~7.0.6|~7.1.0|~7.2.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Dolphin\\CartEdit\\": ""
+        }
+    }
+}

@@ -1,0 +1,6 @@
+<?php $_item = $block->getItem();
+?>
+<?= /* @noEscape */ $block->getOrder()->formatPrice($_item->getData('igst_amount')) ?>
+<?php
+echo '<br>Rate:' . round($_item->getIgstPercent() ?? 0, 2) . '%';
+?>

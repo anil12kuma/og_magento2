@@ -1,0 +1,153 @@
+<?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+?>
+<style>
+    div#mb-ajaxsuite-popup-wrapper.mb-ajaxsuite-popup-wrapper.popmsg {
+        max-width: 580px;
+        max-height: inherit;
+        height: 67% !important;
+    }
+
+    /*.mb-ajaxsuite-popup-wrapper .block-customer-login {
+    width: 100% !important;
+}
+.mb-ajaxsuite-popup-wrapper .block-customer-login:after {
+    background: #ffffff !important;
+}*/
+</style>
+<div class="mb-login-popup" >
+    <div class="mb-ajaxsuite-popup-border masum mb-ajaxlogin-popup mb-ajaxlogin-login">
+        <div class="block block-customer-login">
+            <div class="block-title">
+                <strong id="block-customer-login-heading" role="heading"
+                    aria-level="2"><?= $block->escapeHtml(__('Account Login')) ?></strong>
+            </div>
+            <form class="form  nb form-login" method="post" id="ajax-login-form" enctype="multipart/form-data"
+                autocomplete="off">
+                <?= $block->getBlockHtml('formkey'); ?>
+                <fieldset class="fieldset login" data-hasrequired="<?= __('* Required Fields') ?>">
+                    <div class="field email required">
+                        <label class="label" for="email"><span><?= __('Email') ?></span></label>
+                        <div class="control">
+                            <input name="login[username]" value="<?= $block->escapeHtml($block->getUsername()) ?>"
+                                <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off" <?php endif; ?>
+                                id="ajaxlogin-email" type="email" class="input-text" title="<?= __('Email') ?>"
+                                data-validate="{required:true, 'validate-email':true}">
+                        </div>
+                    </div>
+                    <div class="field password required">
+                        <label for="pass" class="label"><span><?= __('Password') ?></span></label>
+                        <div class="control">
+                            <input name="login[password]" type="password"
+                                <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off" <?php endif; ?>
+                                class="input-text" id="ajaxlogin-pass" title="<?= __('Password') ?>"
+                                data-validate="{required:true, 'validate-password':true}">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                            <script>
+                                require(['jquery', 'jquery/ui'], function ($) {
+                                    $(document).ready(function () {
+                                        $("body").on('click', '.toggle-password', function () {
+                                            $(this).toggleClass("fa-eye fa-eye-slash");
+                                            var input = $("#ajaxlogin-pass");
+                                            if (input.attr("type") === "password") {
+                                                input.attr("type", "text");
+                                            } else {
+                                                input.attr("type", "password");
+                                            }
+
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="actions">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary" name="login" id="login">
+                            <span><?= __('Login') ?></span>
+                        </button>
+                    </div>
+                </div>
+                <?php
+                    $blockObj= $block->getLayout()->createBlock('Mageplaza\SocialLogin\Block\Popup\Social');
+                    //echo $blockObj->getMyCustomMethod();
+                    $availableSocials = $blockObj->getAvailableSocials();
+                    $childBlock = $blockObj->getChildBlock('request.info');
+
+                ?>
+                <div class="block social-login-authentication-channel account-social-login">
+                    <div class="block-content">
+                        <?php foreach ($availableSocials as $key => $social): ?>
+                        <div class="actions-toolbar social-btn social-btn-actions-toolbar <?= $key ?>-login">
+                            <a class="btn btn-block btn-social btn-<?= $block->getBtnKey($key) ?>"
+                                data-mage-init='{"socialProvider": {"url": "<?= $social['login_url'] ?>", "label": "<?= __('Login By %1', $social['label']) ?>"}}'>
+                                <span class="fa fa-<?= $block->getBtnKey($key) ?>"></span>
+                                <?= __('Sign in with %1', $social['label']) ?>
+                            </a>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <style type="text/css">
+                    .request-popup {
+                        overflow-y: unset;
+                        max-width: 800px;
+                        left: 30%;
+                    }
+
+                    .request-popup .modal-header {
+                        padding: 0;
+                    }
+
+                    .request-popup .modal-header button.action-close {
+                        color: white;
+                        z-index: 100;
+                    }
+
+                    .request-popup .modal-content {
+                        padding: 0;
+                    }
+                </style>
+                <?php if ($block->isEnableSocialLogin() && !$block->isLoggedIn()): ?>
+                <div id="social-login">
+                    <div class="primary">
+                        <?php if ($this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/facebook_appid')) {
+                            ?>
+                        <button id="facebook-login-btn" type="button" class="action social-login-btn primary">
+                            <span><?= __('Facebook Login') ?></span>
+                        </button>
+                        <?php
+} ?>
+                        <?php if ($this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/googleplus_clientid')) {
+        ?>
+
+                        <?php
+    } ?>
+                        <?php if ($this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/twitter_consumer_key')
+                                && $this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/twitter_consumer_secret')
+                            ) {
+        ?>
+                        <button id="twitter-login-btn" type="button" class="action social-login-btn primary">
+                            <span><?= __('Twitter Login') ?></span>
+                        </button>
+                        <?php
+    } ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <div class="actions">
+                    <div class="secondary">
+                        <a class="action forgot" href="<?= $block->getForgotPasswordUrl() ?>">
+                            <span><?= __('Forgot Your Password?') ?></span>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © 2016 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magestore\Shopbybrand\Block\Bestseller $block */
+    $bestSeller = $block->getProductBestseller();
+?>
+<?php if(count($bestSeller)): ?>
+    <div class="bestsllerbrand">
+        <div class="shopbybrand-title">
+            <h1><?php echo __('BestSeller Products') ?></h1>
+        </div>
+        <div class="brand-bestseller-content">
+            <ol class="mini-products-list" id="block-related">
+                <?php foreach($bestSeller as $_item): ?>
+                <?php $_item = $block->getItem($_item->getProductId()) ?>
+                <?php
+                    $image = 'category_page_list';
+                    $_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+                    $productImage = $_imagehelper->init($_item, $image)->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(60)->getUrl();
+                ?>
+                <li class="item">
+                    <div class="product">
+                        <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $block->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php echo $productImage; ?>" alt="<?php echo $block->escapeHtml($_item->getName()) ?>" /></a>
+                        <div class="product-details">
+                            <p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $block->escapeHtml($_item->getName()) ?></a></p>
+                        </div>
+                    </div>
+                </li>
+                <?php endforeach ?>
+            </ol>
+        </div>
+    </div>
+<?php endif ?>
+<style>
+    .brand-bestseller-content #block-related .item .product a{
+        float: left;
+        max-width: 150px;
+    }
+    .brand-bestseller-content #block-related .item .product a.product-image {
+        border: 1px solid #ededed;
+    }
+</style>
+

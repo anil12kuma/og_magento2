@@ -1,0 +1,92 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var $block \Magento\Sales\Block\Order\Email\Items\DefaultItems */
+
+/** @var $_item \Magento\Sales\Model\Order\Item */
+$_item = $block->getItem();
+$_order = $_item->getOrder();
+ $product = $_item->getProduct();
+ $_store = $_order->getStore();
+ $_baseImageUrl = $_store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product';
+    if($childProd = current($_item->getChildrenItems())) {
+        $productImage = $_baseImageUrl . $childProd->getProduct()->getImage();
+    }
+    else {
+        $productImage = $_baseImageUrl . $product->getImage();
+    }
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of Object Manager
+$product = $objectManager->create('\Magento\Catalog\Api\ProductRepositoryInterface')->get($block->getSku($_item));
+$Brandname = $product->getResource()->getAttribute('brand')->getFrontend()->getValue($product);
+?>
+
+                <td class="product_section" style="padding: 0px 0px;">
+                    <table style="width:100%;">
+                      <tbody style="border-bottom: 1px solid #e3e3e3;">
+                        <tr>
+                          <td style="padding: 20px 0px; width: 40%;">
+                            <a href="#">
+                              <img src="<?= $productImage?>" alt="<?= __('Product Image');?>" width="200" height="200">
+                            </a>
+                          </td>
+                          <td style="padding: 20px 0px;font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 20px; letter-spacing: 0em;">
+                            <p style="margin-top:0; margin-bottom:5px;"><?php  echo $Brandname; ?></p>
+                            <p style="margin-top:0; margin-bottom:5px;"><?= $block->escapeHtml($block->getSku($_item)) ?></p>
+                            <p style="margin-top:0; margin-bottom:5px;"><a href="#" style="font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 20px; letter-spacing: 0em;"><?= $block->escapeHtml($_item->getName()) ?></a></p>
+                            
+                             <?php if ($block->getItemOptions()) : ?>
+                                 
+                                <?php foreach ($block->getItemOptions() as $option) : ?>
+                                    <p style="margin-top:0; margin-bottom:5px;"><?= $block->escapeHtml($option['label']) ?> - <?= /* @noEscape */  nl2br($block->escapeHtml($option['value'])) ?></p>
+                                <?php endforeach; ?>
+                                <p style="margin-top:0; margin-bottom:5px;">Qty - <?= (float) $_item->getQtyOrdered() ?></p>
+                                
+                                 
+                            <?php endif; ?>
+                            <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+                            <?php if ($addInfoBlock) :?>
+                                <?= $addInfoBlock->setItem($_item)->toHtml() ?>
+                            <?php endif; ?>
+                            <?= $block->escapeHtml($_item->getDescription()) ?>
+                          </td>
+                          <td style="padding: 20px 0px;">
+                            <p style="margin-top:0; margin-bottom:5px; font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 20px; letter-spacing: 0em;"><?= /* @noEscape */ $block->getItemPrice($_item) ?></p>
+                          </td>
+                          <!-- <td style="padding: 20px 0px;">
+                            <p>300.41</p>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                      
+                    </table>
+                     
+                </td>
+              </tr>
+                  
+ 
+<?php if ($_item->getGiftMessageId()
+    && $_giftMessage = $this->helper(\Magento\GiftMessage\Helper\Message::class)
+        ->getGiftMessage($_item->getGiftMessageId())
+) : ?>
+    <tr>
+    <td colspan="4" class="item-extra">
+        <table class="message-gift">
+            <tr>
+                <td>
+                    <h3><?= $block->escapeHtml(__('Gift Message')) ?></h3>
+                    <strong><?= $block->escapeHtml(__('From:')) ?></strong> <?= $block->escapeHtml($_giftMessage->getSender()) ?>
+                    <br /><strong><?= $block->escapeHtml(__('To:')) ?></strong> <?= $block->escapeHtml($_giftMessage->getRecipient()) ?>
+                    <br /><strong><?= $block->escapeHtml(__('Message:')) ?></strong>
+                    <br /><?= $block->escapeHtml($_giftMessage->getMessage()) ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<?php endif; ?>

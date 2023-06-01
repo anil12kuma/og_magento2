@@ -1,0 +1,112 @@
+<?php
+/** @var $block \Mega\Phonelogin\Block\Customer\Account\Address */
+?>
+<div id="otp-popup-modal" style="display:none">
+        <dl>
+            <dd>
+                <?php
+                echo __('A Verification Code Has been sent on entered mobile number. Please enter the verification code and click submit');
+                ?>
+            </dd>
+        </dl>
+        <div id="vcodeContainer">
+            <label for="name"><?php echo __('Verification Code')?></label>
+            <input type="text" id="verificationCode" name="verificationCode" />
+            <div id="vcodeErr" style="color:red"></div>
+            <input type="hidden" value="0" name = 'mphone_verified'>
+        </div>
+</div>
+<script>
+    require([
+        'jquery',
+        'intlTelInput',
+        'Magento_Ui/js/modal/modal'
+    ], function ($,intlTelInput,modal) {
+        $(document).ready(function (){
+            $('#telephone').intlTelInput(<?php echo $block->phoneConfig()?>)
+            $("#telephone").change(function () {
+                var popupModal = null;
+                if (popupModal === null) {
+                    let options = {
+                        type: 'popup',
+                        responsive: true,
+                        innerScroll: true,
+                        title: 'Verify Phone Number',
+                        modalClass: 'otp-checkout-modal',
+                        buttons: [{
+                            text: $.mage.__('verify'),
+                            class: 'button btn-success',
+                            click: function () {
+                                var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Phone/verifyUpdatePhone");?>';
+                                var verificationCode = $('#verificationCode').val();
+                                if (verificationCode == '') {
+                                    $('#verificationCode').addClass('mage-error');
+                                }
+                                $('#verificationCode').removeClass('mage-error');
+                                var phone = $("#telephone").val();
+                                var param = {phone: phone, code: verificationCode};
+                                $.ajax({
+                                    showLoader: true,
+                                    url: requestUrl,
+                                    data: param,
+                                    type: "POST",
+                                    dataType: 'json'
+                                }).done(function (data) {
+                                    if (data.status) {
+                                        alert(data.message);
+                                        $('.action-close').trigger('click');
+                                        //$('#form-validate').submit();
+                                    } else {
+                                        alert(data.message);
+                                    }
+                                });
+                            }
+                        }, {
+                            text: $.mage.__('Re-Send Code'),
+                            class: 'button btn-warning',
+                            click: function () {
+                                var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Checkout/Sendcode");?>';
+                                var phone = $("input[name='telephone']").val();
+                                var param = {phone: phone};
+                                $.ajax({
+                                    showLoader: true,
+                                    url: requestUrl,
+                                    data: param,
+                                    type: "POST",
+                                    dataType: 'json'
+                                }).done(function (data) {
+                                    alert(data.message);
+                                });
+
+                            }
+                        }]
+                    };
+                    popupModal = $('#otp-popup-modal');
+                    modal(options, popupModal);
+                }
+                var requestUrl = '<?php echo $block->getUrl("megaphonelogin/Checkout/Sendcode");?>';
+                var fullPhone = $("#telephone").val();
+                var param = {phone: fullPhone};
+                var phoneInput = this;
+                $.ajax({
+                    showLoader: true,
+                    url: requestUrl,
+                    data: param,
+                    type: "POST",
+                    dataType: 'json'
+                }).done(function (data) {
+                    $('.modal-footer').show();
+                    if (data.status) {
+                        $('#otp-popup-modal').show();
+                        popupModal.modal('openModal');
+                    } else {
+                        $('#otp-popup-modal').hide();
+                        if (data.message) {
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+        });
+    })
+</script>

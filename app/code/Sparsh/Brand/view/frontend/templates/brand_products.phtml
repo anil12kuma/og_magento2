@@ -1,0 +1,171 @@
+<?php
+$products = $block->getBrandProducts();
+$listProduct= $block->getLayout()->createBlock(\Magento\Catalog\Block\Product\ListProduct::class);
+
+$showWishlist = true;
+$showCompare = true;
+$showCart = true;
+$helper = $this->helper(\Magento\Catalog\Helper\Output::class);
+?>
+
+<?php if (empty($products)) : ?>
+    <div class="message info empty"><div><?= /* @noEscape */ $block->escapeHtml(('We can\'t find products matching the selection.')) ?></div></div>
+<?php else : ?>
+    <div class="sparsh-brand-toolbar">
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getPagerHtml(); ?>
+    </div>
+    <?php
+    if ($listProduct->getMode() == 'grid') {
+        $viewMode = 'grid';
+        $image = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $image = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+
+    $pos = $listProduct->getPositioned();
+    ?>
+    <?php if ($block->getTitle()) : ?>
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong>
+        </div>
+    <?php endif ?>
+    <div class="brand-product products wrapper <?= /* @noEscape */ $block->escapeHtml($viewMode) ?> products-<?= /* @noEscape */ $block->escapeHtml($viewMode) ?>">
+        <ol class="products list items product-items">
+            <?php $iterator = 1; ?>
+                <?php foreach ($products as $product) : ?>
+                    <?php $postParams = $block->getAddToCartPostParameters($product); ?>
+                    <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="item product product-item">' : '</li><li class="item product product-item">' ?>
+                        <div class="product-item-info" data-container="product-grid">
+                        <?php
+                        $productImage = $listProduct->getImage($product, $image);
+                        if ($pos != null) {
+                            $position = ' style="left:' . $productImage->getWidth() . 'px;'
+                                . 'top:' . $productImage->getHeight() . 'px;"';
+                        }
+                        ?>
+                        <?php // Product Image ?>
+                        <a href="<?= /* @noEscape */ $block->escapeUrl($product->getProductUrl()) ?>" class="product photo product-item-photo" tabindex="-1">
+                            <?= $productImage->toHtml() ?>
+                        </a>
+                        <div class="product details product-item-details">
+                            <strong class="product-item-name">
+                                <a title="<?= $block->escapeHtml($product->getName()) ?>"
+                                   href="<?= $block->escapeUrl($product->getProductUrl($product)) ?>"
+                                   class="product-item-link">
+                                        <?= $block->escapeHtml($product->getName()) ?>
+                                </a>
+                            </strong>
+                            <?php
+                            //pass $product object as argument...
+                            $ratingSummary = $block->getRatingSummary($product);
+                            $reviewCount = $block->getReviewsCount($product);
+                            ?>
+                            <?php
+                            $productNameStripped = $listProduct->stripTags($product->getName(), null, true);
+                            ?>
+                            <?php if ($ratingSummary) { ?>
+                                <div class="product-reviews-summary short">
+                                    <div class="rating-summary">
+                                        <div title="<?= (int) $ratingSummary; ?>%" class="rating-result">
+                                            <span style="width:<?= (int) $ratingSummary; ?>%"><span><?= (int) $ratingSummary; ?>%</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="reviews-actions">
+                                        <?= $block->escapeHtml('(' . $reviewCount . ')'); ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                            <?= /* @noEscape */ $block->getPrice($product) ?>
+
+                            <?php
+                            if ($product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+                                echo $block->getProductDetailsHtml($product);
+                            }
+                            ?>
+
+                            <?php if ($showWishlist || $showCompare || $showCart) : ?>
+                                <div class="product-item-inner">
+                                    <div class="product actions product-item-actions"<?= $block->escapeHtml(strpos($pos, $viewMode . '-actions') ? $position : '')?>>
+                                        <?php if ($showCart) : ?>
+                                            <div class="actions-primary"<?= $block->escapeHtml(strpos($pos, $viewMode . '-primary') ? $position : '')?>>
+                                                <?php if ($product->isSaleable()) : ?>
+                                                    <form data-role="tocart-form" action="<?= /* @noEscape */ $block->escapeUrl($postParams['action']); ?>" method="post">
+                                                        <input type="hidden" name="product" value="<?= /* @noEscape */ $block->escapeHtml($postParams['data']['product']); ?>">
+                                                        <input type="hidden" name="<?= /* @noEscape */ $block->escapeHtml($block->getCartParamNameURLEncoded()); ?>" value="<?= /* @noEscape */ $block->escapeHtml($postParams['data'][$block->getCartParamNameURLEncoded()]); ?>">
+                                                        <?= $block->getBlockHtml('formkey') ?>
+                                                        <button type="submit"
+                                                                title="<?= $block->escapeHtml(__('Add to Cart')); ?>"
+                                                                class="action tocart primary">
+                                                            <span><?= /* @noEscape */ __('Add to Cart') ?></span>
+                                                        </button>
+                                                    </form>
+                                                <?php else : ?>
+                                                    <?php if ($product->getIsSalable()) : ?>
+                                                        <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
+                                                    <?php else : ?>
+                                                        <div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif ?>
+                                        <?php if ($showWishlist || $showCompare) : ?>
+                                            <div data-role="add-to-links" class="actions-secondary"<?= $block->escapeHtml(strpos($pos, $viewMode . '-secondary') ? $position : '') ?>>
+                                                <?php if ($this->helper(\Magento\Wishlist\Helper\Data::class)->isAllow() && $showWishlist) : ?>
+                                                    <a href="#"
+                                                       accesskey=""data-post='<?= $block->escapeHtml($this->helper(\Magento\Wishlist\Helper\Data::class)->getAddParams($product)) ?>' class="action towishlist" data-action="add-to-wishlist">
+                                                        <span><?= $block->escapeHtml(__('Add to Wish List')) ?></a>
+                                                <?php endif; ?>
+                                                <?php if ($this->helper(\Magento\Catalog\Helper\Product\Compare::class) && $showCompare) : ?>
+                                                    <?php $compareHelper = $this->helper(\Magento\Catalog\Helper\Product\Compare::class); ?>
+                                                    <a href="#" class="action tocompare" data-post='<?= /* @noEscape */ $block->escapeHtml($compareHelper->getPostDataParams($product)) ?>' title="<?= $block->escapeHtml(__('Add to Compare')) ?>">
+                                                        <span><?= $block->escapeHtml(__('Add to Compare')) ?></span>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif ?>
+                                    </div>
+                                    <?php if ($showDescription) :?>
+                                        <div class="product description product-item-description">
+                                            <?= /* @noEscape */ $block->escapeHtml($helper->productAttribute($product, $product->getShortDescription(), 'short_description')) ?>
+                                            <a href="<?= /* @noEscape */ $block->escapeUrl($product->getProductUrl()) ?>" title="<?= /* @noEscape */ $block->escapeHtml($productNameStripped) ?>"
+                                               class="action more"><?= /* @noEscape */ $block->escapeHtml(__('Learn More')) ?></a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                <?php endforeach ?>
+        </ol>
+    </div>
+    <div class="order-products-toolbar toolbar bottom sparsh-brand-bottom-toolbar">
+        <?= $block->getPagerHtml();
+            echo $block->getToolbarHtml();
+        ?>
+    </div>
+    <script type="text/x-magento-init">
+    {
+        "[data-role=tocart-form], .form.map.checkout": {
+            "catalogAddToCart": {
+               "bindSubmit": true
+             }
+        }
+    }
+</script>
+<?php endif; ?>
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui'], function($){
+      jQuery(document).ready( function() {
+        var data = jQuery('.pager .toolbar-amount').html();
+        var data = data.replace("total"," ");
+        var data = data.replace(" to ", "-");
+        jQuery('.sparsh-brand-toolbar .toolbar .toolbar-amount').html(data);
+      });
+    });
+</script>

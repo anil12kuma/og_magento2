@@ -1,0 +1,10 @@
+<!--
+  ~ Copyright © 2016 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+  <container name="root" label="Root">
+    <block class="Magestore\Shopbybrand\Block\Adminhtml\Brand\Edit\Tab\SoldItems" name="shopbybrand.brand.edit.tab.soldItems"/>
+  </container>
+</layout>

@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="W3speedster" translate="label" class="W3speedster" sortOrder="100">
+            <label>W3speedster</label>
+        </tab>
+        
+        <section id="general_setting" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>General Settings</label>
+            <tab>W3speedster</tab>
+            <resource>W3speedster_Optimization::config_opt</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Setting</label>
+                <field id="license_key" translate="label" type="text" sortOrder="401" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>License Key</label>
+                </field>			
+                <field id="optimization_on" translate="label" type="select" sortOrder="401" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Turn ON optimization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+				 <field id="optimize_query_parameters" translate="label" type="select" sortOrder="402" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Optimization with Query parameters</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+				<field id="optimize_user_logged_in" translate="label" type="select" sortOrder="403" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Optimization when user logged in</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="cdn" translate="label" type="text" sortOrder="404" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CDN url</label>
+                </field>
+                <field id="exclude_cdn" translate="label" type="text" sortOrder="405" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude file extensions from cdn</label>
+                </field>				
+                <field id="lbc" translate="label" type="select" sortOrder="406" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable leverage browsing cache</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="gzip" translate="label" type="select" sortOrder="407" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Gzip compression</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="remquery" translate="label" type="select" sortOrder="408" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Remove query parmaters</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="lazy_load" translate="label" type="select" sortOrder="409" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Image lazy Load</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="lazy_load_iframe" translate="label" type="select" sortOrder="410" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Iframe lazy Load</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="lazy_load_video" translate="label" type="select" sortOrder="411" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Video lazy Load</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>		
+                <field id="lazy_load_px" translate="label" type="text" sortOrder="412" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Lazy load Images, Videos, Iframes pixels below the screen</label>
+                </field>
+                <field id="webp_jpg" translate="label" type="select" sortOrder="413" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Jpg Webp support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="webp_png" translate="label" type="select" sortOrder="414" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Png Webp support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>				
+                <field id="webp_quality" translate="label" type="text" sortOrder="415" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Webp image quality</label>
+                </field>
+                <field id="opt_jpg_png" translate="label" type="select" sortOrder="416" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Optimize jpg/png imagest</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="img_quality" translate="label" type="text" sortOrder="417" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Jpg png image quality</label>
+                </field>
+                <field id="opt_img_on_the_go" translate="label" type="select" sortOrder="418" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Optimize images on the go</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="opt_upload" translate="label" type="select" sortOrder="419" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Automatically optimize images on upload</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>				
+                <field id="exclude_lazy_load" translate="label comment" type="textarea" sortOrder="420" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude images from Lazy Loading</label>
+                </field>
+                <field id="exclude_pages_from_optimization" translate="label comment" type="textarea" sortOrder="421" showInDefault="1" showInWebsite="1" showInStore="1">					
+                    <label>Exclude Pages From Optimization</label>
+                </field>
+				<field id="preload_resources" translate="label comment" type="textarea" sortOrder="422" showInDefault="1" showInWebsite="1" showInStore="1">					
+                    <label>Preload resources(Image/javascript/css)</label>
+                </field>
+                <field id="cache_path" translate="label" type="text" sortOrder="423" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cache Path</label>
+                </field>
+            </group>			
+        </section>	
+        <section id="css_opt_settings" translate="label" type="text" sortOrder="450" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>CSS Optimization Settings</label>
+            <tab>W3speedster</tab>
+            <resource>W3speedster_Cssopt::config_cssopt</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>CSS Optimization</label>                
+                <field id="css" translate="label" type="select" sortOrder="451" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable css minification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="load_critical_css" translate="label" type="select" sortOrder="452" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load critical Css</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="exclude_css" translate="label comment" type="textarea" sortOrder="453" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude link tag css from minification</label>
+                </field>
+                <field id="force_lazyload_css" translate="label comment" type="textarea" sortOrder="454" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Force lazy load link tag css</label>
+                </field>
+                <field id="load_combined_css" translate="label" type="select" sortOrder="455" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load Secondary Css</label>
+                    <source_model>W3speedster\Optimization\Model\Config\Source\LoadMode</source_model>
+                </field>	
+                <field id="google_fonts" translate="label" type="select" sortOrder="457" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Combine Google fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="google_fonts_delay_load" translate="label" type="text" sortOrder="458" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delay google fonts by</label>
+                </field>
+                <field id="exclude_page_from_load_combined_css" translate="label comment" type="textarea" sortOrder="459" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude page from Load Combined Css</label>
+                </field>
+                <field id="custom_css" translate="label comment" type="textarea" sortOrder="460" showInDefault="1" showInWebsite="1" showInStore="1">					
+                    <label>Custom css to load with preload css</label>
+                </field>
+            </group>			
+        </section> 
+        <section id="javascript_opt_settings" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Javascript Optimization Settings</label>
+            <tab>W3speedster</tab>
+            <resource>W3speedster_Jsopt::config_jsopt</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Javascript Optimization</label>				
+                <field id="js" translate="label" type="select" sortOrder="540" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable js minification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="exclude_javascript" translate="label comment" type="textarea" sortOrder="541" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude Javascript tags from combine</label>
+                </field>
+                <field id="exclude_js_defer" translate="label" type="select" sortOrder="542" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Javascript Defer </label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="custom_javascript" translate="label comment" type="textarea" sortOrder="543" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preload Custom Javascript</label>
+                </field>
+                <field id="custom_javascript_file" translate="label" type="select" sortOrder="544" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load Custom Javascript as file </label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="custom_javascript_defer" translate="label" type="select" sortOrder="545" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Defer Custom Javascript</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="exclude_inner_javascript" translate="label comment" type="textarea" sortOrder="546" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude Inline Javascript from combine</label>
+                </field>
+                <field id="force_lazy_load_inner_javascript" translate="label comment" type="textarea" sortOrder="547" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Force lazy load Javascript</label>
+                </field>
+                <field id="load_combined_js" translate="label" type="select" sortOrder="548" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Load Combined Javascript</label>
+                    <source_model>W3speedster\Optimization\Model\Config\Source\LoadMode</source_model>
+                </field>
+                <field id="exclude_page_from_load_combined_js" translate="label comment" type="textarea" sortOrder="551" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude page from Javascript Optimization</label>
+                </field>
+                <field id="custom_js" translate="label comment" type="textarea" sortOrder="552" showInDefault="1" showInWebsite="1" showInStore="1">					
+                    <label>Custom Javascript</label>
+                </field>
+            </group>			
+        </section>
+        <section id="hooks_opt_settings" translate="label" type="text" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Hooks Optimization Settings</label>
+            <tab>W3speedster</tab>
+            <resource>W3speedster_Hkopt::config_hkopt</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Custom Hooks</label>			
+                <field id="before_optimization" translate="label comment" type="textarea" sortOrder="601" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster before start optimization</label>
+                </field>
+               <field id="after_optimization" translate="label comment" type="textarea" sortOrder="602" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster After optimization</label>
+                </field>
+                <field id="inner_js_customize" translate="label comment" type="textarea" sortOrder="603" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster Inner Js Customize</label>
+                </field>
+				<field id="inner_js_exclude" translate="label comment" type="textarea" sortOrder="603" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster Inner Js Exclude</label>
+                </field>				
+                <field id="internal_css_customize" translate="label comment" type="textarea" sortOrder="604" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster Internal Css Customize</label>
+                </field>
+                <field id="internal_css_minify" translate="label comment" type="textarea" sortOrder="606" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster Internal Css Minify</label>
+                </field>
+                <field id="no_critical_css" translate="label comment" type="textarea" sortOrder="607" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster No Critical Css</label>
+                </field>
+                <field id="customize_critical_css" translate="label comment" type="textarea" sortOrder="608" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster Customize Critical Css</label>
+                </field>
+                <field id="exclude_page_css" translate="label comment" type="textarea" sortOrder="609" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster exclude from page Css optimization</label>
+                </field>
+                <field id="exclude_page_js" translate="label comment" type="textarea" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster exclude page from Js optimization</label>
+                </field>
+				<field id="customize_add_settings" translate="label comment" type="textarea" sortOrder="611" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>W3speedster customize additional settings</label>
+                </field>
+            </group>			
+        </section>	
+        <section id="hooks_opt_webp" translate="label" type="text" sortOrder="700" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Webp Optimization Settings</label>
+            <tab>W3speedster</tab>
+            <resource>W3speedster_Webpopt::config_webpopt</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>All images</label>			
+                <field id="optimizeimage" type="hidden" sortOrder="701" showInDefault="1" showInWebsite="1" showInStore="1">                    
+                </field>
+                <field id="button_id" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start webp</label>
+                    <frontend_model>W3speedster\Optimization\Block\System\Config\Button</frontend_model>
+                </field>
+            </group>			
+        </section>	
+    </system>
+</config>

@@ -1,0 +1,63 @@
+<?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+?>
+<?php $_product = $block->getProduct();
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+?>
+<div class="mb-login-popup-title">
+    <strong><?= __('Just added to the cart'); ?></strong>
+</div>
+<div class="mb-ajaxsuite-popup-border ajaxcart-success-box">
+    <div class="success-content">
+        <?//= $block->getChildHtml('ajaxcart.message'); ?>
+
+        <div class="success-left-section">
+            <?php echo $block->getChildHtml('product_image'); ?>
+        </div>
+
+        <div class="success-right-section">
+            <strong class="product-brand-name">
+                <a class="product-item-link"
+                   href="<?php echo $_product->getProductUrl() ?>" target="_blank">
+                    <?php echo $_product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($_product); ?>
+                </a>
+            </strong>
+            <h2 class="product-name"><?php echo $_product->getName() ?></h2>
+
+            <p class="product-price">
+                <?= $priceHelper->currency($_product->getPrice(), true, false); ?>
+            </p>
+                
+            <?php echo $block->getChildHtml('product_option'); ?>
+        </div>
+
+        <?php //$block->getChildHtml('ajaxcart.product.related'); ?>
+    </div>
+
+    <?php echo $block->getChildHtml('ajaxcart.cartinfo'); ?>
+    
+    <div class="ajaxcart-buttons ajaxsuite-buttons">
+        <button type="button" id="ajaxcart_checkout" class="action focus primary"
+                title="<?= __('View Cart') ?>"
+                onClick="window.location = '<?= $block->getUrl('checkout/cart'); ?>'">
+            <span><?= __('Checkout') ?></span>
+        </button>
+
+        <button type="button" id="ajaxcart_cancel" class="action primary mb-ajaxsuite-close"
+                title="<?= __('Continue Shopping') ?>">
+            <span><?= __('Continue Shopping ') ?></span>
+            <?php
+            /*if ($popupTTL = $this->helper('Tigren\Ajaxsuite\Helper\Data')->getTTLAjaxSuite()) {*/
+                ?>
+                <!--(<span class="ajaxsuite-autoclose-countdown"><?php //$popupTTL; ?></span>)-->
+                <?php
+        /*    }*/
+            ?>
+        </button>
+        
+    </div>
+</div>

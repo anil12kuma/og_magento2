@@ -1,0 +1,153 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="phoneloginconfig" sortOrder="1">
+            <label>Mega Configuration</label>
+        </tab>
+        <section id="mega_phonelogin" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+            <tab>phoneloginconfig</tab>
+            <label>Login By Mobile Configuration</label>
+            <resource>Mega_Phonelogin::mega_phonelogin</resource>
+            <!-- General Configuration -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="activation" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="login_activation" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Login By Mobile Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends><field id="activation">1</field></depends>
+                </field>
+                <field id="password_activation" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Password Reset By Mobile Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends><field id="activation">1</field></depends>
+                </field>
+            </group>
+            <group id="api" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>API Details</label>
+                <field id="provider" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>SMS API Provider</label>
+                    <source_model>Mega\Phonelogin\Model\Api\Providers</source_model>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Request Url</label>
+                    <depends>
+                        <field id="provider">0</field>
+                    </depends>
+                </field>
+                <field id="key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Key</label>
+                    <depends>
+                        <field id="provider">0</field>
+                    </depends>
+                </field>
+                <field id="sender_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sender ID</label>
+                    <depends>
+                        <field id="provider">0</field>
+                    </depends>
+                </field>
+                <field id="account_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Account ID</label>
+                    <depends>
+                        <field id="provider">1</field>
+                    </depends>
+                </field>
+                <field id="token" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Token</label>
+                    <depends>
+                        <field id="provider">1</field>
+                    </depends>
+                </field>
+                <field id="twilio_number" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Twilio Number</label>
+                    <depends>
+                        <field id="provider">1</field>
+                    </depends>
+                </field>
+
+
+                <field id="routee_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Application Id</label>
+                    <depends>
+                        <field id="provider">2</field>
+                    </depends>
+                </field>
+                <field id="routee_secret" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Application Secret Key</label>
+                    <depends>
+                        <field id="provider">2</field>
+                    </depends>
+                </field>
+                <field id="routee_sender_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Routee Sender ID</label>
+                    <depends>
+                        <field id="provider">2</field>
+                    </depends>
+                </field>
+                <field id="msg91_url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>MSG91 Request URL</label>
+                    <depends>
+                        <field id="provider">3</field>
+                    </depends>
+                </field>
+                <field id="msg91_sender_id" translate="label comment" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>MSG91 Sender ID</label>
+                    <depends>
+                        <field id="provider">3</field>
+                    </depends>
+                </field>
+                <field id="msg91_api_key" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>MSG91 API Key</label>
+                    <depends>
+                        <field id="provider">3</field>
+                    </depends>
+                </field>
+                <field id="whistle_username" translate="label comment" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Username</label>
+                    <depends>
+                        <field id="provider">6</field>
+                    </depends>
+                </field>
+                <field id="whistle_password" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Password</label>
+                    <depends>
+                        <field id="provider">6</field>
+                    </depends>
+                </field>
+                 <field id="whistle_senderid" translate="label comment" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sender Id</label>
+                    <depends>
+                        <field id="provider">6</field>
+                    </depends>
+                </field>
+
+            </group>
+            <group id="templates" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>SMS Templates</label>
+                <field id="verification" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Template For Verification Code</label>
+                    <comment>SMS template for sending verification code. Use {{verification_code}} for verification code</comment>
+                </field>
+                <field id="reset_password" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Template For Reset Password</label>
+                    <comment>SMS template for sending password reset code.</comment>
+                </field>
+            </group>
+            <group id="checkout_config" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Checkout Configuration</label>
+                <field id="enabled_checkout" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable On Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

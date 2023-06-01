@@ -1,0 +1,111 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /** @var $block \Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer */ ?>
+<?php $_item = $block->getItem();
+$_objectManager =   \Magento\Framework\App\ObjectManager::getInstance();
+$priceHelper = $_objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+$block->setPriceDataObject($_item);
+
+$cgstamount = (($_item->getOrderItem()->getCgstAmount() / $_item->getOrderItem()->getQtyOrdered()) * $_item->getQty());
+$sgstamount = (($_item->getOrderItem()->getSgstAmount() / $_item->getOrderItem()->getQtyOrdered()) * $_item->getQty());
+$igstamount = (($_item->getOrderItem()->getIgstAmount() / $_item->getOrderItem()->getQtyOrdered()) * $_item->getQty());
+$utgstamount = (($_item->getOrderItem()->getUtgstAmount() / $_item->getOrderItem()->getQtyOrdered()) * $_item->getQty());
+
+if ($_item->getOrderItem()->getGstExclusive()) {
+    $taxableAmount = $_item->getRowTotal() - round($_item->getDiscountAmount() ?? 0,2);
+} else {
+    $taxableAmount =
+        round($_item->getRowTotal() ?? 0,2) -
+        round($_item->getDiscountAmount() ?? 0,2) -
+        round($cgstamount? $cgstamount :0 ,2) -
+        round($sgstamount ? $sgstamount : 0,2) -
+        round($igstamount ? $igstamount: 0,2) -
+        round($utgstamount ? $utgstamount: 0,2);
+}
+
+$taxableAmount = $priceHelper->currency($taxableAmount, true, false);
+?>
+
+    <td class="col-product"><?php echo $block->getColumnHtml($_item, 'name') ?></td>
+    <td class="col-price">
+        <?php echo $block->getColumnHtml($_item, 'price'); ?>
+    </td>
+    <td class="col-qty"><?php echo $block->getColumnHtml($_item, 'qty') ?></td>
+    <td class="col-qty-invoice">
+    <?php if ($block->canEditQty()) : ?>
+        <input type="text" class="input-text admin__control-text qty-input"
+               name="invoice[items][<?php /* @escapeNotVerified */ echo $_item->getOrderItemId() ?>]"
+               value="<?php /* @escapeNotVerified */ echo $_item->getQty()*1 ?>"/>
+    <?php else : ?>
+        <?php /* @escapeNotVerified */ echo $_item->getQty()*1 ?>
+    <?php endif; ?>
+    </td>
+    <td class="col-subtotal">
+        <?php echo $block->getColumnHtml($_item, 'subtotal'); ?>
+    </td>
+    <td class="col-tax"><?php /* @escapeNotVerified */ echo $taxableAmount ?></td>
+    <td class="col-discount"><?php /* @escapeNotVerified */ echo $block->displayPriceAttribute('discount_amount') ?></td>
+    <td class="col-price" data-th="<?php echo $block->escapeHtml(__('CGST')); ?>">
+        <table class="cgst">
+            <tbody style="background:none;text-align:center">
+            <tr>
+                <td style="text-align: center;width: 50px;"><?php echo round($_item->getOrderItem()->getCgstPercent() ? $_item->getOrderItem()->getCgstPercent() : 0,2);?></span></td>
+                <td style="text-align: center;width: 50px;">
+                    <?php
+                    $formattedPrice = $priceHelper->currency($cgstamount , true, false);
+                    echo $formattedPrice;
+                    ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+<?php
+$sgstUtgstPercent=0;
+$sgstUtgstAmount=0;
+if($_item->getOrderItem()->getSgstPercent()>0){
+    $sgstUtgstPercent=$_item->getOrderItem()->getSgstPercent();
+    $sgstUtgstAmount=$sgstamount;
+}
+else{
+    $sgstUtgstPercent=$_item->getOrderItem()->getUtgstPercent();
+    $sgstUtgstAmount=$utgstamount;
+}
+?>
+    <td class="col-price" data-th="<?php echo $block->escapeHtml(__('SGST')); ?>">
+        <table class="sgst">
+            <tbody style="background:none;text-align:center">
+            <tr>
+                <td style="text-align: center;width: 50px;"><?php echo round($sgstUtgstPercent ?? 0,2);?></span></td>
+                <td style="text-align: center;width: 50px;">
+                    <?php
+                    $formattedPrice = $priceHelper->currency($sgstUtgstAmount ?? 0, true, false);
+                    echo $formattedPrice;
+                    ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td class="col-price" data-th="<?php echo $block->escapeHtml(__('IGST')); ?>">
+        <table class="Sgst">
+            <tbody style="background:none;text-align:center">
+            <tr>
+                <td style="text-align: center;width: 50px;"><?php echo round($_item->getOrderItem()->getIgstPercent() ? $_item->getOrderItem()->getIgstPercent() : 0,2);?></span></td>
+                <td style="text-align: center;width: 50px;">
+                    <?php
+                    $formattedPrice = $priceHelper->currency($igstamount, true, false);
+                    echo $formattedPrice;
+                    ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td class="col-total last">
+        <?php echo $block->getColumnHtml($_item, 'total'); ?>
+    </td>

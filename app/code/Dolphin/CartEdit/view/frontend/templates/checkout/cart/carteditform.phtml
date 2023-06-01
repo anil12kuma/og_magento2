@@ -1,0 +1,17 @@
+<?php
+$data_helper = $block->getCartEditDataHelper();
+$edit_cart_url = $data_helper->getCartEditAjaxUrl();
+?>
+<div id="edit-cart-main" data-ajax="<?= $block->escapeUrl($edit_cart_url) ?>"></div>
+<script type="text/javascript">
+//    require([
+//        'Magento_Customer/js/customer-data'
+//    ], function (customerData) {
+//        var sections = ['cart'];
+//        //customerData.invalidate(sections);
+//        //customerData.reload(sections, true);
+//        var sections = ['cart'];
+//        customerData.invalidate(sections);
+//        customerData.reload(sections, true);
+//    });
+</script>

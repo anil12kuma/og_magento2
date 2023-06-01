@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @Author      Magetop Team
+ * @package     Review Management
+ * @copyright   Copyright (c) 2019 MAGETOP (http://www.magetop.com)
+ * @terms       http://www.magetop.com/terms
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ **/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Magento\Review\Block\Adminhtml\Edit\Form" type="Magetop\ReviewManagement\Block\Adminhtml\ReviewManagement\Edit"/>
+    <preference for="Magento\Review\Controller\Adminhtml\Product\Save" type="Magetop\ReviewManagement\Controller\Adminhtml\SaveReview" />
+</config>

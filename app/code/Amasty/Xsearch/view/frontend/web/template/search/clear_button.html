@@ -1,0 +1,10 @@
+<button class="amsearch-button -close -clear -icon"
+        data-bind="
+            event: {
+                click: inputValue.bind(this, '')
+            },
+            attr: {
+                title: $t('Clear Field')
+            },
+            visible: inputValue && inputValue().length">
+</button>

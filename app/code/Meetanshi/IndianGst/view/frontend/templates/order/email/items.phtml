@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_order = $block->getOrder() ?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of Object Manager
+    $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+   
+
+      $formattedPrice = $priceHelper->currency($_order->getGrandTotal(), true, false);
+      $payment = $_order->getPayment();
+$method = $payment->getMethodInstance();
+$methodTitle = $method->getTitle();
+
+$TimezoneInterface = $objectManager->create('\Magento\Framework\Stdlib\DateTime\TimezoneInterface'); 
+
+$dateTimeZone = $TimezoneInterface->date(new \DateTime($_order->getCreatedAt()))->format("D, M y");
+ 
+?>
+<tr>
+                        <td style=" background: #f1f0f0; padding: 16px 50px 16px 16px;">
+                          <table style="width: 100%;">
+                            <tbody><tr>
+                              <td style="text-align: left;">
+                                <p style="margin:5px 0 0 0; font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 16px;">Order Summary </p>
+                                <p style="margin:5px 0 0 0; font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 16px;">Order ID: <?php   echo $_order->getIncrementId();?></p>
+                                <p style="margin:5px 0 0 0; margin-bottom: 0px;font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 16px;">Order date : <?php echo $dateTimeZone; ?></p>
+                              </td>
+                              <td style="text-align: right;">
+                                <p style="margin:5px 0 0 0; font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 16px;">&nbsp;</p>
+                                <p style="margin:5px 0 0 0; font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 16px;">Order Total:     <?php echo $formattedPrice ; ?></p>
+                                <p style="margin:5px 0 0 0; margin-bottom: 0px;font-weight: 400; font-style: normal; color: rgb(96, 96, 96); text-decoration: none;font-size: 13.3333px;line-height: 16px;">Payment Method: <?php echo $methodTitle;?></p>
+                              </td>
+                            </tr>
+                          </tbody></table>
+                        </td>
+                      </tr>
+<?php if ($_order): ?>
+    <?php $_items = $_order->getAllItems(); ?>
+    <table style="width: 100%; text-align: left;">
+        <?php foreach ($_items as $_item): ?>
+            <?php
+                if ($_item->getParentItem()) {
+                    continue;
+                }
+            ?>
+            <tbody>
+                <?= $block->getItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+    <table style="width: 100% ; background: #335863 ; margin: 0 0 10px ; color: #ffffff ; text-align: left; font-weight: 400 ; font-style: normal ; text-decoration: none ; font-size: 13.3333px ; line-height: 18px;padding: 10px;">
+            <?= $block->getChildHtml('order_totals') ?>
+    </table>
+
+    <?php if ($this->helper('Magento\GiftMessage\Helper\Message')->isMessagesAllowed('order', $_order, $_order->getStore()) && $_order->getGiftMessageId()): ?>
+        <?php $_giftMessage = $this->helper('Magento\GiftMessage\Helper\Message')->getGiftMessage($_order->getGiftMessageId()); ?>
+        <?php if ($_giftMessage): ?>
+            <br />
+            <table class="message-gift" style="width: 100%;">
+                <tr>
+                    <td>
+                        <h3><?= /* @escapeNotVerified */  __('Gift Message for this Order') ?></h3>
+                        <strong><?= /* @escapeNotVerified */  __('From:') ?></strong> <?= $block->escapeHtml($_giftMessage->getSender()) ?>
+                        <br /><strong><?= /* @escapeNotVerified */  __('To:') ?></strong> <?= $block->escapeHtml($_giftMessage->getRecipient()) ?>
+                        <br /><strong><?= /* @escapeNotVerified */  __('Message:') ?></strong>
+                        <br /><?= $block->escapeHtml($_giftMessage->getMessage()) ?>
+                    </td>
+                </tr>
+            </table>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

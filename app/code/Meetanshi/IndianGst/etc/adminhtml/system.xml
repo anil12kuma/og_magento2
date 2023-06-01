@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="meetanshi" translate="label" class="meetanshi" sortOrder="100">
+            <label></label>
+        </tab>
+        <section id="indiangst" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>GST India</label>
+            <tab>meetanshi</tab>
+            <resource>Meetanshi_IndianGst::gst_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>GST India</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="buyer_gst" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Allow Buyers Adding GSTIN</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="gstin" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>GSTIN</label>
+                    <comment>
+                        <![CDATA[Enter Your Goods and Service Tax Identification Number to Show in Various Order Documents.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="cin" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>CIN</label>
+                    <comment>
+                        <![CDATA[Enter Your Challan Identification Number to Show in Various Order Documents.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="pan" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Pan Number</label>
+                    <comment><![CDATA[Enter Your Pan Number to Show in Various Order Documents.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="gst_rate" translate="label comment" sortOrder="6" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>GST Rate (in Percentage)</label>
+                    <comment><![CDATA[Set GST Rate Under Which Your Products Fall.]]></comment>
+                    <source_model>Meetanshi\IndianGst\Model\Config\Source\Options</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="min_amount" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Minimum Product Price Amount to Apply Above GST Rate</label>
+                    <comment><![CDATA[Enter Minimum Product Price to Apply Above GST Rate.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="min_gst_rate" translate="label comment" sortOrder="8" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>GST Rate To Apply Products Below Minimum Set Price</label>
+                    <source_model>Meetanshi\IndianGst\Model\Config\Source\Options</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="origin" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Bussiness Origin State</label>
+                    <source_model>Meetanshi\IndianGst\Model\Config\Source\States</source_model>
+                    <validate>validate-no-empty</validate>
+                    <comment>
+                        <![CDATA[Enter State in Which Your Business Resides.<br>If origin state and shipping state are the same, GST rate will be calculated and charged equally into CGST and SGST. If they are different, IGST will be charged on product purchases. If the origin Union territory and shipping union territory is the same, CGST+UTGST will be charged.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="taxclass" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Product Prices In Catalog</label>
+                    <source_model>Meetanshi\IndianGst\Model\Config\Source\TaxClass</source_model>
+                    <comment>
+                        <![CDATA[ Inclusive of GST: GST is already included in product prices. GST will only be bifurcated and not added to the subtotal.</br>
+Exclusive of GST: Product prices do not include GST and thus it will be bifurcated and added separately in order subtotal.]]>
+                    </comment>
+
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="signature" translate="label comment" type="image" sortOrder="12" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Upload Signature Image to Show in PDF</label>
+                    <backend_model>Meetanshi\IndianGst\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">indiangst</base_url>
+                    <comment><![CDATA[ Allowed file types: jpg, jpeg, gif, png.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="signaturetext" translate="label" sortOrder="13" type="text" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Signature Line to Show in Invoice PDF</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="shipping" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Shipping GST Settings</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>GST on Shipping Charges</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="taxclass" translate="label comment" type="select" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Calculate Shipping Prices</label>
+                    <source_model>Meetanshi\IndianGst\Model\Config\Source\TaxClass</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <depends>
+                    <field id="indiangst/general/enable">1</field>
+                </depends>
+            </group>
+        </section>
+    </system>
+</config>

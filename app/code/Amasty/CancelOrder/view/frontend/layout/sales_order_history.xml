@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sales.order.history.extra.container">
+            <block class="Amasty\CancelOrder\Block\Button" name="amasty.custom.order.button" template="Amasty_CancelOrder::customer/grid/button.phtml">
+                <block class="Amasty\CancelOrder\Block\Popup" after="-" name="amasty.custom.order.popup" template="Amasty_CancelOrder::customer/popup.phtml" />
+            </block>
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" after="-" name="amasty.custom.order.js" template="Amasty_CancelOrder::customer/js.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:helloworld:Magento_Widget:etc/widget.xsd">
+    <widget class="Rb\BrandSlider\Block\Widget\Slider" id="Rb_BrandSlider">
+        <label>Brand Slider Widget</label>
+        <description>Brand Slider Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true" sort_order="0">
+                <label translate="true">Title</label>
+                <value>Brand Slider</value>
+            </parameter>
+            <parameter name="description" xsi:type="text" visible="true" sort_order="1">
+                <label translate="true">Description</label>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget class="Rb\BrandSlider\Block\Widget\Trending" id="Rb_TrendingSlider">
+        <label>Trending Slider Widget</label>
+        <description>Trending Slider Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true" sort_order="0">
+                <label translate="true">Title</label>
+                <value>Trending Slider</value>
+            </parameter>
+            <parameter name="description" xsi:type="text" visible="true" sort_order="1">
+                <label translate="true">Description</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

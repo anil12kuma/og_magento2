@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<!--<event name="sales_order_save_after">
+		<observer name="order_after_notification" instance="Mguru\Notification\Observer\OrderStatusChange" />
+	</event>-->
+	
+	 <event name="checkout_onepage_controller_success_action">
+		<observer name="order_success_message" instance="Mguru\Notification\Observer\OrderStatusChange" />
+	</event>
+
+	<event name="customer_register_success">
+		<observer name="customer_signup_success" instance="Mguru\Notification\Observer\SignupSuccess" />
+	</event>
+
+	<event name="checkout_submit_all_after">
+        <observer name="cod_auto_invoice" instance="Mguru\Notification\Observer\OrderObserver" />
+    </event>
+</config>

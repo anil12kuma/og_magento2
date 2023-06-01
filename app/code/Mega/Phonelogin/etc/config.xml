@@ -1,0 +1,32 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <mega_phonelogin>
+            <general>
+                <activation>1</activation>
+                <login_activation>1</login_activation>
+                <password_activation>1</password_activation>
+                <guest_access>1</guest_access>
+                <notify_activation>1</notify_activation>
+            </general>
+            <api>
+                <provider>6</provider>
+                <whistle_username>WildCoun</whistle_username>
+                <whistle_password>67ce7b5bf4XX</whistle_password>
+                <whistle_senderid>OGOATS</whistle_senderid>
+                <url>https://instantalerts.co/api/web/send/</url>
+                <key>69iq54a4m4s4ib0agg135o3y0yfbkb</key>
+                <sender_id>SEDEMO</sender_id>
+                <available_credits>0</available_credits>
+                <routee_url>https://connect.routee.net/sms</routee_url>
+                <innourl>www.codeinnovers.com/mtheme/generate/key</innourl>
+                <msg91_url>https://control.msg91.com/api/sendhttp.php</msg91_url>
+
+            </api>
+            <templates>
+                <verification>Dear User , Your verification code is {{verification_code}}</verification>
+                <notify>Dear {{name}}, Your Mobile number has been verified. Thank You</notify>
+                <reset_password>Dear User ! Your password reset link is {{password_reset_link}}. Click this link to reset password.</reset_password>
+            </templates>
+        </mega_phonelogin>
+    </default>
+</config>

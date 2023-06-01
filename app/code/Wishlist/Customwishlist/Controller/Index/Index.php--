@@ -1,0 +1,44 @@
+<?php
+namespace Wishlist\Customwishlist\Controller\Index;
+
+class Index extends \Magento\Framework\App\Action\Action
+{
+    protected $_pageFactory;
+    protected $_wishlistFactory;
+    protected $_wishlistResource;
+
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\View\Result\PageFactory $pageFactory,
+        \Magento\Wishlist\Model\WishlistFactory $wishlistFactory,
+        \Magento\Wishlist\Model\ResourceModel\Wishlist $wishlistResource
+    )
+    {
+        $this->_pageFactory = $pageFactory;
+        $this->_wishlistFactory  = $wishlistFactory;
+        $this->_wishlistResource = $wishlistResource;
+        return parent::__construct($context);
+    }
+
+    public function execute()
+    {
+        $product_id = $this->getRequest()->getParam('productid');
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $product = $objectManager->create('Magento\Catalog\Model\Product')->load($product_id);
+        $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+        $customerId = $customerSession->getCustomer()->getId();
+        $this->saveProductToWishlist($product, $customerId);
+        $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+        return $resultRedirect;
+    }
+
+    public function saveProductToWishlist($product, $customerId)
+    {    
+       //load wishlist by customer id
+       $wishlist = $this->_wishlistFactory->create()->loadByCustomerId($customerId, true);
+       //add product for wishlist
+       $wishlist->addNewItem($product);
+       //save wishlist
+       $this->_wishlistResource->save($wishlist);
+    }
+}

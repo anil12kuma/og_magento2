@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      label="Email Creditmemo Items List" design_abstraction="custom">
+    <body>
+        <referenceBlock name="sales.email.order.invoice.renderers">
+            <block class="Magento\Sales\Block\Order\Email\Items\DefaultItems" as="defaultItem"
+                   template="Meetanshi_IndianGst::order/email/items/invoice/default.phtml"
+                   name="sales_email_order_invoice_renderers"/>
+            <block class="Meetanshi\IndianGst\Model\Bundle\Block\Sales\Invoice\Items\Renderer"
+                   name="sales.email.order.invoice.renderers.bundle" as="bundle"
+                   template="Meetanshi_IndianGst::order/email/invoice/bundle/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Email\Items\DefaultItems"
+                   name="sales.email.order.invoice.renderers.downloadable" as="downloadable"
+                   template="Meetanshi_IndianGst::order/email/items/invoice/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Email\Items\DefaultItems"
+                   name="sales.email.order.invoice.renderers.grouped" as="grouped"
+                   template="Meetanshi_IndianGst::order/email/items/invoice/default.phtml"/>
+            <block class="Magento\Sales\Block\Order\Email\Items\DefaultItems"
+                   name="sales.email.order.invoice.renderers.virtual" as="virtual"
+                   template="Meetanshi_IndianGst::order/email/items/invoice/default.phtml"/>
+            <action method="setChild">
+                <argument name="alias" xsi:type="string">default</argument>
+                <argument name="block" xsi:type="string">sales_email_order_invoice_renderers</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist $block 
+
+$helper = $this->helper('Dev\Auth\Helper\CartData');
+//var_dump($helper->checkPrductIsInStock($this->getItem()->getId())->getQty());
+//echo $helper->checkPrductIsInStock($this->getItem()->getId());
+?>
+<?php if(empty($helper->checkPrductIsInStock($this->getItem()->getId())->getQty())) { ?>
+<span class="itemoutstock"><?= $block->escapeHtml(__('Item out of stock')) ?></span>
+<?php if ($block->isAllowInCart() && $block->isProductVisibleInSiteVisibility()) : ?>
+    <a href="#"
+       data-post='<?=  $block->getMoveFromCartParams() ?>'
+       class="use-ajax action towishlist action-towishlist">
+        <span><?= $block->escapeHtml(__('Move to Wishlist')) ?></span>
+    </a>
+<?php endif ?>
+<?php } */?>
+

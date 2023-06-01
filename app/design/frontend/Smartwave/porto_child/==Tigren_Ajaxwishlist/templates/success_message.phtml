@@ -1,0 +1,105 @@
+<?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+//$blockObj = $block->getLayout()->createBlock('Tigren\Ajaxwishlist\Block\Main');
+//echo $blockObj->getMyCustomMethod();
+$_product = $block->getProduct();
+$buttonTitle = __('Add to Cart');
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$reviewFactory = $objectManager->create('Magento\Review\Model\Review');
+
+$storeId = 1;
+$reviewFactory->getEntitySummary($_product, $storeId);
+
+$ratingSummary = $_product->getRatingSummary()->getRatingSummary();
+?>
+
+<div class="ajaxwishlist-msg">
+   
+    <div class="mb-ajaxsuite-popup-border ajaxwishlist-success-box">
+        <?= $block->getChildHtml('ajaxwishlist.message'); ?>
+        <div class="row">
+        
+            <?php //$block->getChildHtml('product_option'); ?>
+            <div class="col"><?= $block->getChildHtml('product_image'); ?></div>
+
+            <div class="col">
+                <strong class="product-brand-name">
+                    <a class="product-item-link"
+                       href="<?php echo $_product->getProductUrl() ?>" target="_blank">
+                        <?php echo $_product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($_product); ?>
+                    </a>
+                </strong>
+                <h2 class="product-name"><?= $_product->getName(); ?></h2>
+
+                <?php if($ratingSummary){ ?>
+                    <div class="product-reviews-summary short">
+                        <div class="rating-summary">
+                            <div title="<?php echo (int)$ratingSummary; ?>%" class="rating-result">
+                                <span style="width:<?php echo (int)$ratingSummary; ?>%"><span><?php echo (int)$ratingSummary; ?>%</span></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+
+                <!-- <p class="product-price">
+                    <?//= $priceHelper->currency($_product->getPrice(), true, false); ?>
+                </p> -->
+
+                <!-- <div class="actions">
+                    <button type="button"
+                            title="<?php echo $buttonTitle ?>"
+                            class="action primary tocart"
+                            id="wishlist-addtocart-button">
+                        <span><?php echo $buttonTitle ?></span>
+                    </button>
+
+                    <button type="button"
+                            title="<?php echo __('Buy now') ?>"
+                            class="action primary buynow"
+                            id="product-buynow-button">
+                        <span><?php echo __('Buy now') ?></span>
+                    </button>
+                </div> -->
+                <!-- <p class="product-sdesc"><?//= $_product->getShortDescription(); ?></p> -->
+            </div>
+        
+        </div>
+        <div class="ajaxwishlist-buttons">
+            <button type="button" id="ajaxwishlist" class="action focus primary"
+                    title="<?= __('View Wishlist') ?>"
+                    onClick="window.location = '<?= $block->getUrl('wishlist'); ?>'">
+                <span><?= __('Your Wishlist') ?></span>
+            </button>
+
+            <button type="button" id="ajaxwishlist_btn_close_popup" class="action primary mb-ajaxsuite-close"
+                    title="<?= __('Continue Shopping') ?>">
+                <span><?= __('Continue Shopping ') ?></span>
+                <?php
+                /*if ($popupTTL = $this->helper('Tigren\Ajaxsuite\Helper\Data')->getTTLAjaxSuite()) {*/
+                    ?>
+                   <!--(<span class="ajaxsuite-autoclose-countdown"><?php //$popupTTL ?></span>)-->
+                    <?php
+                //}
+                ?>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+require(['jquery'],function($){
+    $('#product-buynow-button').on('click',function(){
+        $('.buynow-button button.action.buy-now').trigger('click');
+    });
+
+    $('#wishlist-addtocart-button').on('click',function(){
+        $('.box-tocart button#product-addtocart-button').trigger('click');
+    });
+});
+</script>

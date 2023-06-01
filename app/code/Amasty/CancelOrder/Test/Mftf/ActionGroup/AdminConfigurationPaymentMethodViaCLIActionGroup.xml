@@ -1,0 +1,21 @@
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminConfigurationBrainTreeViaCLIActionGroup">
+        <!--Configure general tab -->
+        <arguments>
+            <argument name="environment" type="string" defaultValue="sandbox"/>
+            <argument name="paymentTitle" type="string" defaultValue="Credit Card (Braintree)"/>
+            <argument name="isActive" type="string" defaultValue="1"/>
+            <argument name="paymentAction" type="string"/>
+        </arguments>
+        <magentoCLI command="config:set payment/braintree/title '{{paymentTitle}}'"
+                    stepKey="setBrainTreeTitle"/>
+        <magentoCLI command="config:set payment/braintree/environment {{environment}}"
+                    stepKey="setBrainTreeSandbox"/>
+        <magentoCLI command="config:set payment/braintree/payment_action {{paymentAction}}"
+                    stepKey="setBrainTreePaymentAction"/>
+        <magentoCLI command="config:set payment/braintree/active {{isActive}}"
+                    stepKey="setBrainTreeStatus"/>
+    </actionGroup>
+
+</actionGroups>

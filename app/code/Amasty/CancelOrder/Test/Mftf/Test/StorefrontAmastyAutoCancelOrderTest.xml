@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontAmastyAutoCancelOrderTest">
+        <annotations>
+            <title value="Cancel an order in pending status automatically"/>
+            <description value="Configure module, create an order, than cancel it automatically, and check the status"/>
+            <testCaseId value="Cancel-6"/>
+            <severity value="CRITICAL"/>
+            <group value="Cancel"/>
+        </annotations>
+        <before>
+            <createData entity="SimpleSubCategory" stepKey="simplecategory"/>
+            <createData entity="SimpleProduct" stepKey="simpleproduct1">
+                <requiredEntity createDataKey="simplecategory"/>
+            </createData>
+            <createData entity="Simple_US_Customer" stepKey="simpleuscustomer"/>
+        </before>
+        <after>
+            <actionGroup ref="logout" stepKey="logout"/>
+            <deleteData createDataKey="simpleproduct1" stepKey="deleteProduct1"/>
+            <deleteData createDataKey="simplecategory" stepKey="deleteCategory"/>
+        </after>
+
+        <actionGroup ref="LoginToStorefrontActionGroup" stepKey="customerLogin">
+            <argument name="Customer" value="$$simpleuscustomer$$" />
+        </actionGroup>
+        <actionGroup ref="AddSimpleProductToCart" stepKey="addProductToCart">
+            <argument name="product" value="$$simpleproduct1$$"/>
+        </actionGroup>
+
+        <actionGroup ref="GoToCheckoutFromMinicartActionGroup" stepKey="goToCheckoutFromMinicart" />
+        <click stepKey="selectFirstShippingMethod" selector="{{CheckoutShippingMethodsSection.firstShippingMethod}}"/>
+        <waitForElement stepKey="waitForMethodSection" selector="{{CheckoutShippingMethodsSection.next}}" time="30"/>
+        <click stepKey="clickNextButton" selector="{{CheckoutShippingMethodsSection.next}}" />
+
+        <!-- Checkout select Check/Money Order payment -->
+        <actionGroup ref="CheckoutSelectCheckMoneyOrderPaymentActionGroup" stepKey="selectCheckMoneyPayment"/>
+        <waitForPageLoad stepKey="waitForPlaceOrderPageToDownload"/>
+        <waitForElement stepKey="waitForPlaceOrderButton" selector="{{CheckoutPaymentSection.placeOrder}}" time="30" />
+        <see stepKey="fillInAdress" selector="{{CheckoutPaymentSection.billingAddress}}" userInput="{{US_Address_TX.street[0]}}" />
+        <click stepKey="pressPlaceOrderButton" selector="{{CheckoutPaymentSection.placeOrder}}" />
+        <waitForPageLoad stepKey="waitForOrderResultPage"/>
+        <grabTextFrom stepKey="grabOrderNumber" selector="{{CheckoutSuccessMainSection.orderNumber22}}"/>
+        <setCookie userInput="cookieWithOrdNum"
+                   value="{$grabOrderNumber}"
+                   stepKey="setOrderNumCookie"/>
+        <see stepKey="successMessage" selector="{{CheckoutSuccessMainSection.success}}" userInput="Your order number is:" />
+        <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        <actionGroup ref="AdminAmastyCancelOrderAutoCancelStatus" stepKey="switchAutoCancel">
+            <argument name="moduleStatus" value="Yes"/>
+            <argument name="consideredStatuses" value="'pending','pending_payment'"/>
+        </actionGroup>
+        <actionGroup ref="ClickSaveButtonActionGroup" stepKey="saveConfigurationFirst">
+            <argument name="message" value="You saved the configuration."/>
+        </actionGroup>
+        <actionGroup ref="AdminAmastyCancelOrderConfigurationAutoCancelActionGroup" stepKey="configuration">
+            <argument name="consideredStatuses" value="'pending','pending_payment'"/>
+            <argument name="paymentMethod" value="Check / Money order"/>
+            <argument name="durationUnit" value="Day(s)"/>
+            <argument name="duration" value="0"/>
+        </actionGroup>
+
+    </test>
+</tests>

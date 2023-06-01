@@ -1,0 +1,285 @@
+<?php
+    $controller = $block->getCustomUrl();
+    echo $block->getButtonHtml();
+    $settings = $block->getSettings();  
+?>
+<div class="reset_btn"><span>Reset Webp</span></div>
+<h2>
+    <?php echo ($settings['img_remaining'] <= 0) ? 'Great Work!, all images are optimized' : 'Images to be optimized' . ' - <span class="progress-number">'.($settings['img_remaining']).'</span>'; ?>
+</h2>
+<div class="progress-container" style="">
+    <div class="progress" style="<?php echo 'width:'.number_format((100-($settings['img_remaining']/$settings['img_to_opt']*100)),1).'%'?>">
+        <span class="progress-percent">
+            <?php echo number_format((100-($settings['img_remaining']/$settings['img_to_opt']*100)),1).'%'?></span>
+    </div>
+</div>
+<div class="critical_section">
+    <div class="start_critical" id="create_critical_css">Create Critical Css Now</div>
+    <div class="no-line critical-css-bar">
+        <div>
+            <div class="meter">
+                <span style=""></span>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+div#create_critical_css {
+    cursor: pointer;
+    background-color: #eb5202;
+    display: inline-block;
+    margin: 15px 0px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: #fff;
+    float: left;
+}
+
+.critical_section,
+.no-line.critical-css-bar {
+    float: left;
+    width: 100%;
+}
+
+#create_critical_css {
+    margin-bottom: 25px;
+}
+
+.meter {
+    box-sizing: content-box;
+    height: 20px;
+    position: relative;
+    /* margin: -80px 0 20px 0; */
+    background: #ddd;
+    border-radius: 25px;
+    padding: 10px;
+    box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.meter>span {
+    display: block;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: rgb(43, 194, 83);
+    background-image: linear-gradient(center bottom,
+        rgb(43, 194, 83) 37%,
+        rgb(84, 240, 84) 69%);
+    box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.meter>span:after,
+.animate>span>span {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(-45deg,
+        rgba(255, 255, 255, 0.2) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.2) 75%,
+        transparent 75%,
+        transparent);
+    z-index: 1;
+    background-size: 50px 50px;
+    animation: move 2s linear infinite;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow: hidden;
+}
+
+.animate>span:after {
+    display: none;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 50px 50px;
+    }
+}
+
+.critical-css-bar {
+    display: none;
+}
+
+.reset_btn {
+    float: left;
+    background: #ddd;
+    margin-left: 10px;
+    border: 1px solid #000;
+    width: 100px;
+    padding: 6px;
+    text-align: center;
+}
+
+button#start_image_optimization {
+    float: left;
+}
+
+.progress-container .progress {
+    height: 35px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 15px;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.progress {
+    background: #20a5b8 !important;
+}
+
+.progress {
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 10%);
+}
+
+.progress-container {
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    width: 100% !important;
+    background: #e6e6e6;
+    border-radius: 5px;
+    display: inline-flex;
+}
+</style>
+<script>
+require([
+        'jquery'
+    ],
+    function($) {
+        var start_optimization = 0;
+        var offset = 0;
+        var img_to_opt = "<?php echo $settings['img_to_opt']; ?>";
+
+        function countimages(a) {
+            jQuery.ajax({
+                url: "<?php echo $block->getBaseUrl(); ?>",
+                data: {
+                    'action': 'countimages',
+                    'reset_img': a
+                },
+                success: function(data) {
+                    console.log();
+                    img_to_opt = JSON.parse(data).img_to_opt;
+                    if (a == 1) {
+                        jQuery(this).attr("disabled", false);
+                    }
+                },
+                error: function(errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+        jQuery('.reset_btn').click(function() { countimages(1);
+            jQuery(this).attr("disabled", true); });
+        jQuery('.start_image_optimization').click(function() {
+            if (!start_optimization) {
+                if (jQuery(this).hasClass('restart')) {
+                    start_optimization = 2;
+                } else {
+                    start_optimization = 1;
+                }
+                jQuery(this).attr("disabled", true);
+                do_optimization(start_optimization);
+                console.log("optimization_start");
+            }
+        });
+
+        function do_optimization(opt) {
+            jQuery.ajax({
+                url: "<?php echo $block->getBaseUrl(); ?>",
+                data: {
+                    'action': 'w3speedsterOptimizeImage',
+                    'start_type': opt
+                },
+                success: function(data) {
+                    if (data && data != 'optimization running') {
+                        data = jQuery.parseJSON(data);
+                        console.log(data, offset);
+                        if (data.offset == -1) {
+                            setTimeout(function() {
+                                do_optimization(1);
+                            }, 100);
+                        } else if (offset != data.offset) {
+                            offset = data.offset;
+                            percent = (offset / img_to_opt * 100);
+                            console.log(offset, img_to_opt, percent);
+                            jQuery('#hooks_opt_webp_general_optimizeimage').val(percent.toFixed(1));
+                            jQuery('.progress-container .progress').css('width', percent.toFixed(1) + "%");
+                            jQuery('.progress-container').show();
+                            jQuery('.progress-container .progress .progress-percent').html(percent.toFixed(1) + "%");
+                            jQuery('.progress-number').html(img_to_opt - offset);
+                            setTimeout(function() {
+                                do_optimization(1);
+                            }, 100);
+                        }
+                    } else {
+                        setTimeout(function() {
+                            do_optimization(1);
+                        }, 100);
+                    }
+                },
+                error: function(errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+        jQuery('#create_critical_css').click(function() {
+            jQuery(this).prop('disabled', true);
+            jQuery('.critical-css-bar').show();
+            create_critical_css();
+        });
+
+        function create_critical_css() {
+            jQuery('.preload_error_css').html('');
+            jQuery.ajax({
+                url: "<?php echo $block->getBaseUrl(); ?>",
+                data: {
+                    'action': 'w3speedsterPreloadCss'
+                },
+                success: function(data) {
+                    data = jQuery.parseJSON(data);
+                    console.log(data);
+                    if (data[0] == 'success' || (data[0] == 'error' && (data[1] == 'process already running' || data[1].indexOf('no stylesheets found') > -1))) {
+                        jQuery('.preload_total_css').html(data[2]);
+                        jQuery('.preload_created_css').html(data[3]);
+                        jQuery('.critical-css-bar .meter span').css('width', (parseFloat(data[3]) / parseFloat(data[2]) * 100) + '%');
+                        if (data[2] > data[3]) {
+                            console.log("next scheduled");
+                            setTimeout(create_critical_css, 30000);
+                        } else {
+                            jQuery('.critical-css-bar').hide();
+                        }
+                    } else {
+                        jQuery('.preload_error_css').html(data[1]);
+                        jQuery('#create_critical_css').prop('disabled', true);
+                        jQuery('.critical-css-bar').hide();
+                    }
+                },
+                error: function(errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+    });
+</script>

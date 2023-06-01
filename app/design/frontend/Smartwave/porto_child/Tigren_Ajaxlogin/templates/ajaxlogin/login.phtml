@@ -1,0 +1,120 @@
+<?php
+/**
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2022 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+?>
+<style>
+    div#mb-ajaxsuite-popup-wrapper.mb-ajaxsuite-popup-wrapper.popmsg {
+        max-width: 580px;
+        max-height: inherit;
+        height: 67% !important;
+    }
+
+    /*.mb-ajaxsuite-popup-wrapper .block-customer-login {
+    width: 100% !important;
+}
+.mb-ajaxsuite-popup-wrapper .block-customer-login:after {
+    background: #ffffff !important;
+}*/
+</style>
+ 
+                
+<div class="mb-login-popup" >
+    <div class="mb-ajaxsuite-popup-border mb-ajaxlogin-popup mb-ajaxlogin-login">
+        <div class="block block-customer-login">
+
+         
+            <form class="form form-login" method="post" id="ajax-login-form" enctype="multipart/form-data"
+                autocomplete="off">
+                <?= $block->getBlockHtml('formkey'); ?>
+                <fieldset class="fieldset login" data-hasrequired="<?= __('* Required Fields') ?>">
+                    <div class="field email required">
+                           <div class="control">
+                            <input name="login[username]" value="<?= $block->escapeHtml($block->getUsername()) ?>"
+                                <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off" <?php endif; ?>
+                                id="ajaxlogin-email" type="email" placeholder="Enter Your Email" class="input-text" title="<?= __('Email') ?>"
+                                data-validate="{required:true, 'validate-email':true}">
+                        </div>
+                    </div>
+                    <div class="field password required">
+                             <div class="control">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                            <input name="login[password]" type="password" placeholder="Enter Your Password"
+                                <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off" <?php endif; ?>
+                                class="input-text" id="ajaxlogin-pass" title="<?= __('Password') ?>"
+                                data-validate="{required:true, 'validate-password':true}">
+                      
+                    <div class="actions">
+                        <div class="secondary">
+                            <a class="action forgot" href="<?= $block->getForgotPasswordUrl() ?>">
+                                <span><?= __('Forgot Your Password?') ?></span>
+                            </a>
+                        </div>
+                    </div>
+                           
+                            <script>
+                                require(['jquery', 'jquery/ui'], function ($) {
+                                    $(document).ready(function () {
+                                        $("body").on('click', '.toggle-password', function () {
+                                            $(this).toggleClass("fa-eye fa-eye-slash");
+                                            var input = $("#ajaxlogin-pass");
+                                            if (input.attr("type") === "password") {
+                                                input.attr("type", "text");
+                                            } else {
+                                                input.attr("type", "password");
+                                            }
+
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="actions">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary" name="login" id="login">
+                            <span><?= __('Sign in') ?></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="policycontent">
+                <p class="pcontent">By sign in you agree to OutdoorGoats' <a class="termsuse" href="https://www.outdoorgoats.com/terms-of-use-privacy-policy" target="_blank">Terms & Conditions</a> and  
+                    <a class="termpolicy" href="#">Privacy Policy.</a>
+                </p>
+                      </div>
+                
+                <?php if ($block->isEnableSocialLogin() && !$block->isLoggedIn()): ?>
+                <div id="social-login">
+                    <div class="primary">
+                        <?php if ($this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/facebook_appid')) {
+                            ?>
+                        <button id="facebook-login-btn" type="button" class="action social-login-btn primary">
+                            <span><?= __('Facebook Login') ?></span>
+                        </button>
+                        <?php
+} ?>
+                        <?php if ($this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/googleplus_clientid')) {
+        ?>
+
+                        <?php
+    } ?>
+                        <?php if ($this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/twitter_consumer_key')
+                                && $this->helper('Tigren\Ajaxlogin\Helper\Data')->getScopeConfig('ajaxlogin/social_login/twitter_consumer_secret')
+                            ) {
+        ?>
+                        <button id="twitter-login-btn" type="button" class="action social-login-btn primary">
+                            <span><?= __('Twitter Login') ?></span>
+                        </button>
+                        <?php
+    } ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+               
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+<style>
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px; /*--Set height of tabs--*/
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    width: 100%;
+}
+ul.tabs li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 31px; /*--Subtract 1px from the height of the unordered list--*/
+    line-height: 31px; /*--Vertically aligns the text within the tab--*/
+    border: 1px solid #999;
+    border-left: none;
+    margin-bottom: -1px; /*--Pull the list item down 1px--*/
+    overflow: hidden;
+    position: relative;
+    background: #e0e0e0;
+}
+ul.tabs li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-size: 1.2em;
+    padding: 0 20px;
+    border: 1px solid #fff; /*--Gives the bevel look with a 1px white border inside the list item--*/
+    outline: none;
+}
+ul.tabs li a:hover {
+    background: #ccc;
+}
+html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that the active tab does not listen to the hover properties--*/
+    background: #fff;
+    border-bottom: 1px solid #fff; /*--Makes the active tab look like it's connected with its content--*/
+}
+.tab_container {
+    border: 1px solid #999;
+    border-top: none;
+    overflow: hidden;
+    clear: both;
+    float: left; width: 100%;
+    background: #fff;
+}
+.tab_content {
+    padding: 20px;
+    font-size: 1.2em;
+}
+</style>
+
+<?php
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+$customHelper = $this->helper('Gearup\CustomerAccount\Helper\Data');
+?>
+
+<div>
+    <ul class="tabs">
+        <li><a href="#tab1">Order</a></li>
+        <li><a href="#tab2">Wishlist</a></li>
+    </ul>
+    
+    <div class="tab_container">
+        <div id="tab1" class="tab_content">
+            <?php $_orders = $block->getOrders(); ?>
+            <?= $block->getChildHtml('info') ?>
+            <?php if ($_orders && count($_orders)) : ?>
+                <div class="table-wrapper orders-history">
+                    <table class="data table table-order-items history" id="my-orders-table">
+                        <caption class="table-caption"><?= $block->escapeHtml(__('Orders')) ?></caption>
+                        <tbody>
+                            <?php foreach ($_orders as $_order) : 
+                                $items = $_order->getAllVisibleItems(); ?>
+                                <tr>
+                                    <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id">
+                                        <label>Order Id: </label>
+                                        <span><?= $block->escapeHtml($_order->getRealOrderId()) ?></span>
+
+                                        <?php foreach ($items as $item) { ?>
+                                            <div class="order-details-section">
+                                                <div class="ordered-item-image">
+                                                    <?php
+                                                    $_product = $customHelper->getProductInfo($item->getProductId());
+
+                                                    $_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+                                                    if($childProd = current($item->getChildrenItems())){
+                                                    $productImage = $_imagehelper->init($item->getProduct(), 'category_page_list', array('height' => 70 , 'width'=> 70))->getUrl();
+                                                    }
+                                                    else{
+                                                       $productImage = $_imagehelper->init($item->getProduct(), 'category_page_list', array('height' => 70 , 'width'=> 70))->getUrl();
+                                                    }
+                                                    ?>
+
+                                                    <img src="<?=$productImage?>" title="<?= $block->escapeHtml($item->getName()) ?>" alt="<?= $block->escapeHtml($item->getName()) ?>" />
+                                                </div>
+                                                <div class="ordered-item-details">
+                                                    <strong class="product-brand-name">
+                                                        <?php echo $_product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($_product); ?>
+                                                    </strong>
+
+                                                    <span class="product name product-item-name"><?= $block->escapeHtml($item->getName()) ?></span>
+
+                                                    <?php $options = $item->getProductOptions();
+                                                    if (isset($options['attributes_info']) && !empty($options['attributes_info'])) 
+                                                        {             
+                                                        foreach ($options['attributes_info'] as $option) 
+                                                        { ?>
+                                                        <label><?php echo $option['label']; ?>: </label>
+                                                        <span><?php echo $option['value'];?></span>
+                                                        <?php }
+                                                    }
+                                                    ?>
+                                                    <label>Qty: </label>
+                                                    <span><?php echo $item->getQtyOrdered(); ?></span>
+                                                    <br>
+                                                    <span>
+                                                    <?php 
+                                                    $formattedPrice = $priceHelper->currency($item->getPrice(), true, false);
+                                                    echo $formattedPrice; ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </td>
+
+                                    <td class="col id">
+                                        <?php
+                                        $orderInfo = $customHelper->getOrderInfo($item->
+                                            getOrderId());
+                                        echo $orderInfo->getStatus();
+                                        ?>
+                                    </td>
+                                    <td class="col id">
+                                        <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
+                                            <span><?= $block->escapeHtml(__('View Details')) ?></span>
+                                        </a>
+                                        <div class="contact-customer-care">
+                                            <span><?php echo __('Contact customer care'); ?></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <?php //if ($block->getPagerHtml()) : ?>
+                    <div class="order-products-toolbar toolbar bottom"><?//= $block->getPagerHtml() ?></div>
+                <?php //endif ?> -->
+            <?php else : ?>
+                <div class="message info empty"><span><?= $block->escapeHtml($block->getEmptyOrdersMessage()) ?></span></div>
+            <?php endif ?>
+        </div>
+        <div id="tab2" class="tab_content">
+            <?php //echo $block->getLayout()->createBlock("Magento\Wishlist\Block\Customer\Wishlist")->setTemplate("Magento_Wishlist::view.phtml")->toHtml();?>
+        </div>
+    </div>
+</div>
+
+<script>
+require(['jquery'],function($){
+    $(document).ready(function() {
+        //When page loads...
+        $(".tab_content").hide(); //Hide all content
+        $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+        $(".tab_content:first").show(); //Show first tab content
+        //On Click Event
+        $("ul.tabs li").click(function() {
+            $("ul.tabs li").removeClass("active"); //Remove any "active" class
+            $(this).addClass("active"); //Add "active" class to selected tab
+            $(".tab_content").hide(); //Hide all tab content
+            var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+            $(activeTab).fadeIn(); //Fade in the active ID content
+            return false;
+        });
+
+    });
+});
+</script>

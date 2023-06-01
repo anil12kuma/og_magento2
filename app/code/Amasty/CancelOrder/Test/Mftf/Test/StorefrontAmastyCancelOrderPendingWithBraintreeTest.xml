@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_CancelOrder
+ */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontAmastyCancelOrderPendingWithBraintreeTest">
+        <annotations>
+            <title value="Cancel a braintree order in pending status"/>
+            <description value="Configure module, create an order using braintree, than cancel it from storefront, and check the status"/>
+            <testCaseId value="Cancel-4"/>
+            <severity value="CRITICAL"/>
+            <group value="Cancel"/>
+        </annotations>
+        <before>
+            <createData entity="_defaultCategory" stepKey="category"/>
+            <createData entity="SimpleProduct" stepKey="product">
+                <requiredEntity createDataKey="category"/>
+            </createData>
+            <createData entity="Simple_US_Customer" stepKey="customer"/>
+        </before>
+        <after>
+            <deleteData createDataKey="product" stepKey="deleteProduct1"/>
+            <deleteData createDataKey="customer" stepKey="deleteCustomer"/>
+            <deleteData createDataKey="category" stepKey="deleteCategory"/>
+        </after>
+        <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+        <actionGroup ref="AdminAmastyCancelOrderConfigurationGeneralActionGroup" stepKey="configureGeneralTab">
+            <argument name="customerGroups" value="'1','2'"/>
+            <argument name="allowedStatuses" value="'pending','processing'"/>
+            <argument name="refundMethod" value="Online (if possible)"/>
+        </actionGroup>
+        <actionGroup ref="ClickSaveButtonActionGroup" stepKey="saveConfigurationFirst">
+            <argument name="message" value="You saved the configuration."/>
+        </actionGroup>
+        <actionGroup ref="AdminAmastyCancelOrderPopupStatusSwitchActionGroup" stepKey="disablePopup">
+            <argument name="popupStatus" value="No"/>
+        </actionGroup>
+        <actionGroup ref="ClickSaveButtonActionGroup" stepKey="saveConfigurationSecond">
+            <argument name="message" value="You saved the configuration."/>
+        </actionGroup>
+        <actionGroup ref="SignUpNewUserFromStorefrontActionGroup" stepKey="signUpNewUserFromStorefrontActionGroup">
+            <argument name="Customer" value="Simple_US_Customer"/>
+        </actionGroup>
+        <!-- Configure braintree, create a user and a product BraintreeCreditCardOnCheckoutTest.xml-->
+
+        <actionGroup ref="AdminConfigurationBrainTreeViaCLIActionGroup" stepKey="brainTreeConfiguration">
+            <argument name="paymentAction" value="authorize"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddSimpleProductToCart" stepKey="addProductToCart">
+            <argument name="product" value="$$product$$"/>
+        </actionGroup>
+        <!--Proceed to checkout-->
+        <actionGroup ref="GoToCheckoutFromMinicartActionGroup" stepKey="GoToCheckoutFromMinicartActionGroup"/>
+
+        <actionGroup ref="LoggedInCheckoutFillNewBillingAddressActionGroup" stepKey="loggedInCheckoutFillNewBillingAddressActionGroup">
+            <argument name="Address" value="US_Address_CA"/>
+        </actionGroup>
+        <waitForPageLoad stepKey="waitForPageLoad2"/>
+        <click stepKey="selectFirstShippingMethod" selector="{{CheckoutShippingMethodsSection.firstShippingMethod}}"/>
+        <click stepKey="clickNextButton" selector="{{CheckoutShippingSection.next}}"/>
+        <waitForElement selector="{{CheckoutPaymentSection.paymentSectionTitle}}" time="30" stepKey="waitForPaymentSectionLoaded"/>
+        <!--Fill cart data-->
+        <click selector="{{BraintreeConfigurationPaymentSection.creditCart}}" stepKey="SelectBraintreePaymentMethod"/>
+        <waitForPageLoad stepKey="waitForPageLoad3"/>
+        <scrollTo selector="{{BraintreeConfigurationPaymentSection.creditCart}}" stepKey="ScrollToCreditCardSection"/>
+        <actionGroup ref="StorefrontFillCartDataActionGroup" stepKey="StorefrontFillCartDataActionGroup"/>
+        <waitForPageLoad stepKey="waitForPageLoad4"/>
+        <!--Place order-->
+        <click selector="{{BraintreeConfigurationPaymentSection.paymentMethodContainer}}{{CheckoutPaymentSection.placeOrder}}"
+               stepKey="PlaceOrder"/>
+        <waitForPageLoad stepKey="waitForPageLoad5"/>
+        <grabTextFrom stepKey="grabOrderNumber" selector="{{CheckoutSuccessMainSection.orderNumber22}}"/>
+        <setCookie userInput="cookieWithOrdNum"
+                   value="{$grabOrderNumber}"
+                   stepKey="setOrderNumCookie"/>
+        <see stepKey="successMessage" selector="{{CheckoutSuccessMainSection.success}}" userInput="Your order number is:" />
+        <actionGroup ref="StorefrontAmastyCancelOrderWithoutPopupActionGroup" stepKey="cancelOrder"/>
+        <!--Check the transaction-->
+        <actionGroup ref="AdminAmastyCancelOrderGridCheckOrderStatusWithTransactonsActionGroup" stepKey="checkOrderOnCancelOrderGrid"/>
+    </test>
+</tests>
